@@ -1,8 +1,12 @@
+int gravity, score;
+//Candy candy;
+//Monster[] monster;
+//Soundfile music;
+
 void setup(){
   //background
   size(900,1300);
   background(225);
-  
   
   //boarders
   stroke(0, 150, 0);
