@@ -43,13 +43,13 @@ public class Doodle{
   // y += dy;
   //}
   
-  //void moveLeft(){
-  //  x--;
-  //}
+  void moveLeft(){
+    x = x-5;
+  }
   
-  //void moveRight(){
-  //  x++;
-  //}
+  void moveRight(){
+    x = x+5;
+  }
  
   
   //boolean getCandy(){

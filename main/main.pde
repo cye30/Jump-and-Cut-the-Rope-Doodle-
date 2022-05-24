@@ -13,7 +13,11 @@ void setup(){
   //background
   size(900,1300);
   background(225);
+}
+
+void draw(){
   
+  background(255);
   //boarders
   stroke(0, 150, 0);
   fill(0, 150, 0);
@@ -22,21 +26,17 @@ void setup(){
   rect(width-35, 0, 35, height); // Right
   rect(0, height-35, width, 35); // Bottom
   rect(0, 0, 35, height); // Left
-
-}
-
-void draw(){
   
   //doodle stuff
-  //if(keyPressed){
-  //  if(key == 'e'){
-  //    doodle.jump();
-  //  }else if(key == 's'){
-  //    doodle.moveLeft();
-  //  }else if(key == 'f'){
-  //     doodle.moveRight();
-  //  }
-  //}
+  if(keyPressed){
+    if(key == 'e'){
+      //doodle.jump();
+    }else if(key == 's'){
+      doodle.moveLeft();
+    }else if(key == 'f'){
+       doodle.moveRight();
+    }
+  }
   //doodle.gravity();
   doodle.display(); //draw out doodle
 
