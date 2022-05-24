@@ -13,7 +13,9 @@ public class Doodle{
     dy += gravity;
   }
   
-  void move(){}
+  void moveLeft(){}
+  
+  void moveRight(){}
   
   void getCandy(){}
   
