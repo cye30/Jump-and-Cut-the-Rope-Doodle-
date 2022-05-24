@@ -9,8 +9,9 @@ public class Doodle{
   public Doodle(float x_, float y_){
     x = x_;
     y = y_;
-    dx = 0;
+    //dx = 0; necessary?
     dy= 0;
+    status = true; 
     //steps = ?
     //heart = 0;
   }
@@ -23,11 +24,15 @@ public class Doodle{
     dy += gravity;
   }
   
-  void moveLeft(){}
+  void moveLeft(){
+    x--;
+  }
   
-  void moveRight(){}
+  void moveRight(){
+    x++;
+  }
   
-  void getCandy(){}
+  boolean getCandy(){}
   
   void victory(){}
   
