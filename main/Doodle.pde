@@ -1,5 +1,5 @@
 public class Doodle{
-  float x, y, dx, dy;
+  float x, y, dx, dy, accY;
   //boolean status; //dead or alive
   ////Step[] steps; //waiting for Step class construction
   ////int heart; //waiting for stage 4 implementation
@@ -17,22 +17,21 @@ public class Doodle{
   
   void display(){
     imageMode(CENTER);
-    image(doodleAngel, x, y, doodleAngel.width/2.5, doodleAngel.height/2.5);
+    image(doodleAngel, x, y, doodleAngel.width/3, doodleAngel.height/3);
   }
   
   void jump(){
-    dy = 5;
+    dy = -20;
   }
   
   void gravity(){
     if(!onStep()){
-      dy -= gravity;
+      dy += gravity;
     }
   }
   
   boolean onStep(){
-    if(x<800 && x>100 && y == 1000){
-       dy = 0;
+    if(x<500 && x>200 && y == 800){
        return true;
     }return false;
     

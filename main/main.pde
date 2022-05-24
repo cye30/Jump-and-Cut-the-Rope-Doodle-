@@ -1,6 +1,6 @@
 int score;
 PImage doodleAngel;
-Doodle doodle = new Doodle(450, 1000); //construct the doodle for this game;
+Doodle doodle = new Doodle(375, 800); //construct the doodle for this game;
 //Candy candy;
 //Monster[] monster;
 //Soundfile music;
@@ -11,7 +11,7 @@ void setup(){
   doodleAngel = loadImage("doodleTheAngel.png");
   
   //background
-  size(900,1300);
+  size(750,1000);
   background(225);
 }
 
@@ -37,8 +37,15 @@ void draw(){
        doodle.moveRight();
     }
   }
-  doodle.gravity();
+  
   doodle.move();
+  doodle.gravity();
+  text("dy is " + doodle.dy, 100, 100);
   doodle.display(); //draw out doodle
+  
+  if(doodle.onStep()){
+    doodle.dy = 0;
+    doodle.accY = 0;
+  }
 
 }
