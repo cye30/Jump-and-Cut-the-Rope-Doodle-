@@ -5,6 +5,16 @@ public class Doodle{
   
   //int heart; //waiting for stage 4 implementation
   
+  
+  public Doodle(float x_, float y_){
+    x = x_;
+    y = y_;
+    dx = 0;
+    dy= 0;
+    //steps = ?
+    //heart = 0;
+  }
+  
   void display(){}
   
   void jump(){}

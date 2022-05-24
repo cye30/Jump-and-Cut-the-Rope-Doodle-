@@ -4,7 +4,7 @@ Doodle doodle;
 //Monster[] monster;
 //Soundfile music;
 
-doodle = new Doodle(); //construct the doodle for this game
+doodle = new Doodle(450, 1000); //construct the doodle for this game
 
 void setup(){
   //background
@@ -26,11 +26,11 @@ void draw(){
   
   //doodle stuff
   if(keyPressed){
-    if(keyCode == UP){
+    if(key == 'e'){
       doodle.jump();
-    }else if(keyCode == LEFT){
+    }else if(key == 's'){
       doodle.moveLeft();
-    }else if(keyCode == RIGHT){
+    }else if(key == 'f'){
        doodle.moveRight();
     }
   }
