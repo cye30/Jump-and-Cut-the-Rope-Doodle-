@@ -3,10 +3,11 @@
     
     public Steps(float m,float n){
       x = m;
-      y =n;
+      y = n;
     }
     
     void drawStep(){
-      rect(x,y,100,10);
+      fill(0,150,0);
+      rect(x,y,150,20);
     }
   }
