@@ -4,7 +4,7 @@ Doodle doodle = new Doodle(450, 1000); //construct the doodle for this game;
 //Candy candy;
 //Monster[] monster;
 //Soundfile music;
-final float gravity = 0.15;
+final float gravity = 1;
  
 void setup(){
   //import doodle image
@@ -29,15 +29,16 @@ void draw(){
   
   //doodle stuff
   if(keyPressed){
-    if(key == 'e'){
-      //doodle.jump();
-    }else if(key == 's'){
+    if(key == 'e'){ //if statements such that more than 1 direction can be called at the same time
+      doodle.jump();
+    }if(key == 's'){
       doodle.moveLeft();
-    }else if(key == 'f'){
+    }if(key == 'f'){
        doodle.moveRight();
     }
   }
-  //doodle.gravity();
+  doodle.gravity();
+  doodle.move();
   doodle.display(); //draw out doodle
 
 }
