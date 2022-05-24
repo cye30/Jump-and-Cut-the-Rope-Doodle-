@@ -1,12 +1,15 @@
-int gravity, score;
-Doodle doodle;
+int score;
+PImage doodleAngel;
+Doodle doodle = new Doodle(450, 1000); //construct the doodle for this game;
 //Candy candy;
 //Monster[] monster;
 //Soundfile music;
-
-doodle = new Doodle(450, 1000); //construct the doodle for this game
-
+final float gravity = 0.15;
+ 
 void setup(){
+  //import doodle image
+  doodleAngel = loadImage("doodleTheAngel.png");
+  
   //background
   size(900,1300);
   background(225);
@@ -25,15 +28,16 @@ void setup(){
 void draw(){
   
   //doodle stuff
-  if(keyPressed){
-    if(key == 'e'){
-      doodle.jump();
-    }else if(key == 's'){
-      doodle.moveLeft();
-    }else if(key == 'f'){
-       doodle.moveRight();
-    }
-  }
+  //if(keyPressed){
+  //  if(key == 'e'){
+  //    doodle.jump();
+  //  }else if(key == 's'){
+  //    doodle.moveLeft();
+  //  }else if(key == 'f'){
+  //     doodle.moveRight();
+  //  }
+  //}
+  //doodle.gravity();
   doodle.display(); //draw out doodle
 
 }
