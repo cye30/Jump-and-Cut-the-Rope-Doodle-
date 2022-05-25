@@ -31,7 +31,7 @@ public class Doodle{
   }
   
   boolean onStep(){
-    if(x<500 && x>200 && y == 800){
+    if(x<500 && x>200 && y > 800){
        return true;
     }return false;
     
