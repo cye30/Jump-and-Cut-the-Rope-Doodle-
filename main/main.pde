@@ -16,7 +16,6 @@ void setup(){
 }
 
 void draw(){
-  
   background(255);
   //boarders
   stroke(0, 150, 0);
@@ -30,7 +29,9 @@ void draw(){
   //doodle stuff
   if(keyPressed){
     if(key == 'e'){ //if statements such that more than 1 direction can be called at the same time
-      doodle.jump();
+      if(doodle.onStep()){
+        doodle.jump();
+      }
     }if(key == 's'){
       doodle.moveLeft();
     }if(key == 'f'){
@@ -47,5 +48,13 @@ void draw(){
     doodle.dy = 0;
     doodle.accY = 0;
   }
+  
+//  if(doodle.dies()){
+//    endGame();
+//  }
 
 }
+
+//void endGame(){
+//  clear();
+//}

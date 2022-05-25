@@ -2,7 +2,7 @@ public class Doodle{
   float x, y, dx, dy, accY;
   //boolean status; //dead or alive
   ////Step[] steps; //waiting for Step class construction
-  ////int heart; //waiting for stage 4 implementation
+  int heart; //waiting for stage 4 implementation
   
   
   public Doodle(float x_, float y_){
@@ -12,7 +12,7 @@ public class Doodle{
     dy= 0;
     //status = true; 
     //steps = ?
-    //heart = 0;
+    heart = 0;
   }
   
   void display(){
@@ -21,7 +21,7 @@ public class Doodle{
   }
   
   void jump(){
-    dy = -20;
+    dy = -15;
   }
   
   void gravity(){
@@ -53,7 +53,13 @@ public class Doodle{
   void moveRight(){
     x = x+5;
   }
- 
+   
+   //check if dead or alive
+  boolean dies(){
+   if(y >= 1000){
+     return false;
+   }return heart >=0;
+  }
   
   //boolean getCandy(){
   //  return false;
