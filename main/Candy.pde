@@ -32,6 +32,10 @@ public class Candy{
   void gravity(){
     dy += 0.35;
   }
+  
+  int[] addFixedPoint(float x, float y){
+    fixPoint.add({{x},{y}});
+  }  
   /*void shatter(){
     : candy will shatter if it touches the spikes
   }
