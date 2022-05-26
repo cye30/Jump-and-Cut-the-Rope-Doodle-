@@ -29,6 +29,7 @@ void setup(){
 
 void draw(){
   background(255);
+  
   //boarders
   stroke(0, 150, 0);
   fill(0, 150, 0);
@@ -37,6 +38,7 @@ void draw(){
   rect(width-35, 0, 35, height); // Right
   rect(0, height-35, width, 35); // Bottom
   rect(0, 0, 35, height); // Left
+  
   
   for(Steps s : game1){ //modify this if change game
       s.drawStep();
@@ -68,9 +70,9 @@ void draw(){
     doodle.accY = 0;
   }
   
-//  if(doodle.dies()){
-//    endGame();
-//  }
+  if(doodle.dies()){
+    doodle = new Doodle(375, 700);
+  }
 
 }
 

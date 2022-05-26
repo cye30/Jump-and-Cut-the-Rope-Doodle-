@@ -74,8 +74,8 @@ public class Doodle{
    //check if dead or alive
   boolean dies(){
    if(y >= 1000){
-     return false;
-   }return heart >=0;
+     return true;
+   }return heart < 0;
   }
   
   //boolean getCandy(){
