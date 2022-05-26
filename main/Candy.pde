@@ -25,6 +25,13 @@ public class Candy{
     //display spikes && stars
   }
   
+  void move(){
+    x += dx;
+    y += dy;
+  }
+  void gravity(){
+    dy += 0.35;
+  }
   /*void shatter(){
     : candy will shatter if it touches the spikes
   }
