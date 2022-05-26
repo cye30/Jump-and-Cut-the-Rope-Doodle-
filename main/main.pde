@@ -1,7 +1,7 @@
 int score;
 PImage doodleAngel;
 Doodle doodle = new Doodle(375, 800); //construct the doodle for this game;
-//Candy candy;
+Candy candy;
 //Monster[] monster;
 //Soundfile music;
 final float gravity = 1;
@@ -13,6 +13,10 @@ void setup(){
   //background
   size(750,1000);
   background(225);
+  
+  //candy
+  float[][] points = {{400,300},{300,400}};
+  candy = new Candy(400,400,30,points);
 }
 
 void draw(){
@@ -48,6 +52,8 @@ void draw(){
     doodle.dy = 0;
     doodle.accY = 0;
   }
+  
+  candy.display(); //test candy!!!
   
 //  if(doodle.dies()){
 //    endGame();
