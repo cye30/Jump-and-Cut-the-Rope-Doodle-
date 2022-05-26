@@ -17,7 +17,6 @@ public class Doodle{
   
   void display(){
     imageMode(CENTER);
-    image(doodleAngel, x, y, doodleAngel.width/3, doodleAngel.height/3);
   }
   
   void jump(){
