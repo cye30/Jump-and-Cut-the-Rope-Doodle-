@@ -1,14 +1,26 @@
 int score;
-PImage doodleAngel;
-Doodle doodle = new Doodle(375, 800); //construct the doodle for this game;
+PImage doodleAngelLeft;
+PImage doodleAngelRight;
+final float gravity = 1;
+int mode;
+
+//construct the doodle and steps for this game; sample 1
+Steps a = new Steps(530, 858);
+Steps b = new Steps(300, 779);
+Steps c = new Steps(70, 700);
+Steps[] game1 = new Steps[]{a, b, c};
+Doodle doodle = new Doodle(375, 700); 
+
+
 //Candy candy;
 //Monster[] monster;
 //Soundfile music;
-final float gravity = 1;
+
  
 void setup(){
   //import doodle image
-  doodleAngel = loadImage("doodleTheAngel.png");
+   doodleAngelLeft = loadImage("doodleTheAngelLeft.png");
+   doodleAngelRight = loadImage("doodleTheAngelRight.png");
   
   //background
   size(750,1000);
@@ -26,16 +38,22 @@ void draw(){
   rect(0, height-35, width, 35); // Bottom
   rect(0, 0, 35, height); // Left
   
+  for(Steps s : game1){ //modify this if change game
+      s.drawStep();
+    }
+  
   //doodle stuff
   if(keyPressed){
     if(key == 'e'){ //if statements such that more than 1 direction can be called at the same time
-      if(doodle.onStep()){
+      if(onStep()){
         doodle.jump();
       }
     }if(key == 's'){
+      mode = 0;
       doodle.moveLeft();
     }if(key == 'f'){
-       doodle.moveRight();
+      mode = 1;
+      doodle.moveRight();
     }
   }
   
@@ -44,7 +62,8 @@ void draw(){
   text("dy is " + doodle.dy, 100, 100);
   doodle.display(); //draw out doodle
   
-  if(doodle.onStep()){
+  if(onStep()){
+    
     doodle.dy = 0;
     doodle.accY = 0;
   }
@@ -54,6 +73,20 @@ void draw(){
 //  }
 
 }
+
+boolean onStep(){
+    //if(x<500 && x>200 && y > 800){ //for testing jump methods solely
+    //   return true;
+    //}return false;
+    
+    for(Steps s : game1){ //modify this if change game
+      if(doodle.x <s.leng + s.x && s.x < doodle.x && (doodle.y+64 <= s.y+20 && doodle.y+64 >= s.y )){
+        
+        return true;
+      }
+    }return false;
+  }
+  
 
 //void endGame(){
 //  clear();
