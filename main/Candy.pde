@@ -12,6 +12,8 @@ public class Candy{
     y = yy;
     radius = rad;
     fixPoint = fixP;
+    dx = 0;
+    dy = 0;
   }
   
   void display(){
@@ -30,12 +32,9 @@ public class Candy{
     y += dy;
   }
   void gravity(){
-    dy += 0.35;
+    dy += gravity;
   }
   
-  int[] addFixedPoint(float x, float y){
-    fixPoint.add({{x},{y}});
-  }  
   /*void shatter(){
     : candy will shatter if it touches the spikes
   }

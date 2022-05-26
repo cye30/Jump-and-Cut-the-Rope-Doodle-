@@ -15,7 +15,7 @@ void setup(){
   background(225);
   
   //candy
-  float[][] points = {{400,300},{300,400}};
+  float[][] points = {{400,300},{300,350}};
   candy = new Candy(400,400,30,points);
 }
 
@@ -40,7 +40,7 @@ void draw(){
       doodle.moveLeft();
     }if(key == 'f'){
        doodle.moveRight();
-    }
+    } 
   }
   
   doodle.move();
@@ -54,6 +54,9 @@ void draw(){
   }
   
   candy.display(); //test candy!!!
+  
+    candy.move();
+    candy.gravity();
   
 //  if(doodle.dies()){
 //    endGame();
