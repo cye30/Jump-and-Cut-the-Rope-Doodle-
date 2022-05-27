@@ -24,6 +24,8 @@ public class Candy{
       fill(0);
       ellipse(fixPoint[i][0],fixPoint[i][1],10,10);
     }
+    
+    addStar(400,400);
     //display spikes && stars
   }
   
@@ -49,6 +51,15 @@ public class Candy{
     dy += gravity;
   }
   
+  void addStar(float x, float y){
+    line(x-3,y-3,x-10,y-3);
+    line(x+3,y-3,x+10,y-3);
+    line(x-5,y+3,x-10,y-3);
+    line(x+5,y+3,x+10,y-3);
+    line(x-3,y-3,x,y-10);
+    line(x+3,y-3,x,y-10);
+  }
+  
   /*void shatter(){
     : candy will shatter if it touches the spikes
   }
@@ -60,9 +71,6 @@ public class Candy{
   }
   int getScore(){
     : return the current starScore.
-  }
-  void addStar(float x, float y){
-    : create stars at the specified location
   }
   void addSpike(Spike s){
     : add a specified spike into the spike array
