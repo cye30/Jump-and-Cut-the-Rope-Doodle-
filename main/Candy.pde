@@ -22,16 +22,30 @@ public class Candy{
     for(int i = 0; i < fixPoint.length; i++){
       line(x, y, fixPoint[i][0], fixPoint[i][1]); //makes line from Candy to fixed points
       fill(0);
-      ellipse(fixPoint[i][0],fixPoint[i][1],5,5);
+      ellipse(fixPoint[i][0],fixPoint[i][1],10,10);
     }
     //display spikes && stars
   }
   
-  void move(){
-    x += dx;
-    y += dy;
+  void attract(float px, float py){//modify this
+    float dist = dist(x, y, px, py) ;
+    float force = (dist) * .01;
+    float displacex = (x - px) ;
+    float displacey = (y - py) ;
+    dx += displacex * force / dist;
+    dy += displacey * force / dist;
+    dx *= 0.2;
+    dy *= 0.2;
+    dx += dx;
+    dy += dy;
   }
-  void gravity(){
+  
+  void move(){
+    /*for(int i = 0; i < fixPoint.length; i++){
+      attract(fixPoint[i][0], fixPoint[i][1]);
+    }*/ 
+    x+=dx;
+    y+=dy;
     dy += gravity;
   }
   
