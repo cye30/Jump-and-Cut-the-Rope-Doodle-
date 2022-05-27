@@ -54,9 +54,9 @@ void draw(){
   }
   
   candy.display(); //test candy!!!
-  
+  text("candy dx: " + candy.dx, 100,120);
+  text("candy dy: " + candy.dy, 100,140);
     candy.move();
-    candy.gravity();
   
 //  if(doodle.dies()){
 //    endGame();
