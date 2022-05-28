@@ -23,8 +23,7 @@ public class Monsters{
   
   void attack(Doodle d){
     if(dist(x, y, d.x, d.y) <= 125){
-      d.drop();
-      
+      d.injure();
     }
   }
   

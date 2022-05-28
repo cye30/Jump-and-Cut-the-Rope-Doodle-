@@ -77,7 +77,7 @@ public class Doodle{
    //check if dead or alive
   boolean dies(){
    if(y >= 1000){
-     return true;
+     heart --;
    }
    return heart < 0;
   }
@@ -88,9 +88,11 @@ public class Doodle{
   
   //void victory(){}
   
-  //void injure(){
-  //  heart --;
-  //}
+  void injure(){
+    skipStep = true;
+    dy = 7;
+    dx = 0;
+  }
   
   //void addStep(){}
 

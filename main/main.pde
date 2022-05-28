@@ -4,16 +4,19 @@ PImage doodleAngelRight;
 PImage monsterIm;
 final float gravity = 1;
 int mode;
+float startX = 375;
+float startY = 700;
+boolean skipStep;
 
 //construct the doodle and steps for this game; sample 1
 Steps a = new Steps(530, 858);
 Steps b = new Steps(300, 779);
 Steps c = new Steps(70, 700);
 Steps[] game1 = new Steps[]{a, b, c};
-Doodle doodle = new Doodle(375, 700); 
+Doodle doodle = new Doodle(startX, startY); 
 
 //construct monster; sample 1
-Monsters toothy = new Monsters(580, 670, 0);
+Monsters toothy = new Monsters(580, 550, 0);
 
 
 //Candy candy;
@@ -46,12 +49,12 @@ void draw(){
   
   //step stuff
   for(Steps s : game1){ //modify this if change game
-      s.drawStep();
-    }
+    s.drawStep();
+  }
   
   //doodle stuff
   if(keyPressed){
-    if(key == 'e'){ //if statements such that more than 1 direction can be called at the same time
+    if(key == 'e'){
       if(onStep()){
         doodle.jump();
       }
@@ -64,27 +67,27 @@ void draw(){
     }
   }
   
-  doodle.move();
   doodle.gravity();
-  toothy.attack(doodle);
-  text("dy is " + doodle.dy, 100, 100);
+  doodle.move();
+  text("dy of doodle is " + doodle.dy, 100, 100);
   doodle.display(); //draw out doodle
   
   
-  if(onStep()){
+  if(onStep() && !skipStep){
     doodle.dy = 0;
     doodle.accY = 0;
   }
   
   if(doodle.dies()){
-    doodle = new Doodle(375, 700);
+    doodle = new Doodle(startX, startY);
+    skipStep = false;
   }
       
   //monster stuff
   toothy.display(); //draw out monster
-  noFill();
-  circle(580, 670, 125);
-  if()
+  toothy.attack(doodle); //attacking, set skipStep to false
+  noFill(); //for testing purposes
+  circle(580, 550, 125);
 }
 
 boolean onStep(){
