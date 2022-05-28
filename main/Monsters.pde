@@ -11,5 +11,23 @@ public class Monsters{
     dy = 0;
   }
 
+  void display(){
+    imageMode(CENTER);
+    image(monsterIm, x, y, monsterIm.width/4, monsterIm.height/4);
+    
+    text("monster's width= " + monsterIm.width/4, 100, 220);
+    text("monster's height= " + monsterIm.height/4, 100, 230);
+    text("monster's x= " + x, 100, 240);
+    text("monster's y= " + y, 100, 250);
+  }
+  
+  void attack(){}
+  
+  void monsMove(){}
+  
+  void monsDrop(){}
+  
+  //void monsAttract(){}
+  
   
 }

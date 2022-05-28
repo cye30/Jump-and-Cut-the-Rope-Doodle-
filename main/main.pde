@@ -1,6 +1,7 @@
 int score;
 PImage doodleAngelLeft;
 PImage doodleAngelRight;
+PImage monsterIm;
 final float gravity = 1;
 int mode;
 
@@ -10,6 +11,9 @@ Steps b = new Steps(300, 779);
 Steps c = new Steps(70, 700);
 Steps[] game1 = new Steps[]{a, b, c};
 Doodle doodle = new Doodle(375, 700); 
+
+//construct monster; sample 1
+Monsters toothy = new Monsters(580, 470, 0);
 
 
 //Candy candy;
@@ -21,6 +25,7 @@ void setup(){
   //import doodle image
    doodleAngelLeft = loadImage("doodleTheAngelLeft.png");
    doodleAngelRight = loadImage("doodleTheAngelRight.png");
+   monsterIm = loadImage("monster1.png");
   
   //background
   size(750,1000);
@@ -39,7 +44,7 @@ void draw(){
   rect(0, height-35, width, 35); // Bottom
   rect(0, 0, 35, height); // Left
   
-  
+  //step stuff
   for(Steps s : game1){ //modify this if change game
       s.drawStep();
     }
@@ -65,7 +70,6 @@ void draw(){
   doodle.display(); //draw out doodle
   
   if(onStep()){
-    
     doodle.dy = 0;
     doodle.accY = 0;
   }
@@ -73,7 +77,9 @@ void draw(){
   if(doodle.dies()){
     doodle = new Doodle(375, 700);
   }
-
+      
+  //monster stuff
+  toothy.display(); //draw out monster
 }
 
 boolean onStep(){
@@ -83,7 +89,6 @@ boolean onStep(){
     
     for(Steps s : game1){ //modify this if change game
       if(doodle.x <s.leng + s.x && s.x < doodle.x && (doodle.y+64 <= s.y+20 && doodle.y+64 >= s.y )){
-        
         return true;
       }
     }return false;

@@ -29,7 +29,7 @@ public class Doodle{
     }
     
     text("doodle's width= " + doodleAngelLeft.width/3, 100, 200);
-    text("doodle's height= " + doodleAngelLeft.height/3, 100, 300);
+    text("doodle's height= " + doodleAngelLeft.height/3, 100, 210);
     
     //drawing steps
     //for(Steps s : steps){
