@@ -11,7 +11,7 @@ public class Doodle{
     //dx = 0; necessary?
     dy= 0;
     //status = true; 
-    heart = 0;
+    heart = 5;
     
     ////store the steps into arraylist
     //for(int i = 0; i < input.length; i++){
@@ -27,9 +27,12 @@ public class Doodle{
     }if(mode == 1){
       image(doodleAngelRight, x, y, doodleAngelRight.width/3, doodleAngelRight.height/3);
     }
+    noFill();
+    circle(x, y, 125);
     
     text("doodle's width= " + doodleAngelLeft.width/3, 100, 200);
     text("doodle's height= " + doodleAngelLeft.height/3, 100, 210);
+    text("doodle's heart= " + heart, 100, 260);
     
     //drawing steps
     //for(Steps s : steps){
@@ -75,7 +78,8 @@ public class Doodle{
   boolean dies(){
    if(y >= 1000){
      return true;
-   }return heart < 0;
+   }
+   return heart < 0;
   }
   
   //boolean getCandy(){
@@ -84,7 +88,9 @@ public class Doodle{
   
   //void victory(){}
   
-  //void injure(){}
+  //void injure(){
+  //  heart --;
+  //}
   
   //void addStep(){}
 

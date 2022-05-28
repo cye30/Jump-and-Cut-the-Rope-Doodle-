@@ -21,7 +21,12 @@ public class Monsters{
     text("monster's y= " + y, 100, 250);
   }
   
-  void attack(){}
+  void attack(Doodle d){
+    if(dist(x, y, d.x, d.y) <= 125){
+      d.drop();
+      
+    }
+  }
   
   void monsMove(){}
   

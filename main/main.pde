@@ -13,7 +13,7 @@ Steps[] game1 = new Steps[]{a, b, c};
 Doodle doodle = new Doodle(375, 700); 
 
 //construct monster; sample 1
-Monsters toothy = new Monsters(580, 470, 0);
+Monsters toothy = new Monsters(580, 670, 0);
 
 
 //Candy candy;
@@ -66,8 +66,10 @@ void draw(){
   
   doodle.move();
   doodle.gravity();
+  toothy.attack(doodle);
   text("dy is " + doodle.dy, 100, 100);
   doodle.display(); //draw out doodle
+  
   
   if(onStep()){
     doodle.dy = 0;
@@ -80,6 +82,9 @@ void draw(){
       
   //monster stuff
   toothy.display(); //draw out monster
+  noFill();
+  circle(580, 670, 125);
+  if()
 }
 
 boolean onStep(){
