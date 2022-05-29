@@ -8,11 +8,18 @@ float startY = 560; //for organizational purposes
 boolean skipStep;
 int mode;
 
-//construct the doodle and steps for this game; sample 1
+//construct buttons
+Button restart = new Button(37, 40);
+Button pause = new Button(90, 40);
+Button[] buttons = new Button[]{restart, pause};
+
+//construct steps for this game; sample 1
 Steps a = new Steps(424, 686);
 Steps b = new Steps(240, 623);
 Steps c = new Steps(56, 560);
 Steps[] game1 = new Steps[]{a, b, c};
+
+//construct the doodle; sample 1
 Doodle doodle = new Doodle(startX, startY); 
 
 //construct monster; sample 1
@@ -37,6 +44,11 @@ void setup(){
 
 void draw(){
   background(255);
+  
+  //buttons
+  for(Button m : buttons){
+    m.display();
+  }
   
   //boarders
   stroke(0, 150, 0);
@@ -69,7 +81,7 @@ void draw(){
   
   doodle.gravity();
   doodle.move();
-  text("dy of doodle is " + doodle.dy, 80, 80);
+  text("dy of doodle is " + doodle.dy, 50, 100);
   doodle.display(); //draw out doodle
   
   

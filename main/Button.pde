@@ -7,12 +7,12 @@ public class Button{
   public Button(float x, float y){
     sqrtX = x;
     sqrtY = y;
-    sqrtColor = color(225);
-    sqrtHighlight = color(204);
+    sqrtColor = color(255);
+    sqrtHighlight = color(243);
   }
   
   void display(){
-    strokeWeight(16);
+    strokeWeight(5);
     stroke(0, 150, 0);
     
     if(overSqrt()){
@@ -20,7 +20,7 @@ public class Button{
     }else{
       fill(sqrtColor);
     }
-    rect(sqrtX, sqrtY, sqrtSize, sqrtSize, 16);
+    rect(sqrtX, sqrtY, sqrtSize, sqrtSize, 10);
     
   }
   

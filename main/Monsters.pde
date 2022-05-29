@@ -15,10 +15,10 @@ public class Monsters{
     imageMode(CENTER);
     image(monsterIm, x, y, monsterIm.width/5, monsterIm.height/5);
     
-    text("monster's width= " + monsterIm.width/5, 80, 120);
-    text("monster's height= " + monsterIm.height/5, 80, 130);
-    text("monster's x= " + x, 80, 140);
-    text("monster's y= " + y, 80, 150);
+    text("monster's width= " + monsterIm.width/5, 50, 140);
+    text("monster's height= " + monsterIm.height/5, 50, 130);
+    text("monster's x= " + x, 50, 160);
+    text("monster's y= " + y, 50, 150);
   }
   
   void attack(Doodle d){

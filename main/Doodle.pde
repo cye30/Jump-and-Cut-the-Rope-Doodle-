@@ -30,9 +30,9 @@ public class Doodle{
     noFill();
     circle(x, y, 125);
     
-    text("doodle's width= " + 4*doodleAngelLeft.width/15, 80, 90);
-    text("doodle's height= " + 4*doodleAngelLeft.height/15, 80, 100);
-    text("doodle's heart= " + heart, 80, 110);
+    text("doodle's width= " + 4*doodleAngelLeft.width/15, 50, 110);
+    text("doodle's height= " + 4*doodleAngelLeft.height/15, 50, 120);
+    text("doodle's heart= " + heart, 50, 170);
     
     //drawing steps
     //for(Steps s : steps){
