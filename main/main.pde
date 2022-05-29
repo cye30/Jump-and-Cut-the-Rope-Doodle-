@@ -5,10 +5,15 @@ Candy candy;
 //Monster[] monster;
 //Soundfile music;
 final float gravity = 1;
- 
+
+PImage candyImg;
+PImage starImg;
+
 void setup(){
   //import doodle image
   doodleAngel = loadImage("doodleTheAngel.png");
+  candyImg = loadImage("candyIMG.png");
+  starImg = loadImage("starImg.png");
   
   //background
   size(750,1000);
@@ -56,7 +61,8 @@ void draw(){
   candy.display(); //test candy!!!
   text("candy dx: " + candy.dx, 100,120);
   text("candy dy: " + candy.dy, 100,140);
-    candy.move();
+  text("starScore: " + candy.getScore(), 100,160); //starScore
+  //candy.move();
   
 //  if(doodle.dies()){
 //    endGame();
