@@ -17,11 +17,12 @@ public class Candy{
   }
   
   void display(){
-    fill(200,100,200);
-    ellipse(x,y,radius*2,radius*2);
+    imageMode(CENTER);
+    image(candyImg, x, y, candyImg.width/10, candyImg.height/10);
     for(int i = 0; i < fixPoint.length; i++){
+      stroke(102,51,0);
+      strokeWeight(4);
       line(x, y, fixPoint[i][0], fixPoint[i][1]); //makes line from Candy to fixed points
-      fill(0);
       ellipse(fixPoint[i][0],fixPoint[i][1],10,10);
     }
     
@@ -51,13 +52,9 @@ public class Candy{
     dy += gravity;
   }
   
-  void addStar(float x, float y){
-    line(x-3,y-3,x-10,y-3);
-    line(x+3,y-3,x+10,y-3);
-    line(x-5,y+3,x-10,y-3);
-    line(x+5,y+3,x+10,y-3);
-    line(x-3,y-3,x,y-10);
-    line(x+3,y-3,x,y-10);
+  void addStar(float xs, float ys){
+    imageMode(CENTER);
+    image(starImg, xs, ys, starImg.width/50, starImg.height/50);
   }
   
   /*void shatter(){
