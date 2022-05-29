@@ -47,8 +47,8 @@ void mousePressed(){
   for(Button m : buttons){
     if(m.overSqrt()){
       //pausing
-        if(looping){
       if(m.equals(buttons[0])){ 
+        if(looping){
           noLoop();
         }else{
           loop();
@@ -58,7 +58,7 @@ void mousePressed(){
       else if(m.equals(buttons[1])){
         setup();
         doodle = new Doodle(startX, startY);
-        toothy.display(); //draw out monster
+        toothy = new Monsters(464, 440, 0); //draw out monster
       }
     }
   }
