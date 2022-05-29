@@ -7,13 +7,15 @@ public class Monsters{
     x = x_;
     y = y_;
     attackSpeed = attackSpeed_;
-    dx = 0; 
+    dx = 2; 
     dy = 0; 
   }
 
   void display(){
     imageMode(CENTER);
     image(monsterIm, x, y, monsterIm.width/5, monsterIm.height/5);
+    noFill(); //for testing purposes
+    circle(x, y, 100);
     
     text("monster's width= " + monsterIm.width/5, 50, 140);
     text("monster's height= " + monsterIm.height/5, 50, 130);
@@ -27,7 +29,14 @@ public class Monsters{
     }
   }
   
-  void monsMove(){}
+  void monsMove(){
+    if(x >= 567 && dx > 0) {
+      dx = -2;
+    }else if(x < 33 && dx < 0){
+      dx = 2;
+    }
+    x += dx;
+  }
   
   void monsDrop(){}
   

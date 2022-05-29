@@ -118,10 +118,9 @@ void draw(){
   }
       
   //monster stuff
+  toothy.monsMove();
   toothy.display(); //draw out monster
-  //toothy.attack(doodle); //attacking, set skipStep to false
-  noFill(); //for testing purposes
-  circle(464, 440, 100);
+  toothy.attack(doodle); //attacking, set skipStep to false
 }
 
 boolean onStep(){
