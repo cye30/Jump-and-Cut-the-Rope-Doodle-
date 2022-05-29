@@ -11,7 +11,7 @@ int mode;
 //construct buttons
 Button restart = new Button(37, 40);
 Button pause = new Button(90, 40);
-Button[] buttons = new Button[]{restart, pause};
+Button[] buttons = new Button[]{pause, restart};
 
 //construct steps for this game; sample 1
 Steps a = new Steps(424, 686);
@@ -40,6 +40,28 @@ void setup(){
   //background
   size(600,800);
   background(225);
+}
+
+//for the buttons!
+void mousePressed(){
+  for(Button m : buttons){
+    if(m.overSqrt()){
+      //pausing
+        if(looping){
+      if(m.equals(buttons[0])){ 
+          noLoop();
+        }else{
+          loop();
+        }
+      }
+      //restarting
+      else if(m.equals(buttons[1])){
+        setup();
+        doodle = new Doodle(startX, startY);
+        toothy.display(); //draw out monster
+      }
+    }
+  }
 }
 
 void draw(){
