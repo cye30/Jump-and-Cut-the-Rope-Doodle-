@@ -4,6 +4,9 @@ public class Candy{
   int starScore;
   color c;
   boolean status;
+  boolean drawStar=true;
+  float starx;
+  float stary;
   //Spike[] spikes; later methods
   //Bubble[] bubbles;
   
@@ -25,8 +28,8 @@ public class Candy{
       line(x, y, fixPoint[i][0], fixPoint[i][1]); //makes line from Candy to fixed points
       ellipse(fixPoint[i][0],fixPoint[i][1],10,10);
     }
-    
-    addStar(400,400);
+    addStar(445,400);
+    starAchieved();
     //display spikes && stars
   }
   
@@ -53,8 +56,27 @@ public class Candy{
   }
   
   void addStar(float xs, float ys){
-    imageMode(CENTER);
-    image(starImg, xs, ys, starImg.width/50, starImg.height/50);
+    if(drawStar == true){
+      starx = xs;
+      stary = ys;
+      imageMode(CENTER);
+      image(starImg, xs, ys, starImg.width/50, starImg.height/50);
+    } else {
+      starx = 0;
+      stary = 0;
+    }
+  }
+  
+  void starAchieved(){
+    if(x - starx < 48 && y - stary < 46){
+      starScore++;
+      drawStar=false;
+    }
+    //star is removed from screen and starScore + 1 when the candy touches the star
+  }
+  int getScore(){
+    return starScore;
+    //return the current starScore.
   }
   
   /*void shatter(){
@@ -62,12 +84,6 @@ public class Candy{
   }
   void cut(){
     : disconnect the candy from the string
-  }
-  void starAchieved(){
-    : star is removed from screen and starScore + 1 when the candy touches the star
-  }
-  int getScore(){
-    : return the current starScore.
   }
   void addSpike(Spike s){
     : add a specified spike into the spike array
