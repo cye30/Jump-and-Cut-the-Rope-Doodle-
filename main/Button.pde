@@ -1,7 +1,6 @@
 public class Button{
   
   color sqrtColor, sqrtHighlight;
-  boolean sqrtOver = false;
   int sqrtSize = 45;
   float sqrtX, sqrtY;
   
@@ -16,7 +15,7 @@ public class Button{
     strokeWeight(16);
     stroke(0, 150, 0);
     
-    if(sqrtOver){
+    if(overSqrt()){
       fill(sqrtHighlight);
     }else{
       fill(sqrtColor);

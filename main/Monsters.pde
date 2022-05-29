@@ -8,21 +8,21 @@ public class Monsters{
     y = y_;
     attackSpeed = attackSpeed_;
     dx = 0; 
-    dy = 0;
+    dy = 0; 
   }
 
   void display(){
     imageMode(CENTER);
-    image(monsterIm, x, y, monsterIm.width/4, monsterIm.height/4);
+    image(monsterIm, x, y, monsterIm.width/5, monsterIm.height/5);
     
-    text("monster's width= " + monsterIm.width/4, 100, 220);
-    text("monster's height= " + monsterIm.height/4, 100, 230);
-    text("monster's x= " + x, 100, 240);
-    text("monster's y= " + y, 100, 250);
+    text("monster's width= " + monsterIm.width/5, 80, 120);
+    text("monster's height= " + monsterIm.height/5, 80, 130);
+    text("monster's x= " + x, 80, 140);
+    text("monster's y= " + y, 80, 150);
   }
   
   void attack(Doodle d){
-    if(dist(x, y, d.x, d.y) <= 125){
+    if(dist(x, y, d.x, d.y) <= 100){
       d.injure();
     }
   }

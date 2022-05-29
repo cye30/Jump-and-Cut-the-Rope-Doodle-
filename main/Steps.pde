@@ -6,8 +6,8 @@ public class Steps{
   public Steps(float m,float n){
     x = m;
     y = n;
-    leng = 150;
-    wid = 20;
+    leng = 120;
+    wid = 18;
   }
   
   void drawStep(){

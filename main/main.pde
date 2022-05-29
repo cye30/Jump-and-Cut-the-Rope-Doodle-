@@ -1,26 +1,26 @@
-int score;
+final float gravity = 1;
+//int score;
 PImage doodleAngelLeft;
 PImage doodleAngelRight;
 PImage monsterIm;
-final float gravity = 1;
-int mode;
-float startX = 375;
-float startY = 700;
+float startX = 300; //for organizational purposes
+float startY = 560; //for organizational purposes
 boolean skipStep;
+int mode;
 
 //construct the doodle and steps for this game; sample 1
-Steps a = new Steps(530, 858);
-Steps b = new Steps(300, 779);
-Steps c = new Steps(70, 700);
+Steps a = new Steps(424, 686);
+Steps b = new Steps(240, 623);
+Steps c = new Steps(56, 560);
 Steps[] game1 = new Steps[]{a, b, c};
 Doodle doodle = new Doodle(startX, startY); 
 
 //construct monster; sample 1
-Monsters toothy = new Monsters(580, 550, 0);
-
+Monsters toothy = new Monsters(464, 440, 0);
+Monsters biggy = new Monsters(136, 360, 0);
+Monsters[] monster = new Monsters[]{toothy, biggy};
 
 //Candy candy;
-//Monster[] monster;
 //Soundfile music;
 
  
@@ -29,9 +29,9 @@ void setup(){
    doodleAngelLeft = loadImage("doodleTheAngelLeft.png");
    doodleAngelRight = loadImage("doodleTheAngelRight.png");
    monsterIm = loadImage("monster1.png");
-  
+   
   //background
-  size(750,1000);
+  size(600,800);
   background(225);
 }
 
@@ -42,10 +42,10 @@ void draw(){
   stroke(0, 150, 0);
   fill(0, 150, 0);
   
-  rect(0, 0, width, 35); // Top
-  rect(width-35, 0, 35, height); // Right
-  rect(0, height-35, width, 35); // Bottom
-  rect(0, 0, 35, height); // Left
+  rect(0, 0, width, 28); // Top
+  rect(width-28, 0, 28, height); // Right
+  rect(0, height-28, width, 28); // Bottom
+  rect(0, 0, 28, height); // Left
   
   //step stuff
   for(Steps s : game1){ //modify this if change game
@@ -69,7 +69,7 @@ void draw(){
   
   doodle.gravity();
   doodle.move();
-  text("dy of doodle is " + doodle.dy, 100, 100);
+  text("dy of doodle is " + doodle.dy, 80, 80);
   doodle.display(); //draw out doodle
   
   
@@ -85,9 +85,9 @@ void draw(){
       
   //monster stuff
   toothy.display(); //draw out monster
-  toothy.attack(doodle); //attacking, set skipStep to false
+  //toothy.attack(doodle); //attacking, set skipStep to false
   noFill(); //for testing purposes
-  circle(580, 550, 125);
+  circle(464, 440, 100);
 }
 
 boolean onStep(){
@@ -96,7 +96,7 @@ boolean onStep(){
     //}return false;
     
     for(Steps s : game1){ //modify this if change game
-      if(doodle.x <s.leng + s.x && s.x < doodle.x && (doodle.y+64 <= s.y+20 && doodle.y+64 >= s.y )){
+      if(doodle.x <s.leng + s.x && s.x < doodle.x && (doodle.y+51<= s.y+16 && doodle.y+51 >= s.y )){
         return true;
       }
     }return false;

@@ -23,16 +23,16 @@ public class Doodle{
     //drawing doodle
     imageMode(CENTER);
     if(mode == 0){
-      image(doodleAngelLeft, x, y, doodleAngelLeft.width/3, doodleAngelLeft.height/3);
+      image(doodleAngelLeft, x, y, 4 * doodleAngelLeft.width/15, 4 * doodleAngelLeft.height/15);
     }if(mode == 1){
-      image(doodleAngelRight, x, y, doodleAngelRight.width/3, doodleAngelRight.height/3);
+      image(doodleAngelRight, x, y, 4 * doodleAngelRight.width/15, 4 * doodleAngelRight.height/15);
     }
     noFill();
     circle(x, y, 125);
     
-    text("doodle's width= " + doodleAngelLeft.width/3, 100, 200);
-    text("doodle's height= " + doodleAngelLeft.height/3, 100, 210);
-    text("doodle's heart= " + heart, 100, 260);
+    text("doodle's width= " + 4*doodleAngelLeft.width/15, 80, 90);
+    text("doodle's height= " + 4*doodleAngelLeft.height/15, 80, 100);
+    text("doodle's heart= " + heart, 80, 110);
     
     //drawing steps
     //for(Steps s : steps){
@@ -41,7 +41,7 @@ public class Doodle{
   }
   
   void jump(){
-    dy = -20;
+    dy = -14.5;
   }
   
   void gravity(){
@@ -67,16 +67,16 @@ public class Doodle{
   }
   
   void moveLeft(){
-    x = x-7;
+    x = x-6;
   }
   
   void moveRight(){
-    x = x+7;
+    x = x+6;
   }
    
    //check if dead or alive
   boolean dies(){
-   if(y >= 1000){
+   if(y >= 800){
      heart --;
    }
    return heart < 0;
@@ -90,8 +90,7 @@ public class Doodle{
   
   void injure(){
     skipStep = true;
-    dy = 7;
-    dx = 0;
+    dy = 6;
   }
   
   //void addStep(){}
