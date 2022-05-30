@@ -35,6 +35,14 @@ void draw(){
   rect(0, height-35, width, 35); // Bottom
   rect(0, 0, 35, height); // Left
   
+  if(mousePressed == true){
+    cursor(CROSS);
+    stroke(150,150,150);
+    strokeWeight(6);
+    line(mouseX, mouseY, pmouseX, pmouseY);
+    candy.cut();
+  }
+  
   //doodle stuff
   if(keyPressed){
     if(key == 'e'){ //if statements such that more than 1 direction can be called at the same time
