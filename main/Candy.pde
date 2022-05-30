@@ -17,6 +17,7 @@ public class Candy{
     fixPoint = fixP;
     dx = 0;
     dy = 0;
+    starScore = 0;
   }
   
   void display(){
@@ -68,22 +69,32 @@ public class Candy{
   }
   
   void starAchieved(){
-    if(x - starx < 48 && y - stary < 46){
+    if(abs(x - starx) < 48 && abs(y - stary) < 46){
       starScore++;
       drawStar=false;
     }
     //star is removed from screen and starScore + 1 when the candy touches the star
   }
+  
   int getScore(){
     return starScore;
     //return the current starScore.
   }
   
+  void cut(){
+    float[][] newFixed = new float[fixPoint.length][2];
+    for(int i = 0; i < fixPoint.length; i++){
+      if(mouseX < fixPoint[i][0] && mouseX > x && mouseY < fixPoint[i][1] && mouseY > y){
+        newFixed[i][0] = fixPoint[i][0];
+        newFixed[i][1] = fixPoint[i][1];
+        fixPoint = newFixed;
+      }
+    }
+    //disconnect the candy from the string
+  }
+  
   /*void shatter(){
     : candy will shatter if it touches the spikes
-  }
-  void cut(){
-    : disconnect the candy from the string
   }
   void addSpike(Spike s){
     : add a specified spike into the spike array
