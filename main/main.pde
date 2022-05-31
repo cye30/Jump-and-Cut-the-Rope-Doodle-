@@ -1,22 +1,10 @@
 final float gravity = 1;
+int mode;
 //int score;
 //Soundfile music;
-PImage doodleAngelLeft;
-PImage doodleAngelRight;
-PImage doodleWins;
-PImage monsterIm;
-float startX = 300; //for organizational purposes
-float startY = 560; //for organizational purposes
-boolean skipStep;
-int mode;
-
-Candy candy;
-PImage candyImg;
-PImage starImg;
-
-PImage restartB;
 
 //construct buttons
+PImage restartB;
 Button restart = new Button(37, 40);
 Button pause = new Button(90, 40);
 Button[] buttons = new Button[]{pause, restart};
@@ -28,14 +16,26 @@ Steps c = new Steps(56, 560);
 Steps[] game1 = new Steps[]{a, b, c};
 
 //construct the doodle; sample 1
-Doodle doodle = new Doodle(startX, startY);
+float startX = 300; //for organizational purposes
+float startY = 560; //for organizational purposes
+PImage doodleAngelLeft;
+PImage doodleAngelRight;
+PImage doodleWins;
+boolean skipStep;
+Doodle doodle;
 
 //construct monster; sample 1
+PImage monsterIm;
 Monsters toothy = new Monsters(464, 440, 0);
 Monsters biggy = new Monsters(136, 360, 0);
 Monsters[] monster = new Monsters[]{toothy, biggy};
 
-//Candy candy;
+//construct candy stuff;
+Candy candy;
+PImage candyImg;
+PImage starImg;
+ArrayList<float[]> points = new ArrayList<float[]>();
+  
 //Soundfile music;
 
 
@@ -47,6 +47,7 @@ void setup(){
    monsterIm = loadImage("monster1.png");
    candyImg = loadImage("candyIMG.png");
    starImg = loadImage("starImg.png");
+   doodle = new Doodle(startX, startY);
 
    restartB = loadImage("restartButton.png");
    mode = 0;
@@ -56,10 +57,9 @@ void setup(){
   background(225);
 
   //candy
-  ArrayList<float[]> points = new ArrayList<float[]>();
-  points.add(0,new float[]{200,250});
-  points.add(0,new float[]{300,200});
   candy = new Candy(300,300,30,points);
+  points.add(0, new float[]{200,250});
+  points.add(0, new float[]{300,200});
 }
 
 //for the buttons!
@@ -140,6 +140,10 @@ void draw(){
     mode = 3;
     //make monster disappear
     //add sprinkles
+  }else if (doodle.dies()||candy.dies()){
+    setup();
+    toothy = new Monsters(464, 440, 0); //draw out monster
+    skipStep = false;
   }
   candy.candyAchieved(doodle);
 
@@ -147,11 +151,6 @@ void draw(){
   if(onStep() && !skipStep){
     doodle.dy = 0;
     doodle.accY = 0;
-  }
-
-  if(doodle.dies()){
-    doodle = new Doodle(startX, startY);
-    skipStep = false;
   }
 
   //monster stuff
