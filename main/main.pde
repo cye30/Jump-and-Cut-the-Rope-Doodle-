@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 final float gravity = 1;
 //int score;
 //Soundfile music;
@@ -116,7 +115,7 @@ void draw(){
       mode = 0;
       doodle.moveLeft();
     }if(key == 'f'){
-<<<<<<< HEAD
+
       mode = 1;
       doodle.moveRight();
     }
@@ -133,7 +132,6 @@ void draw(){
     doodle.accY = 0;
   }
 
-<<<<<<< HEAD
   if(doodle.dies()){
     doodle = new Doodle(startX, startY);
     skipStep = false;
