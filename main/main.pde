@@ -28,7 +28,7 @@ Doodle doodle;
 PImage monsterIm;
 Monsters toothy = new Monsters(464, 440, 0);
 Monsters biggy = new Monsters(136, 360, 0);
-Monsters[] monster = new Monsters[]{toothy, biggy};
+ArrayList<Monsters> monster = new ArrayList<Monsters>();
 
 //construct candy stuff;
 Candy candy;
@@ -48,6 +48,8 @@ void setup(){
    candyImg = loadImage("candyIMG.png");
    starImg = loadImage("starImg.png");
    doodle = new Doodle(startX, startY);
+   monster.add(0, toothy);
+   monster.add(0, biggy);
 
    restartB = loadImage("restartButton.png");
    mode = 0;
@@ -136,13 +138,16 @@ void draw(){
   doodle.move();
   text("dy of doodle is " + doodle.dy, 50, 100);
   doodle.display(); //draw out doodle
+  
   if(doodle.victory(candy)){
     mode = 3;
+    for(int i=0; i<monster.size(); i++){ //remove allmosnters
+      monster.remove(0);
+    }
     //make monster disappear
     //add sprinkles
   }else if (doodle.dies()||candy.dies()){
     setup();
-    toothy = new Monsters(464, 440, 0); //draw out monster
     skipStep = false;
   }
   candy.candyAchieved(doodle);
@@ -171,7 +176,8 @@ boolean onStep(){
     //}return false;
 
     for(Steps s : game1){ //modify this if change game
-      if(doodle.x <s.leng + s.x && s.x < doodle.x && (doodle.y+51<= s.y+16 && doodle.y+51 >= s.y )){
+      if(doodle.x <s.leng + s.x && s.x < doodle.x && (doodle.y+51<= s.y+16 && doodle.y+51 >= s.y) && !skipStep){
+        doodle.y = s.y-51;
         return true;
       }
     }return false;
