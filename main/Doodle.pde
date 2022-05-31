@@ -26,9 +26,11 @@ public class Doodle{
       image(doodleAngelLeft, x, y, 4 * doodleAngelLeft.width/15, 4 * doodleAngelLeft.height/15);
     }if(mode == 1){
       image(doodleAngelRight, x, y, 4 * doodleAngelRight.width/15, 4 * doodleAngelRight.height/15);
+    }if(mode == 3){
+      image(doodleWins, x, y, 4 * doodleWins.width/15, 4 * doodleWins.height/15);
     }
-    noFill();
-    circle(x, y, 125);
+    //noFill();
+    //circle(x, y, 125);
     
     text("doodle's width= " + 4*doodleAngelLeft.width/15, 50, 110);
     text("doodle's height= " + 4*doodleAngelLeft.height/15, 50, 120);
@@ -86,7 +88,9 @@ public class Doodle{
   //  return false;
   //}
   
-  //void victory(){}
+  boolean victory(Candy c){
+    return (dist(x, y, c.x, c.y)<=75);
+  }
   
   void injure(){
     skipStep = true;

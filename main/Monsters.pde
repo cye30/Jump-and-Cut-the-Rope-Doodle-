@@ -14,8 +14,8 @@ public class Monsters{
   void display(){
     imageMode(CENTER);
     image(monsterIm, x, y, monsterIm.width/5, monsterIm.height/5);
-    noFill(); //for testing purposes
-    circle(x, y, 100);
+    //noFill(); //for testing purposes
+    //circle(x, y, 100);
     
     text("monster's width= " + monsterIm.width/5, 50, 140);
     text("monster's height= " + monsterIm.height/5, 50, 130);
