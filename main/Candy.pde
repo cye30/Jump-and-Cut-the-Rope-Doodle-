@@ -102,7 +102,7 @@ public class Candy{
   }
   
   boolean dies(){
-    return (y >= 800);
+    return (y >= 800) && drawCandy;
   }
   
   /*void shatter(){
