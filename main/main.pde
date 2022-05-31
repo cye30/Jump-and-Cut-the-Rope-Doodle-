@@ -141,13 +141,15 @@ void draw(){
   text("dy of doodle is " + doodle.dy, 50, 100);
   doodle.display(); //draw out doodle
   
-  if(doodle.victory(candy)){
+  if(doodle.victory(candy) || mode ==3){
     mode = 3;
     monster.clear();
+    if(onStep()){
       doodle.jump();
       doodle.gravity();
       doodle.move();
       //add sprinkles
+    } 
     
   }else if (doodle.dies()||candy.dies()){
     setup();
