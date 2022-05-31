@@ -144,7 +144,11 @@ void draw(){
   if(doodle.victory(candy)){
     mode = 3;
     monster.clear();
-    //add sprinkles
+      doodle.jump();
+      doodle.gravity();
+      doodle.move();
+      //add sprinkles
+    
   }else if (doodle.dies()||candy.dies()){
     setup();
     for(int i = 0; i<monster.size(); i++){
