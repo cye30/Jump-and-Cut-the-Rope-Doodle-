@@ -132,7 +132,10 @@ void draw(){
   doodle.display(); //draw out doodle
   if(doodle.victory(candy)){
     mode = 3;
+    //make monster disappear
+    //add sprinkles
   }
+  candy.candyAchieved(doodle);
 
 
   if(onStep() && !skipStep){
