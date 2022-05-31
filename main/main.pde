@@ -3,6 +3,7 @@ final float gravity = 1;
 //Soundfile music;
 PImage doodleAngelLeft;
 PImage doodleAngelRight;
+PImage doodleWins;
 PImage monsterIm;
 float startX = 300; //for organizational purposes
 float startY = 560; //for organizational purposes
@@ -40,9 +41,12 @@ void setup(){
   //import doodle image
    doodleAngelLeft = loadImage("doodleTheAngelLeft.png");
    doodleAngelRight = loadImage("doodleTheAngelRight.png");
+   doodleWins = loadImage("success.png");
    monsterIm = loadImage("monster1.png");
    candyImg = loadImage("candyIMG.png");
    starImg = loadImage("starImg.png");
+   
+   mode = 0;
 
   //background
   size(600,800);
@@ -117,7 +121,6 @@ void draw(){
       mode = 0;
       doodle.moveLeft();
     }if(key == 'f'){
-
       mode = 1;
       doodle.moveRight();
     }
@@ -127,6 +130,9 @@ void draw(){
   doodle.move();
   text("dy of doodle is " + doodle.dy, 50, 100);
   doodle.display(); //draw out doodle
+  if(doodle.victory(candy)){
+    mode = 3;
+  }
 
 
   if(onStep() && !skipStep){

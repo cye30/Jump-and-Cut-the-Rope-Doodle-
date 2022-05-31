@@ -10,6 +10,7 @@ public class Candy{
   float stary;
   //Spike[] spikes; later methods
   //Bubble[] bubbles;
+  boolean drawCandy = true;
   
   public Candy(float xx, float yy, float rad, ArrayList<float[]> fixP){
     x = xx;
@@ -22,17 +23,22 @@ public class Candy{
   }
   
   void display(){
-    imageMode(CENTER);
-    image(candyImg, x, y, candyImg.width/10, candyImg.height/10);
+    if(drawCandy){
+      imageMode(CENTER);
+      image(candyImg, x, y, candyImg.width/10, candyImg.height/10);
+    }
+    
     for(int i = 0; i < fixPoint.size(); i++){
       stroke(102,51,0);
       strokeWeight(4);
       line(x, y, fixPoint.get(i)[0], fixPoint.get(i)[1]); //makes line from Candy to fixed points
       ellipse(fixPoint.get(i)[0],fixPoint.get(i)[1],10,10);
     }
+    
     addStar(300,400);
-    starAchieved();
-    //display spikes && stars
+      starAchieved();
+      //display spikes && stars
+    
   }
   
   void attract(float px, float py){//modify this
@@ -65,6 +71,12 @@ public class Candy{
       starx = 0;
       stary = 0;
     }
+  }
+  
+  void candyAchieved(Doodle d){
+    if(d.victory(this)){
+      drawCandy = false;
+    }//candy is removed when it falls within the radius of the doodle
   }
   
   void starAchieved(){
