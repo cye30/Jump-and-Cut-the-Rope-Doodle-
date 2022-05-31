@@ -49,8 +49,10 @@ void setup(){
   background(225);
 
   //candy
-  float[][] points = {{400,300},{300,350}};
-  candy = new Candy(400,400,30,points);
+  ArrayList<float[]> points = new ArrayList<float[]>();
+  points.add(0,new float[]{200,250});
+  points.add(0,new float[]{300,200});
+  candy = new Candy(300,300,30,points);
 }
 
 //for the buttons!
@@ -97,7 +99,7 @@ void draw(){
     s.drawStep();
   }
 
-  if(mousePressed == true){
+  if(mousePressed){
     cursor(CROSS);
     stroke(150,150,150);
     strokeWeight(6);
@@ -146,7 +148,7 @@ void draw(){
   text("candy dx: " + candy.dx, 50,200);
   text("candy dy: " + candy.dy, 50,210);
   text("starScore: " + candy.getScore(), 50,220); //starScore
-  //candy.move();
+  candy.move();
 }
 
 boolean onStep(){

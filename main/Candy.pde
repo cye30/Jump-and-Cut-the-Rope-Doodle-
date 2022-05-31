@@ -1,6 +1,7 @@
 public class Candy{
   float dx,dy,x,y,radius;
-  float[][] fixPoint,star;
+  float[][] star;
+  ArrayList<float[]> fixPoint;
   int starScore;
   color c;
   boolean status;
@@ -10,7 +11,7 @@ public class Candy{
   //Spike[] spikes; later methods
   //Bubble[] bubbles;
   
-  public Candy(float xx, float yy, float rad, float[][] fixP){
+  public Candy(float xx, float yy, float rad, ArrayList<float[]> fixP){
     x = xx;
     y = yy;
     radius = rad;
@@ -23,13 +24,13 @@ public class Candy{
   void display(){
     imageMode(CENTER);
     image(candyImg, x, y, candyImg.width/10, candyImg.height/10);
-    for(int i = 0; i < fixPoint.length; i++){
+    for(int i = 0; i < fixPoint.size(); i++){
       stroke(102,51,0);
       strokeWeight(4);
-      line(x, y, fixPoint[i][0], fixPoint[i][1]); //makes line from Candy to fixed points
-      ellipse(fixPoint[i][0],fixPoint[i][1],10,10);
+      line(x, y, fixPoint.get(i)[0], fixPoint.get(i)[1]); //makes line from Candy to fixed points
+      ellipse(fixPoint.get(i)[0],fixPoint.get(i)[1],10,10);
     }
-    addStar(445,400);
+    addStar(300,400);
     starAchieved();
     //display spikes && stars
   }
@@ -82,12 +83,9 @@ public class Candy{
   }
   
   void cut(){
-    float[][] newFixed = new float[fixPoint.length][2];
-    for(int i = 0; i < fixPoint.length; i++){
-      if(mouseX < fixPoint[i][0] && mouseX > x && mouseY < fixPoint[i][1] && mouseY > y){
-        newFixed[i][0] = fixPoint[i][0];
-        newFixed[i][1] = fixPoint[i][1];
-        fixPoint = newFixed;
+    for(int i = 0; i < fixPoint.size(); i++){
+      if(abs(mouseX - fixPoint.get(i)[0]) < 5  && abs(mouseY - fixPoint.get(i)[1]) < 5){
+        fixPoint.remove(i);
       }
     }
     //disconnect the candy from the string
