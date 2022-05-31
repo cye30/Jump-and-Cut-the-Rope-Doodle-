@@ -25,9 +25,10 @@ boolean skipStep;
 Doodle doodle;
 
 //construct monster; sample 1
-PImage monsterIm;
-Monsters toothy = new Monsters(464, 440, 0);
-Monsters biggy = new Monsters(136, 360, 0);
+PImage monsterIm1;
+PImage monsterIm2;
+Monsters toothy = new Monsters(464, 190, 0);
+Monsters biggy = new Monsters(536, 460, 0);
 ArrayList<Monsters> monster = new ArrayList<Monsters>();
 
 //construct candy stuff;
@@ -44,7 +45,8 @@ void setup(){
    doodleAngelLeft = loadImage("doodleTheAngelLeft.png");
    doodleAngelRight = loadImage("doodleTheAngelRight.png");
    doodleWins = loadImage("success.png");
-   monsterIm = loadImage("monster1.png");
+   monsterIm1=loadImage("monster1.png");
+   monsterIm2= loadImage("monster2.png");
    candyImg = loadImage("candyIMG.png");
    starImg = loadImage("starImg.png");
    doodle = new Doodle(startX, startY);
@@ -80,7 +82,6 @@ void mousePressed(){
       else if(m.equals(buttons[1])){
         setup();
         doodle = new Doodle(startX, startY);
-        toothy = new Monsters(464, 440, 0); //draw out monster
       }
     }
   }
@@ -141,13 +142,16 @@ void draw(){
   
   if(doodle.victory(candy)){
     mode = 3;
-    for(int i=0; i<monster.size(); i++){ //remove allmosnters
-      monster.remove(0);
+    for(int i=monster.size()-1; i<=0; i--){ //remove all monsters
+      monster.remove(i);
     }
     //make monster disappear
     //add sprinkles
   }else if (doodle.dies()||candy.dies()){
     setup();
+    for(int i = 0; i<monster.size(); i++){
+      monster.set(i, new Monsters(monster.get(i).monsStartX, monster.get(i).monsStartY, 0));
+    }
     skipStep = false;
   }
   candy.candyAchieved(doodle);
@@ -159,10 +163,15 @@ void draw(){
   }
 
   //monster stuff
-  toothy.monsMove();
-  toothy.display(); //draw out monster
-  toothy.attack(doodle); //attacking, set skipStep to false
-
+  if(monster.size() >0){
+    monster.get(0).monsMove();
+    monster.get(0).display(monsterIm1);
+    monster.get(0).attack(doodle);
+    
+    monster.get(1).display(monsterIm2);
+    monster.get(1).attack(doodle);
+  }
+  
   candy.display(); //test candy!!!
   text("candy dx: " + candy.dx, 50,200);
   text("candy dy: " + candy.dy, 50,210);
