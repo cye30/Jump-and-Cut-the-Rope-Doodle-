@@ -35,6 +35,10 @@ Monsters toothy = new Monsters(464, 440, 0);
 Monsters biggy = new Monsters(136, 360, 0);
 Monsters[] monster = new Monsters[]{toothy, biggy};
 
+//construct spikes
+Spikes spike = new Spikes(100,100,5);
+spike.display();
+
 //Candy candy;
 //Soundfile music;
 
@@ -101,6 +105,7 @@ void draw(){
   rect(0, height-28, width, 28); // Bottom
   rect(0, 0, 28, height); // Left
 
+  //pause and restart icons
   triangle(105,53,105,72,120,62);
   image(restartB, 60, 60, restartB.width/22, restartB.height/22);
 
@@ -108,7 +113,8 @@ void draw(){
   for(Steps s : game1){ //modify this if change game
     s.drawStep();
   }
-
+  
+  //cut candy part
   if(mousePressed){
     cursor(CROSS);
     stroke(150,150,150);
