@@ -21,10 +21,6 @@ public class Monsters{
     //noFill(); //for testing purposes
     //circle(x, y, 100);
     
-    text("monster's width= " + im.width/5, 50, 140);
-    text("monster's height= " + im.height/5, 50, 130);
-    text("monster's x= " + x, 50, 160);
-    text("monster's y= " + y, 50, 150);
   }
   
   void attack(Doodle d){

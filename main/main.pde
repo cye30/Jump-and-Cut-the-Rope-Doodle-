@@ -50,8 +50,11 @@ void setup(){
    candyImg = loadImage("candyIMG.png");
    starImg = loadImage("starImg.png");
    doodle = new Doodle(startX, startY);
-   monster.add(0, toothy);
-   monster.add(0, biggy);
+   if(monster.size() < 2){
+     monster.add(0, toothy);
+     monster.add(0, biggy);
+   }
+   
 
    restartB = loadImage("restartButton.png");
    mode = 0;
@@ -62,8 +65,11 @@ void setup(){
 
   //candy
   candy = new Candy(300,300,30,points);
-  points.add(0, new float[]{200,250});
-  points.add(0, new float[]{300,200});
+  if(points.size() < 2){
+    points.add(0, new float[]{200,250});
+    points.add(0, new float[]{300,200});
+  }
+  
 }
 
 //for the buttons!
@@ -81,7 +87,9 @@ void mousePressed(){
       //restarting
       else if(m.equals(buttons[1])){
         setup();
-        doodle = new Doodle(startX, startY);
+        for(int i = 0; i<monster.size(); i++){
+          monster.set(i, new Monsters(monster.get(i).monsStartX, monster.get(i).monsStartY, 0));
+        }
       }
     }
   }
@@ -89,11 +97,14 @@ void mousePressed(){
 
 void draw(){
   background(255);
-
+  text("mode: "+mode, 50, 320);
+  
   //buttons
   for(Button m : buttons){
     m.display();
   }
+  triangle(105,53,105,72,120,62);
+  image(restartB, 60, 60, restartB.width/22, restartB.height/22);
 
   //boarders
   stroke(0, 150, 0);
@@ -104,20 +115,9 @@ void draw(){
   rect(0, height-28, width, 28); // Bottom
   rect(0, 0, 28, height); // Left
 
-  triangle(105,53,105,72,120,62);
-  image(restartB, 60, 60, restartB.width/22, restartB.height/22);
-
   //step stuff
   for(Steps s : game1){ //modify this if change game
     s.drawStep();
-  }
-
-  if(mousePressed){
-    cursor(CROSS);
-    stroke(150,150,150);
-    strokeWeight(6);
-    line(mouseX, mouseY, pmouseX, pmouseY);
-    candy.cut();
   }
 
   //doodle stuff
@@ -135,6 +135,7 @@ void draw(){
     }
   }
 
+  //doodle stuff
   doodle.gravity();
   doodle.move();
   text("dy of doodle is " + doodle.dy, 50, 100);
@@ -142,10 +143,7 @@ void draw(){
   
   if(doodle.victory(candy)){
     mode = 3;
-    for(int i=monster.size()-1; i<=0; i--){ //remove all monsters
-      monster.remove(i);
-    }
-    //make monster disappear
+    monster.clear();
     //add sprinkles
   }else if (doodle.dies()||candy.dies()){
     setup();
@@ -155,9 +153,10 @@ void draw(){
     skipStep = false;
   }
   candy.candyAchieved(doodle);
+  text("monsnter arraylist size is: "+ monster.size(), 50, 500);
 
-
-  if(onStep() && !skipStep){
+  
+  if(onStep() && !skipStep){ //doodle stops once it lands on the step
     doodle.dy = 0;
     doodle.accY = 0;
   }
@@ -172,6 +171,23 @@ void draw(){
     monster.get(1).attack(doodle);
   }
   
+  text("toothy's width= " + monsterIm1.width/5, 50, 280);
+  text("toothy's height= " + monsterIm1.height/5, 50, 270);
+  text("toothy's x= " + toothy.x, 50, 300);
+  text("toohty's y= " + toothy.y, 50, 290);
+  text("biggy's width= " + monsterIm2.width/5, 50, 240);
+  text("biggy's height= " + monsterIm2.height/5, 50, 230);
+  text("biggy's x= " + biggy.x, 50, 260);
+  text("biggy's y= " + biggy.y, 50, 250);
+  
+  //candy stuff
+  if(mousePressed){
+    cursor(CROSS);
+    stroke(150,150,150);
+    strokeWeight(6);
+    line(mouseX, mouseY, pmouseX, pmouseY);
+    candy.cut();
+  }
   candy.display(); //test candy!!!
   text("candy dx: " + candy.dx, 50,200);
   text("candy dy: " + candy.dy, 50,210);
