@@ -13,6 +13,8 @@ Candy candy;
 PImage candyImg;
 PImage starImg;
 
+PImage restartB;
+
 //construct buttons
 Button restart = new Button(37, 40);
 Button pause = new Button(90, 40);
@@ -43,6 +45,7 @@ void setup(){
    monsterIm = loadImage("monster1.png");
    candyImg = loadImage("candyIMG.png");
    starImg = loadImage("starImg.png");
+   restartB = loadImage("restartButton.png");
 
   //background
   size(600,800);
@@ -93,6 +96,9 @@ void draw(){
   rect(width-28, 0, 28, height); // Right
   rect(0, height-28, width, 28); // Bottom
   rect(0, 0, 28, height); // Left
+  
+  triangle(105,53,105,72,120,62);
+  image(restartB, 60, 60, restartB.width/22, restartB.height/22);
 
   //step stuff
   for(Steps s : game1){ //modify this if change game
