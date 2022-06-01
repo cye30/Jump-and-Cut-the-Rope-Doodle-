@@ -36,8 +36,8 @@ Monsters biggy = new Monsters(136, 360, 0);
 Monsters[] monster = new Monsters[]{toothy, biggy};
 
 //construct spikes
-Spikes spike = new Spikes(100,100,5);
-spike.display();
+Spikes spike = new Spikes(400,500,5);
+
 
 //Candy candy;
 //Soundfile music;
@@ -170,6 +170,8 @@ void draw(){
   text("candy dy: " + candy.dy, 50,210);
   text("starScore: " + candy.getScore(), 50,220); //starScore
   candy.move();
+  
+  spike.display();
 }
 
 boolean onStep(){

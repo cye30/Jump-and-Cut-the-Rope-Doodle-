@@ -6,7 +6,7 @@ public class Spikes{
   public Spikes(float x_, float y_, float nums){
     x = x_;
     y = y_;
-    sideLength = 3;
+    sideLength = 30;
     numSpikes = nums;
   }
   
@@ -17,7 +17,9 @@ public class Spikes{
   void drawSpikes(float nums){
     for(int i = 0; i < nums; i++){
       int val = i * sideLength;
-      triangle(x + val, y, x+sideLength + val, y, x+(sideLength/2) + val, y+1.2*sideLength/2);
+      fill(0);
+      stroke(0);
+      triangle(x + val, y, x+sideLength + val, y, x+(sideLength/2) + val, y-1.2*sideLength/2);
     }
   }
   
