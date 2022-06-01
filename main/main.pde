@@ -88,6 +88,12 @@ void mousePressed(){
   }
 }
 
+void mouseDragged(){
+  //use y = mx+b to find intersection of points
+  float slope = (mouseY-pmouseY)/(mouseX-pmouseX);
+  float ropeSlope = (candy.y
+}
+
 void draw(){
   background(255);
 
