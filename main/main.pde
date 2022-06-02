@@ -38,8 +38,9 @@ Monsters[] monster = new Monsters[]{toothy, biggy};
 //construct spikes
 Spikes spike = new Spikes(400,500,5);
 
+//fixed points for Candy class
+ArrayList<float[]> points = new ArrayList<float[]>();
 
-//Candy candy;
 //Soundfile music;
 
 
@@ -60,7 +61,6 @@ void setup(){
   background(225);
 
   //candy
-  ArrayList<float[]> points = new ArrayList<float[]>();
   points.add(0,new float[]{200,250});
   points.add(0,new float[]{300,200});
   candy = new Candy(300,300,30,points);
@@ -91,7 +91,9 @@ void mousePressed(){
 void mouseDragged(){
   //use y = mx+b to find intersection of points
   float slope = (mouseY-pmouseY)/(mouseX-pmouseX);
-  float ropeSlope = (candy.y
+  for(int i = 0; i < candy.fixPoint.size(); i++){
+    float ropeSlope = (candy.y-candy.fixPoint.get(i)[1]/candy.x-candy.fixPoint.get(i)[0]);
+  }
 }
 
 void draw(){
