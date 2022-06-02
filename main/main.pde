@@ -94,12 +94,12 @@ void mouseDragged(){
     float slope = (mouseY-pmouseY)/(mouseX-pmouseX);
     float b = mouseY/(slope*mouseX);
     for(int i = 0; i < candy.fixPoint.size(); i++){
-      float ropeSlope = (candy.y-candy.fixPoint.get(i)[1]/candy.x-candy.fixPoint.get(i)[0]);
+      float ropeSlope = (candy.y-candy.fixPoint.get(i)[1])/(candy.x-candy.fixPoint.get(i)[0]);
       float bRope = candy.y/(ropeSlope*candy.x);
       float xCor = (b-bRope)/(ropeSlope-slope);
       float yCor = ropeSlope*xCor+bRope;
       if(xCor >= candy.x && xCor <= candy.fixPoint.get(i)[0] && yCor >= candy.y && yCor <= candy.fixPoint.get(i)[0]){
-        candy.cut();
+        candy.cut(i);
       }
     }
   }
@@ -137,7 +137,6 @@ void draw(){
     stroke(150,150,150);
     strokeWeight(6);
     line(mouseX, mouseY, pmouseX, pmouseY);
-    candy.cut();
   }
 
   //doodle stuff
