@@ -91,8 +91,11 @@ void mousePressed(){
 void mouseDragged(){
   //use y = mx+b to find intersection of points
   float slope = (mouseY-pmouseY)/(mouseX-pmouseX);
+  float b = mouseY/(slope*mouseX);
   for(int i = 0; i < candy.fixPoint.size(); i++){
     float ropeSlope = (candy.y-candy.fixPoint.get(i)[1]/candy.x-candy.fixPoint.get(i)[0]);
+    float bRope = candy.y/(ropeSlope*candy.x);
+    float xRope = (b-bRope)/(ropeSlope-slope);
   }
 }
 
