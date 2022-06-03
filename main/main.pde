@@ -41,6 +41,8 @@ Spikes spike = new Spikes(400,500,5);
 //fixed points for Candy class
 ArrayList<float[]> points = new ArrayList<float[]>();
 
+Win won;
+
 //Soundfile music;
 
 
@@ -64,6 +66,9 @@ void setup(){
   points.add(0,new float[]{200,250});
   points.add(0,new float[]{300,200});
   candy = new Candy(300,300,30,points);
+  
+  //win tab
+  won = new Win();
 }
 
 //for the buttons!
@@ -93,7 +98,7 @@ void mouseDragged(){
   if(mouseX-pmouseX != 0){
     float slope = (mouseY-pmouseY)/(mouseX-pmouseX);
     float b = mouseY-(slope*mouseX);
-    for(int i = 0; i < candy.fixPoint.size(); i++){
+    for(int i = 0; i < candy.fixPoint.size(); i++){\
       float ropeSlope = (candy.y-candy.fixPoint.get(i)[1])/(candy.x-candy.fixPoint.get(i)[0]);
       float bRope = candy.y-(ropeSlope*candy.x);
       float xCor = (b-bRope)/(ropeSlope-slope);
@@ -111,6 +116,9 @@ void mouseDragged(){
 
 void draw(){
   background(255);
+  
+  //draw win tab
+  //won.display();
 
   //buttons
   for(Button m : buttons){
