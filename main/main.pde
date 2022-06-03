@@ -98,8 +98,12 @@ void mouseDragged(){
       float bRope = candy.y-(ropeSlope*candy.x);
       float xCor = (b-bRope)/(ropeSlope-slope);
       float yCor = ropeSlope*xCor+bRope;
-      if(xCor >= candy.x && xCor <= candy.fixPoint.get(i)[0] && yCor <= candy.y && yCor >= candy.fixPoint.get(i)[0]){
-        candy.cut(i);
+      if(yCor <= candy.y && yCor >= candy.fixPoint.get(i)[0]){
+        if(candy.x <= candy.fixPoint.get(i)[0] && xCor >= candy.x && xCor <= candy.fixPoint.get(i)[0]){
+          candy.cut(i);
+        } else if(candy.x >= candy.fixPoint.get(i)[0] && xCor <= candy.x && xCor >= candy.fixPoint.get(i)[0]){
+          candy.cut(i);
+        }
       }
     }
   }
