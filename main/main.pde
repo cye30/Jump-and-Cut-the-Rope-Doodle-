@@ -100,22 +100,24 @@ void mouseDragged(){
     float b = mouseY-(slope*mouseX);
     for(int i = 0; i < candy.fixPoint.size(); i++){
       
-      float first = ((candy.x-candy.fixPoint.get(i)[0])*(pmouseY-candy.fixPoint.get(i)[1]) - (candy.y-candy.fixPoint.get(i)[1])*(pmouseX-candy.fixPoint.get(i)[0])) / ((candy.y-candy.fixPoint.get(i)[1])*(mouseX-pmouseX) - (candy.x-candy.fixPoint.get(i)[0])*(mouseY-pmouseY));
+      /*float first = ((candy.x-candy.fixPoint.get(i)[0])*(pmouseY-candy.fixPoint.get(i)[1]) - (candy.y-candy.fixPoint.get(i)[1])*(pmouseX-candy.fixPoint.get(i)[0])) / ((candy.y-candy.fixPoint.get(i)[1])*(mouseX-pmouseX) - (candy.x-candy.fixPoint.get(i)[0])*(mouseY-pmouseY));
       float sec = ((mouseX-pmouseX)*(pmouseY-candy.fixPoint.get(i)[1]) - (mouseY-pmouseY)*(pmouseX-candy.fixPoint.get(i)[0])) / ((candy.y-candy.fixPoint.get(i)[1])*(mouseX-pmouseX) - (candy.x-candy.fixPoint.get(i)[0])*(mouseY-pmouseY));
       if(first >= 0 && first <= 1 && sec >= 0 && sec <= 1){
         candy.cut(i);
-      }
-      /*float ropeSlope = (candy.y-candy.fixPoint.get(i)[1])/(candy.x-candy.fixPoint.get(i)[0]);
+      }*/
+      float ropeSlope = (candy.y-candy.fixPoint.get(i)[1])/(candy.x-candy.fixPoint.get(i)[0]);
       float bRope = candy.y-(ropeSlope*candy.x);
       float xCor = (b-bRope)/(ropeSlope-slope);
       float yCor = ropeSlope*xCor+bRope;
+      if(pmouseX-xCor >= 0 && mouseX-xCor <= 0 || pmouseX-xCor <= 0 && mouseX-xCor >= 0){
       if(yCor <= candy.y && yCor >= candy.fixPoint.get(i)[0]){
         if(candy.x <= candy.fixPoint.get(i)[0] && xCor >= candy.x && xCor <= candy.fixPoint.get(i)[0]){
           candy.cut(i);
         } else if(candy.x >= candy.fixPoint.get(i)[0] && xCor <= candy.x && xCor >= candy.fixPoint.get(i)[0]){
           candy.cut(i);
         }
-      }*/
+      }
+      }
     }
   }
 }
