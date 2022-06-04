@@ -188,6 +188,8 @@ void draw(){
     
     monster.get(1).display(monsterIm2);
     monster.get(1).attack(doodle);
+    stroke(190);
+    fill(0, 160, 0);
     monster.get(1).shoot(monster.get(1).x, monster.get(1).y+33, 4);
   }
   
