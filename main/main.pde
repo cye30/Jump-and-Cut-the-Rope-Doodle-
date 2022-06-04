@@ -140,7 +140,6 @@ void draw(){
   //draw win tab
   //won.display();
 
->>>>>>> 2e32f7032558eacd94732ec79b8a04dbe4f9a8d3
   //buttons
   for(Button m : buttons){
     m.display();
