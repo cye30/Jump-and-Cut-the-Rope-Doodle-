@@ -93,6 +93,7 @@ void mousePressed(){
       }
       //restarting
       else if(m.equals(buttons[1])){
+        music.pause();
         setup();
         for(int i = 0; i<monster.size(); i++){
           monster.set(i, new Monsters(monster.get(i).monsStartX, monster.get(i).monsStartY, 0));
@@ -160,6 +161,7 @@ void draw(){
     
     
   }else if (doodle.dies()||candy.dies()){
+    music.pause();
     setup();
     for(int i = 0; i<monster.size(); i++){
       monster.set(i, new Monsters(monster.get(i).monsStartX, monster.get(i).monsStartY, 0));

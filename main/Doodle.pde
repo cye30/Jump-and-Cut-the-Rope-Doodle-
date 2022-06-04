@@ -79,15 +79,21 @@ public class Doodle{
    
    //check if dead or alive
   boolean dies(){
-   if(y >= 800){
-     heart --;
+    for(Monsters mon : monster){
+     if(y >= 800 || bulletHit(mon)){
+       heart --;
+     }
    }
    return heart < 0;
   }
   
-  //boolean getCandy(){
-  //  return false;
-  //}
+  boolean bulletHit(Monsters m){
+    for(float[] b : m.bullet){
+      if(b[0]>x-35 && b[0]<x+35 && b[1]>y-51 && b[1]<y+51){
+        return true;
+      }
+    }return false;
+  }
   
   boolean victory(Candy c){
     return (dist(x, y, c.x, c.y)<=75);
