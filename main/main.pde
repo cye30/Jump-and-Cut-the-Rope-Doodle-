@@ -91,8 +91,10 @@ void mousePressed(){
     //pausing
     if(m.equals(buttons[0])){
       if(looping){
+        music.pause();
         noLoop();
       }else{
+        music.play();
         loop();
       }
     }
@@ -250,7 +252,6 @@ void draw(){
     stroke(150,150,150);
     strokeWeight(6);
     line(mouseX, mouseY, pmouseX, pmouseY);
-    candy.cut();
   }
   candy.display(); //test candy!!!
   text("candy dx: " + candy.dx, 50,200);
