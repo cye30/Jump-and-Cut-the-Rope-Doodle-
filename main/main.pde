@@ -39,6 +39,9 @@ ArrayList<float[]> points = new ArrayList<float[]>();
   
 //Soundfile music;
 
+//special effect at the end
+ArrayList<Sprinkle> stars = new ArrayList<Sprinkle>();
+
 
 void setup(){
   //import doodle image
@@ -55,10 +58,10 @@ void setup(){
      monster.add(0, biggy);
    }
    
-
+   //restart button image
    restartB = loadImage("restartButton.png");
+   
    mode = 0;
-
   //background
   size(600,800);
   background(225);
@@ -148,8 +151,18 @@ void draw(){
       doodle.jump();
       doodle.gravity();
       doodle.move();
-      //add sprinkles
+      //sprinkles!!
+      stars.add(new Sprinkle(doodle.x, doodle.y+120, -5));
+      stars.add(new Sprinkle(doodle.x, doodle.y+120, 5));
+      stars.add(new Sprinkle(doodle.x, doodle.y+70, 8));
+      stars.add(new Sprinkle(doodle.x, doodle.y+70, -8));
     } 
+      for(Sprinkle s : stars){
+        s.gravity();
+        s.move();
+        s.display();
+      }
+    
     
   }else if (doodle.dies()||candy.dies()){
     setup();
@@ -164,17 +177,18 @@ void draw(){
   
   if(onStep() && !skipStep){ //doodle stops once it lands on the step
     doodle.dy = 0;
-    doodle.accY = 0;
   }
+    
 
   //monster stuff
-  if(monster.size() >0){
+  if(monster.size() >0){ //prevent out of bound error
     monster.get(0).monsMove();
     monster.get(0).display(monsterIm1);
     monster.get(0).attack(doodle);
     
     monster.get(1).display(monsterIm2);
     monster.get(1).attack(doodle);
+    monster.get(1).shoot(monster.get(1).x, monster.get(1).y+33, 4);
   }
   
   text("toothy's width= " + monsterIm1.width/5, 50, 280);

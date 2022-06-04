@@ -1,5 +1,5 @@
 public class Doodle{
-  float x, y, dx, dy, accY;
+  float x, y, dx, dy;
   //boolean status; //dead or alive
   //ArrayList<Steps> steps;//waiting for Step class construction
   int heart; //waiting for stage 4 implementation
@@ -27,6 +27,7 @@ public class Doodle{
     }if(mode == 1){
       image(doodleAngelRight, x, y, 4 * doodleAngelRight.width/15, 4 * doodleAngelRight.height/15);
     }if(mode == 3){
+      
       image(doodleWins, x, y, 4 * doodleWins.width/15, 4 * doodleWins.height/15);
     }
     //noFill();

@@ -117,5 +117,4 @@ public class Candy{
   void inBubble(){
     :remove the gravitational force and  modify the dy of the candy based on bubbleFloat()
   }*/
-  
 }
