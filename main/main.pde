@@ -1,7 +1,8 @@
+import processing.sound.*;
+SoundFile music;
 final float gravity = 1;
 int mode;
 //int score;
-//Soundfile music;
 
 //construct buttons
 PImage restartB;
@@ -73,6 +74,9 @@ void setup(){
     points.add(0, new float[]{300,200});
   }
   
+  //music
+  music = new SoundFile(this, "game_music.wav");
+  music.play();
 }
 
 //for the buttons!
