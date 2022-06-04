@@ -92,9 +92,9 @@ public class Candy{
     //return the current starScore.
   }
   
-  void cut(){
-    for(int i = 0; i < fixPoint.size(); i++){
-      if(abs(mouseX - fixPoint.get(i)[0]) < 5  && abs(mouseY - fixPoint.get(i)[1]) < 5){
+  void cut(int count){
+    for(int i = fixPoint.size()-1; i >= 0; i--){
+      if(count == i){
         fixPoint.remove(i);
       }
     }
