@@ -28,7 +28,7 @@ Doodle doodle;
 PImage monsterIm1;
 PImage monsterIm2;
 Monsters toothy = new Monsters(464, 190, 0);
-Monsters biggy = new Monsters(536, 460, 0);
+Monsters biggy = new Monsters(136, 460, 0);
 ArrayList<Monsters> monster = new ArrayList<Monsters>();
 
 //construct candy stuff;
@@ -109,15 +109,6 @@ void draw(){
   triangle(105,53,105,72,120,62);
   image(restartB, 60, 60, restartB.width/22, restartB.height/22);
 
-  //boarders
-  stroke(0, 150, 0);
-  fill(0, 150, 0);
-
-  rect(0, 0, width, 28); // Top
-  rect(width-28, 0, 28, height); // Right
-  rect(0, height-28, width, 28); // Bottom
-  rect(0, 0, 28, height); // Left
-
   //step stuff
   for(Steps s : game1){ //modify this if change game
     s.drawStep();
@@ -182,15 +173,17 @@ void draw(){
 
   //monster stuff
   if(monster.size() >0){ //prevent out of bound error
+    monster.get(0).monsHorMove();
     monster.get(0).monsMove();
     monster.get(0).display(monsterIm1);
     monster.get(0).attack(doodle);
     
     monster.get(1).display(monsterIm2);
     monster.get(1).attack(doodle);
-    stroke(190);
-    fill(0, 160, 0);
+    stroke(225,0,0);
     monster.get(1).shoot(monster.get(1).x, monster.get(1).y+33, 4);
+    monster.get(1).monsAttract(doodle);
+    monster.get(1).monsMove();
   }
   
   text("toothy's width= " + monsterIm1.width/5, 50, 280);
@@ -215,6 +208,15 @@ void draw(){
   text("candy dy: " + candy.dy, 50,210);
   text("starScore: " + candy.getScore(), 50,220); //starScore
   candy.move();
+  
+  //boarders
+  stroke(0, 150, 0);
+  fill(0, 150, 0);
+
+  rect(0, 0, width, 28); // Top
+  rect(width-28, 0, 28, height); // Right
+  rect(0, height-28, width, 28); // Bottom
+  rect(0, 0, 28, height); // Left
 }
 
 boolean onStep(){

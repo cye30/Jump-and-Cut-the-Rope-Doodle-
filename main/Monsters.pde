@@ -6,7 +6,7 @@ public class Monsters{
   float monsStartY = 560; //for organizational purposes
   ArrayList<float[]> bullet = new ArrayList<float[]>(); //0=bx,1=by,2=br,3=bdy
 
-  int countDown=30;
+  int countDown=60;
 
   public Monsters(float x_, float y_, int attackSpeed_){
     x = x_;
@@ -36,7 +36,7 @@ public class Monsters{
     countDown--;
     if(countDown ==0){
       bullet.add(new float[] {x_, y_, 7, bdy_});
-      countDown =30;
+      countDown =60;
     }
     
     for(int i=0; i<bullet.size(); i++){
@@ -45,18 +45,24 @@ public class Monsters{
     }
   }
   
-  void monsMove(){
-    if(x >= 567 && dx > 0) {
+  void monsHorMove(){
+    if(x >= 530 && dx > 0) {
       dx = -2;
-    }else if(x < 33 && dx < 0){
+    }else if(x < 73 && dx < 0){
       dx = 2;
     }
+  }
+  
+  void monsMove(){
     x += dx;
+    y += dy;
   }
   
   void monsDrop(){}
   
-  //void monsAttract(){}
+  void monsAttract(Doodle d){
+    dx = (d.x-x) * 0.01;
+  }
   
   
 }
