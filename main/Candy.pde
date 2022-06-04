@@ -101,6 +101,10 @@ public class Candy{
     //disconnect the candy from the string
   }
   
+  boolean dies(){
+    return (y >= 800) && drawCandy;
+  }
+  
   /*void shatter(){
     : candy will shatter if it touches the spikes
   }
@@ -113,5 +117,4 @@ public class Candy{
   void inBubble(){
     :remove the gravitational force and  modify the dy of the candy based on bubbleFloat()
   }*/
-  
 }

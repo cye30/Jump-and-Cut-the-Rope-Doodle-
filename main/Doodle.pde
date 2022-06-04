@@ -1,5 +1,5 @@
 public class Doodle{
-  float x, y, dx, dy, accY;
+  float x, y, dx, dy;
   //boolean status; //dead or alive
   //ArrayList<Steps> steps;//waiting for Step class construction
   int heart; //waiting for stage 4 implementation
@@ -27,6 +27,7 @@ public class Doodle{
     }if(mode == 1){
       image(doodleAngelRight, x, y, 4 * doodleAngelRight.width/15, 4 * doodleAngelRight.height/15);
     }if(mode == 3){
+      
       image(doodleWins, x, y, 4 * doodleWins.width/15, 4 * doodleWins.height/15);
     }
     //noFill();
@@ -78,15 +79,21 @@ public class Doodle{
    
    //check if dead or alive
   boolean dies(){
-   if(y >= 800){
-     heart --;
+    for(Monsters mon : monster){
+     if(y >= 800 || bulletHit(mon)){
+       heart --;
+     }
    }
    return heart < 0;
   }
   
-  //boolean getCandy(){
-  //  return false;
-  //}
+  boolean bulletHit(Monsters m){
+    for(float[] b : m.bullet){
+      if(b[0]>x-35 && b[0]<x+35 && b[1]>y-51 && b[1]<y+51){
+        return true;
+      }
+    }return false;
+  }
   
   boolean victory(Candy c){
     return (dist(x, y, c.x, c.y)<=75);
