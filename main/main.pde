@@ -35,7 +35,14 @@ Monsters toothy = new Monsters(464, 440, 0);
 Monsters biggy = new Monsters(136, 360, 0);
 Monsters[] monster = new Monsters[]{toothy, biggy};
 
-//Candy candy;
+//construct spikes
+Spikes spike = new Spikes(400,500,5);
+
+//fixed points for Candy class
+ArrayList<float[]> points = new ArrayList<float[]>();
+
+Win won;
+
 //Soundfile music;
 
 
@@ -56,10 +63,12 @@ void setup(){
   background(225);
 
   //candy
-  ArrayList<float[]> points = new ArrayList<float[]>();
   points.add(0,new float[]{200,250});
   points.add(0,new float[]{300,200});
   candy = new Candy(300,300,30,points);
+  
+  //win tab
+  won = new Win();
 }
 
 //for the buttons!
@@ -84,8 +93,36 @@ void mousePressed(){
   }
 }
 
+void mouseDragged(){
+  //use y = mx+b to find intersection of points
+  if(mouseX-pmouseX != 0){
+    float slope = (mouseY-pmouseY)/(mouseX-pmouseX);
+    float b = mouseY-(slope*mouseX);
+    for(int i = 0; i < candy.fixPoint.size(); i++){
+      /*float first = ((candy.x-candy.fixPoint.get(i)[0])*(pmouseY-candy.fixPoint.get(i)[1]) - (candy.y-candy.fixPoint.get(i)[1])*(pmouseX-candy.fixPoint.get(i)[0])) / ((candy.y-candy.fixPoint.get(i)[1])*(mouseX-pmouseX) - (candy.x-candy.fixPoint.get(i)[0])*(mouseY-pmouseY));
+      float sec = ((mouseX-pmouseX)*(pmouseY-candy.fixPoint.get(i)[1]) - (mouseY-pmouseY)*(pmouseX-candy.fixPoint.get(i)[0])) / ((candy.y-candy.fixPoint.get(i)[1])*(mouseX-pmouseX) - (candy.x-candy.fixPoint.get(i)[0])*(mouseY-pmouseY));
+      if(first >= 0 && first <= 1 && sec >= 0 && sec <= 1){
+        candy.cut(i);
+      }*/
+      float ropeSlope = (candy.y-candy.fixPoint.get(i)[1])/(candy.x-candy.fixPoint.get(i)[0]);
+      float bRope = candy.y-(ropeSlope*candy.x);
+      float xCor = (b-bRope)/(ropeSlope-slope);
+      if(pmouseX-xCor >= 0 && mouseX-xCor <= 0 || pmouseX-xCor <= 0 && mouseX-xCor >= 0){
+        if(candy.x <= candy.fixPoint.get(i)[0] && xCor >= candy.x && xCor <= candy.fixPoint.get(i)[0]){
+          candy.cut(i);
+        } else if(candy.x >= candy.fixPoint.get(i)[0] && xCor <= candy.x && xCor >= candy.fixPoint.get(i)[0]){
+          candy.cut(i);
+        }
+      }
+    }
+  }
+}
+
 void draw(){
   background(255);
+  
+  //draw win tab
+  //won.display();
 
   //buttons
   for(Button m : buttons){
@@ -101,6 +138,7 @@ void draw(){
   rect(0, height-28, width, 28); // Bottom
   rect(0, 0, 28, height); // Left
 
+  //pause and restart icons
   triangle(105,53,105,72,120,62);
   image(restartB, 60, 60, restartB.width/22, restartB.height/22);
 
@@ -108,13 +146,13 @@ void draw(){
   for(Steps s : game1){ //modify this if change game
     s.drawStep();
   }
-
+  
+  //cut candy part
   if(mousePressed){
     cursor(CROSS);
     stroke(150,150,150);
     strokeWeight(6);
     line(mouseX, mouseY, pmouseX, pmouseY);
-    candy.cut();
   }
 
   //doodle stuff
@@ -164,6 +202,8 @@ void draw(){
   text("candy dy: " + candy.dy, 50,210);
   text("starScore: " + candy.getScore(), 50,220); //starScore
   candy.move();
+  
+  spike.display();
 }
 
 boolean onStep(){
