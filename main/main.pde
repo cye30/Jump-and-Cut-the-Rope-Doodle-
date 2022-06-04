@@ -82,24 +82,24 @@ void setup(){
 //for the buttons!
 void mousePressed(){
   for(Button m : buttons){
-    if(m.overSqrt()){
-      //pausing
-      if(m.equals(buttons[0])){
-        if(looping){
-          noLoop();
-        }else{
-          loop();
-        }
-      }
-      //restarting
-      else if(m.equals(buttons[1])){
-        music.pause();
-        setup();
-        for(int i = 0; i<monster.size(); i++){
-          monster.set(i, new Monsters(monster.get(i).monsStartX, monster.get(i).monsStartY, 0));
-        }
+  if(m.overSqrt()){
+    //pausing
+    if(m.equals(buttons[0])){
+      if(looping){
+        noLoop();
+      }else{
+        loop();
       }
     }
+    //restarting
+    else if(m.equals(buttons[1])){
+      music.pause();
+      setup();
+      for(int i = 0; i<monster.size(); i++){
+        monster.set(i, new Monsters(monster.get(i).monsStartX, monster.get(i).monsStartY, 0));
+      }
+     }
+   }
   }
 }
 
@@ -120,7 +120,7 @@ void draw(){
   }
 
   //doodle stuff
-  if(keyPressed){
+  if(keyPressed && mode != 3){
     if(key == 'e'){
       if(onStep()){
         doodle.jump();
@@ -153,11 +153,11 @@ void draw(){
       stars.add(new Sprinkle(doodle.x, doodle.y+70, 8));
       stars.add(new Sprinkle(doodle.x, doodle.y+70, -8));
     } 
-      for(Sprinkle s : stars){
-        s.gravity();
-        s.move();
-        s.display();
-      }
+    for(Sprinkle s : stars){
+      s.gravity();
+      s.move();
+      s.display();
+    }
     
     
   }else if (doodle.dies()||candy.dies()){
@@ -226,19 +226,10 @@ void draw(){
 }
 
 boolean onStep(){
-    //if(x<500 && x>200 && y > 800){ //for testing jump methods solely
-    //   return true;
-    //}return false;
-
-    for(Steps s : game1){ //modify this if change game
-      if(doodle.x <s.leng + s.x && s.x < doodle.x && (doodle.y+51<= s.y+16 && doodle.y+51 >= s.y) && !skipStep){
-        doodle.y = s.y-51;
-        return true;
-      }
-    }return false;
-  }
-
-
-//void endGame(){
-//  clear();
-//}
+  for(Steps s : game1){ //modify this if change game
+    if(doodle.x <s.leng + s.x && s.x < doodle.x && (doodle.y+51<= s.y+16 && doodle.y+51 >= s.y) && !skipStep){
+      doodle.y = s.y-51;
+      return true;
+    }
+  }return false;
+}
