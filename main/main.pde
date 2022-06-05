@@ -137,10 +137,7 @@ void mouseDragged(){
 
 void draw(){
   background(255);
-  text("mode: "+mode, 50, 320);
-
-  //draw win tab
-  //won.display();
+  //text("mode: "+mode, 50, 320);
 
   //buttons
   for(Button m : buttons){
@@ -182,7 +179,7 @@ void draw(){
   //doodle stuff
   doodle.gravity();
   doodle.move();
-  text("dy of doodle is " + doodle.dy, 50, 100);
+  //text("dy of doodle is " + doodle.dy, 50, 100);
   doodle.display(); //draw out doodle
 
   if(doodle.victory(candy) || mode ==3){
@@ -214,7 +211,7 @@ void draw(){
     skipStep = false;
   }
   candy.candyAchieved(doodle);
-  text("monsnter arraylist size is: "+ monster.size(), 50, 500);
+  //text("monsnter arraylist size is: "+ monster.size(), 50, 500);
 
 
   if(onStep() && !skipStep){ //doodle stops once it lands on the step
@@ -237,14 +234,14 @@ void draw(){
     monster.get(1).monsMove();
   }
 
-  text("toothy's width= " + monsterIm1.width/5, 50, 280);
-  text("toothy's height= " + monsterIm1.height/5, 50, 270);
-  text("toothy's x= " + toothy.x, 50, 300);
-  text("toohty's y= " + toothy.y, 50, 290);
-  text("biggy's width= " + monsterIm2.width/5, 50, 240);
-  text("biggy's height= " + monsterIm2.height/5, 50, 230);
-  text("biggy's x= " + biggy.x, 50, 260);
-  text("biggy's y= " + biggy.y, 50, 250);
+  //text("toothy's width= " + monsterIm1.width/5, 50, 280);
+  //text("toothy's height= " + monsterIm1.height/5, 50, 270);
+  //text("toothy's x= " + toothy.x, 50, 300);
+  //text("toohty's y= " + toothy.y, 50, 290);
+  //text("biggy's width= " + monsterIm2.width/5, 50, 240);
+  //text("biggy's height= " + monsterIm2.height/5, 50, 230);
+  //text("biggy's x= " + biggy.x, 50, 260);
+  //text("biggy's y= " + biggy.y, 50, 250);
 
   //candy stuff
   if(mousePressed){
@@ -254,9 +251,9 @@ void draw(){
     line(mouseX, mouseY, pmouseX, pmouseY);
   }
   candy.display(); //test candy!!!
-  text("candy dx: " + candy.dx, 50,200);
-  text("candy dy: " + candy.dy, 50,210);
-  text("starScore: " + candy.getScore(), 50,220); //starScore
+  //text("candy dx: " + candy.dx, 50,200);
+  //text("candy dy: " + candy.dy, 50,210);
+  //text("starScore: " + candy.getScore(), 50,220); //starScore
   candy.move();
 
 
@@ -268,7 +265,12 @@ void draw(){
   rect(width-28, 0, 28, height); // Right
   rect(0, height-28, width, 28); // Bottom
   rect(0, 0, 28, height); // Left
-  spike.display();}
+  spike.display();
+  
+    //draw win tab
+  won.display();
+
+}
 
 boolean onStep(){
   for(Steps s : game1){ //modify this if change game

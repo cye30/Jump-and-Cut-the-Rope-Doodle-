@@ -1,5 +1,7 @@
 public class Win{
   boolean candyObtained;
+  PFont mono;
+
   
   public Win(){
     
@@ -10,8 +12,9 @@ public class Win{
     fill(0,150,0);
     rect(125,150,350,500,10);
     fill(255);
-    textSize(100);
-    text("YOU WIN!", 140,170);
+    textSize(70);
+    //textFont(mono);
+    text("YOU WIN!", 140,240);
   }
   
   /*void restart(){
