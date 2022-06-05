@@ -37,6 +37,7 @@ ArrayList<Monsters> monster = new ArrayList<Monsters>();
 Candy candy;
 PImage candyImg;
 PImage starImg;
+PImage starUImg;
 ArrayList<float[]> points = new ArrayList<float[]>();
 
 //construct spikes
@@ -56,6 +57,7 @@ void setup(){
    monsterIm2= loadImage("monster2.png");
    candyImg = loadImage("candyIMG.png");
    starImg = loadImage("starImg.png");
+   starUImg = loadImage("starUIMG.png");
    doodle = new Doodle(startX, startY);
    if(monster.size() < 2){
      monster.add(0, toothy);

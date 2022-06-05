@@ -15,6 +15,20 @@ public class Win{
     textSize(70);
     //textFont(mono);
     text("YOU WIN!", 140,240);
+    displayStars();
+  }
+  
+  void displayStars(){
+    imageMode(CENTER);
+    int add = 0;
+    for(int i = 0; i < candy.getScore(); i++){
+      add = i*116;
+      image(starImg, 180+add, 290, starImg.width/30, starImg.height/30);
+    }
+    for(int i = 0; i < 3-candy.getScore(); i++){
+      add = (candy.getScore()+i)*116;
+      image(starUImg, 180+add, 290, starImg.width/30, starImg.height/30);
+    }
   }
   
   /*void restart(){
@@ -22,10 +36,6 @@ public class Win{
   }
   
   void won(){
-    
-  }
-  
-  void displayStars(){
     
   }
   
