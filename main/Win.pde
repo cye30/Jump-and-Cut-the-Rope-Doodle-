@@ -42,10 +42,6 @@ Button nextLev = new Button(400, 540);
     
   }
   
-  void won(){
-    
-  }
-  
   void nextLevel(){
     
   }
