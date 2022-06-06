@@ -8,11 +8,11 @@ public class Candy{
   boolean drawStar=true;
   float starx;
   float stary;
-  //Spike[] spikes; later methods
+  Spikes[] spike;
   //Bubble[] bubbles;
   boolean drawCandy = true;
   
-  public Candy(float xx, float yy, float rad, ArrayList<float[]> fixP){
+  public Candy(float xx, float yy, float rad, ArrayList<float[]> fixP,Spikes[] spi){
     x = xx;
     y = yy;
     radius = rad;
@@ -20,6 +20,7 @@ public class Candy{
     dx = 0;
     dy = 0;
     starScore = 0;
+    spike = spi;
   }
   
   void display(){
@@ -107,9 +108,6 @@ public class Candy{
   
   /*void shatter(){
     : candy will shatter if it touches the spikes
-  }
-  void addSpike(Spike s){
-    : add a specified spike into the spike array
   }
   void addBubble(Bubble b){
     : add a specified bubble into the bubble array. 

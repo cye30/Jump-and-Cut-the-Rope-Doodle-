@@ -42,6 +42,7 @@ ArrayList<float[]> points = new ArrayList<float[]>();
 
 //construct spikes
 Spikes spike = new Spikes(400,500,5);
+Spikes[] arrSpikes = new Spikes[]{spike};
 Win won;
 
 //special effect at the end
@@ -73,7 +74,7 @@ void setup(){
   background(225);
 
   //candy
-  candy = new Candy(300,300,30,points);
+  candy = new Candy(300,300,30,points, arrSpikes);
   if(points.size() < 2){
     points.add(0, new float[]{200,250});
     points.add(0, new float[]{300,200});
@@ -270,7 +271,7 @@ void draw(){
   spike.display();
   
     //draw win tab
-  won.display();
+  //won.display();
 
 }
 
