@@ -31,7 +31,8 @@ public class Candy{
     for(int i = 0; i < fixPoint.size(); i++){
       stroke(102,51,0);
       strokeWeight(4);
-      line(x, y, fixPoint.get(i)[0], fixPoint.get(i)[1]); //makes line from Candy to fixed points
+      //replace this with the new draw rope method
+      drawLine(fixPoint.get(i)[0], fixPoint.get(i)[1]); //makes line from Candy to fixed points
       ellipse(fixPoint.get(i)[0],fixPoint.get(i)[1],10,10);
     }
     
@@ -40,6 +41,22 @@ public class Candy{
       //display spikes && stars
     
   }
+  
+  
+  void drawLine(float fx, float fy){ //access through the arraylist
+    float incX = abs(fx-x)/10;
+    float incY = abs(fy-y)/10;
+    for(int i = 0; i<10; i++){
+      float firstX = fx+(incX*i);
+      float firstY = fy+(incY*i);
+      float secX = fx+(incX*(i+1));
+      float secY = fy+(incY*(i+1));
+      line(firstX, firstY, secX, secY);
+    }
+    
+  }
+  
+  
   
   void attract(float px, float py){//modify this
     float dist = dist(x, y, px, py) ;
