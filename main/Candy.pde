@@ -114,10 +114,10 @@ public class Candy{
   void shatter(){
     //candy will shatter if it touches the spikes
     for(int i = 0; i < spike.length; i++){
-      if((spike[i].x - x) < 5 || (x - (spike[i].x + spike[i].sideLength*spike[i].numSpikes)) < 5){
+      if(spike[i].x > x && (spike[i].x - x) < 5 || spike[i].x < x && (x - (spike[i].x + spike[i].sideLength*spike[i].numSpikes)) < 3){
         if(abs(y - spike[i].y) < spike[i].sideLength){
           grav = 1;
-          y -= 30;
+          y -= 20;
         }
       }
     }
