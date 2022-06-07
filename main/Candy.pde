@@ -43,7 +43,9 @@ public class Candy{
       starAchieved();
       //display spikes && stars
       
-      shatter();
+    for(int i = 0; i < spike.length; i++){
+      shatter(spike[i]);
+    }
     
   }
   
@@ -111,17 +113,15 @@ public class Candy{
     return (y >= 800) && drawCandy;
   }
   
-  void shatter(){
+  void shatter(Spikes broken){
     //candy will shatter if it touches the spikes
-    for(int i = 0; i < spike.length; i++){
-      if(spike[i].x > x && (spike[i].x - x) < 5 || spike[i].x < x && (x - (spike[i].x + spike[i].sideLength*spike[i].numSpikes)) < 3){
-        if(abs(y - spike[i].y) < spike[i].sideLength){
-          grav = 1;
-          y -= 20;
-        }
+    if(broken.x > x && (broken.x - x) < 5 || broken.x < x && (x - (broken.x + broken.sideLength*broken.numSpikes)) < 3){
+      if(abs(y - broken.y) < broken.sideLength){
+        grav = 1;
+        y -= 20;
       }
     }
-    
+      
   }
   /*
   void addBubble(Bubble b){
