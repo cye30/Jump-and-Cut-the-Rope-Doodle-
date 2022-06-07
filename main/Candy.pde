@@ -11,6 +11,7 @@ public class Candy{
   Spikes[] spike;
   //Bubble[] bubbles;
   boolean drawCandy = true;
+  boolean breakCandy = false;
   
   public Candy(float xx, float yy, float rad, ArrayList<float[]> fixP,Spikes[] spi){
     x = xx;
@@ -24,16 +25,20 @@ public class Candy{
   }
   
   void display(){
-    if(drawCandy){
-      imageMode(CENTER);
-      image(candyImg, x, y, candyImg.width/10, candyImg.height/10);
-    }
-    
-    for(int i = 0; i < fixPoint.size(); i++){
-      stroke(102,51,0);
-      strokeWeight(4);
-      line(x, y, fixPoint.get(i)[0], fixPoint.get(i)[1]); //makes line from Candy to fixed points
-      ellipse(fixPoint.get(i)[0],fixPoint.get(i)[1],10,10);
+    if(breakCandy){
+      //??
+    } else {
+      if(drawCandy){
+        imageMode(CENTER);
+        image(candyImg, x, y, candyImg.width/10, candyImg.height/10);
+      }
+      
+      for(int i = 0; i < fixPoint.size(); i++){
+        stroke(102,51,0);
+        strokeWeight(4);
+        line(x, y, fixPoint.get(i)[0], fixPoint.get(i)[1]); //makes line from Candy to fixed points
+        ellipse(fixPoint.get(i)[0],fixPoint.get(i)[1],10,10);
+      }
     }
     
     addStar(300,400);
@@ -106,9 +111,16 @@ public class Candy{
     return (y >= 800) && drawCandy;
   }
   
-  /*void shatter(){
-    : candy will shatter if it touches the spikes
+  void shatter(){
+    //candy will shatter if it touches the spikes
+    for(int i = 0; i < spike.length; i++){
+      if((x - spike[i].x) < 10 && (x - (spike[i].x + spike[i].sideLength*spike[i].numSpikes)) < 10 && abs(y - spike[i].y) < spike[i].sideLength){
+        
+      }
+    }
+    
   }
+  /*
   void addBubble(Bubble b){
     : add a specified bubble into the bubble array. 
   }
