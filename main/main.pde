@@ -41,7 +41,7 @@ PImage starUImg;
 ArrayList<float[]> points = new ArrayList<float[]>();
 
 //construct spikes
-Spikes spike = new Spikes(400,500,5);
+Spikes spike = new Spikes(100,400,5);
 Spikes[] arrSpikes = new Spikes[]{spike};
 Win won;
 
