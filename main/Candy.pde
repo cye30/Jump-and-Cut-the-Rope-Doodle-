@@ -27,22 +27,27 @@ public class Candy{
   }
   
   void display(){
-    if(drawCandy){
-      imageMode(CENTER);
-      image(candyImg, x, y, candyImg.width/10, candyImg.height/10);
-    }
-    
-    for(int i = 0; i < fixPoint.size(); i++){
-      stroke(102,51,0);
-      strokeWeight(4);
-      line(x, y, fixPoint.get(i)[0], fixPoint.get(i)[1]); //makes line from Candy to fixed points
-      ellipse(fixPoint.get(i)[0],fixPoint.get(i)[1],10,10);
-    }
-    
-    addStar(300,400);
-      starAchieved();
-      //display spikes && stars
+    if(breakCandy){
+      image(candyL, x-20, y, candyL.width/10, candyL.height/10);
+      image(candyR, x+20, y, candyR.width/10, candyR.height/10);
+    } else{
+      if(drawCandy){
+        imageMode(CENTER);
+        image(candyImg, x, y, candyImg.width/10, candyImg.height/10);
+      }
       
+      for(int i = 0; i < fixPoint.size(); i++){
+        stroke(102,51,0);
+        strokeWeight(4);
+        line(x, y, fixPoint.get(i)[0], fixPoint.get(i)[1]); //makes line from Candy to fixed points
+        ellipse(fixPoint.get(i)[0],fixPoint.get(i)[1],10,10);
+      }
+      
+      addStar(300,400);
+        starAchieved();
+        //display spikes && stars
+    }
+        
     for(int i = 0; i < spike.length; i++){
       shatter(spike[i]);
     }
@@ -118,7 +123,7 @@ public class Candy{
     if(broken.x > x && (broken.x - x) < 5 || broken.x < x && (x - (broken.x + broken.sideLength*broken.numSpikes)) < 3){
       if(abs(y - broken.y) < broken.sideLength){
         grav = 1;
-        y -= 20;
+        breakCandy = true;
       }
     }
       
