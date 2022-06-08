@@ -74,7 +74,7 @@ void setup(){
   candy = new Candy(300,300,30,points);
   if(points.size() < 2){
     points.add(0, new float[]{200,250});
-    points.add(0, new float[]{300,200});
+    points.add(0, new float[]{400,200});
   }
 
   //music

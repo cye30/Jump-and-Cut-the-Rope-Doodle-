@@ -68,11 +68,11 @@ public class Candy{
   
   
   
-  void attract(float px, float py, float qx, float qy){//modify this
-    float dist = dist(qx, qy, px, py) ;
+  void attract(float px, float py){//modify this
+    float dist = dist(x, y, px, py) ;
     float force = (dist-100) * 0.05;
-    float displacex = (px-qx) ;
-    float displacey = (py-qy) ;
+    float displacex = (px-x) ;
+    float displacey = (py-y) ;
     dx += displacex * force / dist;
     dy += displacey * force / dist;
     dx *= 0.99;
@@ -83,11 +83,14 @@ public class Candy{
     for(int i = 0; i < fixPoint.size(); i++){
       for(int t = 0; t < PointsX.get(i).length-1; t++){                                           //NEED MORE WORK
        this.attract(PointsX.get(i)[t], PointsY.get(i)[t], PointsX.get(i)[t+1], PointsY.get(i)[t+1]); 
-       PointsX.get(i)[t]+=dx;
-       PointsY.get(i)[t]+=dy;
-       dy+=0.3;
+       //PointsX.get(i)[t]+=dx;
+       //PointsY.get(i)[t]+=dy;
+       //dy+=0.3;
       }
     }
+    x+=dx;
+    y+=dy;
+    dy+=.3;
   }
   
   void addStar(float xs, float ys){
