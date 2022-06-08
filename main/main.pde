@@ -36,6 +36,8 @@ ArrayList<Monsters> monster = new ArrayList<Monsters>();
 //construct candy stuff;
 Candy candy;
 PImage candyImg;
+PImage candyL;
+PImage candyR;
 PImage starImg;
 PImage starUImg;
 ArrayList<float[]> points = new ArrayList<float[]>();
@@ -57,6 +59,8 @@ void setup(){
    monsterIm1=loadImage("monster1.png");
    monsterIm2= loadImage("monster2.png");
    candyImg = loadImage("candyIMG.png");
+   candyL = loadImage("candyL.png");
+   candyR = loadImage("candyR.png");
    starImg = loadImage("starImg.png");
    starUImg = loadImage("starUIMG.png");
    doodle = new Doodle(startX, startY);
