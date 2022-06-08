@@ -41,6 +41,7 @@ PImage candyR;
 PImage starImg;
 PImage starUImg;
 ArrayList<float[]> points = new ArrayList<float[]>();
+boolean candyBroken = false;
 
 //construct spikes
 Spikes spike = new Spikes(100,400,5);
@@ -189,25 +190,26 @@ void draw(){
   //text("dy of doodle is " + doodle.dy, 50, 100);
   doodle.display(); //draw out doodle
 
-  if(doodle.victory(candy) || mode ==3){
-    mode = 3;
-    monster.clear();
-    if(onStep()){
-      doodle.jump();
-      doodle.gravity();
-      doodle.move();
-      //sprinkles!!
-      stars.add(new Sprinkle(doodle.x, doodle.y+120, -5));
-      stars.add(new Sprinkle(doodle.x, doodle.y+120, 5));
-      stars.add(new Sprinkle(doodle.x, doodle.y+70, 8));
-      stars.add(new Sprinkle(doodle.x, doodle.y+70, -8));
+  if(candyBroken == false){
+    if(doodle.victory(candy) || mode ==3){
+      mode = 3;
+      monster.clear();
+      if(onStep()){
+        doodle.jump();
+        doodle.gravity();
+        doodle.move();
+        //sprinkles!!
+        stars.add(new Sprinkle(doodle.x, doodle.y+120, -5));
+        stars.add(new Sprinkle(doodle.x, doodle.y+120, 5));
+        stars.add(new Sprinkle(doodle.x, doodle.y+70, 8));
+        stars.add(new Sprinkle(doodle.x, doodle.y+70, -8));
+      }
+      for(Sprinkle s : stars){
+        s.gravity();
+        s.move();
+        s.display();
+      }
     }
-    for(Sprinkle s : stars){
-      s.gravity();
-      s.move();
-      s.display();
-    }
-
 
   }else if (doodle.dies()||candy.dies()){
     music.pause();
@@ -249,6 +251,9 @@ void draw(){
   //text("biggy's height= " + monsterIm2.height/5, 50, 230);
   //text("biggy's x= " + biggy.x, 50, 260);
   //text("biggy's y= " + biggy.y, 50, 250);
+  
+  //spikes
+  spike.display();
 
   //candy stuff
   if(mousePressed){
@@ -262,6 +267,9 @@ void draw(){
   //text("candy dy: " + candy.dy, 50,210);
   //text("starScore: " + candy.getScore(), 50,220); //starScore
   candy.move();
+  if(candy.breakCandy){
+    candyBroken = true;
+  }
 
 
   //boarders
@@ -272,7 +280,6 @@ void draw(){
   rect(width-28, 0, 28, height); // Right
   rect(0, height-28, width, 28); // Bottom
   rect(0, 0, 28, height); // Left
-  spike.display();
   
     //draw win tab
   //won.display();
