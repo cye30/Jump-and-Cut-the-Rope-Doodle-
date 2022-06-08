@@ -1,7 +1,7 @@
 public class Button{
   
   color sqrtColor, sqrtHighlight;
-  int sqrtSize = 45;
+  float sqrtSize = 45;
   float sqrtX, sqrtY;
   
   public Button(float x, float y){
@@ -9,6 +9,13 @@ public class Button{
     sqrtY = y;
     sqrtColor = color(255);
     sqrtHighlight = color(243);
+  }
+  public Button(float x, float y, float size){
+    sqrtX = x;
+    sqrtY = y;
+    sqrtColor = color(255);
+    sqrtHighlight = color(243);
+    sqrtSize = size;
   }
   
   void display(){
