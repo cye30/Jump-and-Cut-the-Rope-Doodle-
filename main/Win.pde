@@ -2,9 +2,9 @@ public class Win{
   boolean candyObtained;
   PFont mono;
   
-Button restart = new Button(160, 540);
-Button menu = new Button(300, 540);
-Button nextLev = new Button(400, 540);
+Button restart = new Button(160, 540, 70);
+Button menu = new Button(300-(restart.sqrtSize/2), 540, 70);
+Button nextLev = new Button(370, 540, 70);
 
   
   public Win(){
@@ -38,10 +38,12 @@ Button nextLev = new Button(400, 540);
     }
   }
   
-  /*void restart(){
-    
+  void restart(){
+    //restart icons
+    triangle(105,53,105,72,120,62);
+    image(restartB, restart.sqrtX, restart.sqrtY, restartB.width/20, restartB.height/20);
   }
-  
+  /*
   void nextLevel(){
     
   }

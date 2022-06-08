@@ -281,8 +281,8 @@ void draw(){
   rect(0, height-28, width, 28); // Bottom
   rect(0, 0, 28, height); // Left
   
-    //draw win tab
-  //won.display();
+  //draw win tab
+  won.display();
 
 }
 
