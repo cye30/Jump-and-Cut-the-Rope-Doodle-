@@ -67,12 +67,24 @@ public class Candy{
   }
   
   
-  
+  //attract #1
   void attract(float px, float py){//modify this
     float dist = dist(x, y, px, py) ;
     float force = (dist-100) * 0.05;
     float displacex = (px-x) ;
     float displacey = (py-y) ;
+    dx += displacex * force / dist;
+    dy += displacey * force / dist;
+    dx *= 0.99;
+    dy *= 0.99;
+  }
+  
+  //attract #2
+  void attract(float px, float py, float qx, float qy){//modify this
+    float dist = dist(qx, qy, px, py) ;
+    float force = (dist-100) * 0.05;
+    float displacex = (px-qx) ;
+    float displacey = (py-qy) ;
     dx += displacex * force / dist;
     dy += displacey * force / dist;
     dx *= 0.99;
