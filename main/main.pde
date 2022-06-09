@@ -51,6 +51,8 @@ Win won;
 //special effect at the end
 ArrayList<Sprinkle> stars = new ArrayList<Sprinkle>();
 
+int counter;
+
 
 void setup(){
   //import doodle image
@@ -69,6 +71,8 @@ void setup(){
      monster.add(0, toothy);
      monster.add(0, biggy);
    }
+   
+   counter = 0;
 
    //restart button image
    restartB = loadImage("restartButton.png");
@@ -87,7 +91,7 @@ void setup(){
 
   //music
   music = new SoundFile(this, "game_music.wav");
-  music.play();
+  //music.play();
 
   won = new Win();
 }
@@ -183,6 +187,9 @@ void draw(){
       doodle.moveRight();
     }
   }
+  
+  //spikes
+  spike.display();
 
   //doodle stuff
   doodle.gravity();
@@ -192,22 +199,28 @@ void draw(){
 
   if(candyBroken == false){
     if(doodle.victory(candy) || mode ==3){
-      mode = 3;
-      monster.clear();
-      if(onStep()){
-        doodle.jump();
-        doodle.gravity();
-        doodle.move();
-        //sprinkles!!
-        stars.add(new Sprinkle(doodle.x, doodle.y+120, -5));
-        stars.add(new Sprinkle(doodle.x, doodle.y+120, 5));
-        stars.add(new Sprinkle(doodle.x, doodle.y+70, 8));
-        stars.add(new Sprinkle(doodle.x, doodle.y+70, -8));
-      }
-      for(Sprinkle s : stars){
-        s.gravity();
-        s.move();
-        s.display();
+      if(counter < 5){
+        mode = 3;
+        monster.clear();
+        if(onStep()){
+          counter++;
+          doodle.jump();
+          doodle.gravity();
+          doodle.move();
+          //sprinkles!!
+          stars.add(new Sprinkle(doodle.x, doodle.y+120, -5));
+          stars.add(new Sprinkle(doodle.x, doodle.y+120, 5));
+          stars.add(new Sprinkle(doodle.x, doodle.y+70, 8));
+          stars.add(new Sprinkle(doodle.x, doodle.y+70, -8));
+        }
+        for(Sprinkle s : stars){
+          s.gravity();
+          s.move();
+          s.display();
+        }
+      } else {
+        //draw win tab
+        won.display();
       }
     }
 
@@ -251,9 +264,6 @@ void draw(){
   //text("biggy's height= " + monsterIm2.height/5, 50, 230);
   //text("biggy's x= " + biggy.x, 50, 260);
   //text("biggy's y= " + biggy.y, 50, 250);
-  
-  //spikes
-  spike.display();
 
   //candy stuff
   if(mousePressed){
@@ -280,9 +290,6 @@ void draw(){
   rect(width-28, 0, 28, height); // Right
   rect(0, height-28, width, 28); // Bottom
   rect(0, 0, 28, height); // Left
-  
-  //draw win tab
-  won.display();
 
 }
 
