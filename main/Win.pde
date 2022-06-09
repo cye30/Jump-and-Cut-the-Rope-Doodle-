@@ -1,10 +1,6 @@
 public class Win{
   boolean candyObtained;
   PFont mono;
-  
-Button restart = new Button(160, 540, 70);
-Button menu = new Button(300-(restart.sqrtSize/2), 540, 70);
-Button nextLev = new Button(370, 540, 70);
 
   
   public Win(){
@@ -20,9 +16,6 @@ Button nextLev = new Button(370, 540, 70);
     //textFont(mono);
     text("YOU WIN!", 140,240);
     displayStars();
-    restart.display();
-    menu.display();
-    nextLev.display();
   }
   
   void displayStars(){

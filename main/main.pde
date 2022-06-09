@@ -10,6 +10,11 @@ Button restart = new Button(37, 40);
 Button pause = new Button(90, 40);
 Button[] buttons = new Button[]{pause, restart};
 
+Button restartWin = new Button(160, 540, 70);
+Button menu = new Button(300-(restartWin.sqrtSize/2), 540, 70);
+Button nextLev = new Button(370, 540, 70);
+Button[] buttonWin = new Button[]{restartWin, menu, nextLev};
+
 //construct steps for this game; sample 1
 Steps a = new Steps(424, 686);
 Steps b = new Steps(240, 623);
@@ -44,7 +49,7 @@ ArrayList<float[]> points = new ArrayList<float[]>();
 boolean candyBroken = false;
 
 //construct spikes
-Spikes spike = new Spikes(100,400,5);
+Spikes spike = new Spikes(100, 400, 5);
 Spikes[] arrSpikes = new Spikes[]{spike};
 Win won;
 
@@ -54,39 +59,39 @@ ArrayList<Sprinkle> stars = new ArrayList<Sprinkle>();
 int counter;
 
 
-void setup(){
+void setup() {
   //import doodle image
-   doodleAngelLeft = loadImage("doodleTheAngelLeft.png");
-   doodleAngelRight = loadImage("doodleTheAngelRight.png");
-   doodleWins = loadImage("success.png");
-   monsterIm1=loadImage("monster1.png");
-   monsterIm2= loadImage("monster2.png");
-   candyImg = loadImage("candyIMG.png");
-   candyL = loadImage("candyL.png");
-   candyR = loadImage("candyR.png");
-   starImg = loadImage("starImg.png");
-   starUImg = loadImage("starUIMG.png");
-   doodle = new Doodle(startX, startY);
-   if(monster.size() < 2){
-     monster.add(0, toothy);
-     monster.add(0, biggy);
-   }
-   
-   counter = 0;
+  doodleAngelLeft = loadImage("doodleTheAngelLeft.png");
+  doodleAngelRight = loadImage("doodleTheAngelRight.png");
+  doodleWins = loadImage("success.png");
+  monsterIm1=loadImage("monster1.png");
+  monsterIm2= loadImage("monster2.png");
+  candyImg = loadImage("candyIMG.png");
+  candyL = loadImage("candyL.png");
+  candyR = loadImage("candyR.png");
+  starImg = loadImage("starImg.png");
+  starUImg = loadImage("starUIMG.png");
+  doodle = new Doodle(startX, startY);
+  if (monster.size() < 2) {
+    monster.add(0, toothy);
+    monster.add(0, biggy);
+  }
 
-   //restart button image
-   restartB = loadImage("restartButton.png");
+  counter = 0;
 
-   mode = 0;
+  //restart button image
+  restartB = loadImage("restartButton.png");
+
+  mode = 0;
   //background
-  size(600,800);
+  size(600, 800);
   background(225);
 
   //candy
-  candy = new Candy(300,300,30,points, arrSpikes);
-  if(points.size() < 2){
-    points.add(0, new float[]{200,250});
-    points.add(0, new float[]{300,200});
+  candy = new Candy(300, 300, 30, points, arrSpikes);
+  if (points.size() < 2) {
+    points.add(0, new float[]{200, 250});
+    points.add(0, new float[]{300, 200});
   }
 
   //music
@@ -97,49 +102,80 @@ void setup(){
 }
 
 //for the buttons!
-void mousePressed(){
-  for(Button m : buttons){
-  if(m.overSqrt()){
-    //pausing
-    if(m.equals(buttons[0])){
-      if(looping){
-        music.pause();
-        noLoop();
-      }else{
-        music.play();
-        loop();
+void mousePressed() {
+  if(mode != 3){
+    for (Button m : buttons) {
+      if (m.overSqrt()) {
+        //pausing
+        if (m.equals(buttons[0])) {
+          if (looping) {
+            music.pause();
+            noLoop();
+          } else {
+            music.play();
+            loop();
+          }
+        }
+        //restarting
+        else if (m.equals(buttons[1])) {
+          music.pause();
+          setup();
+          for (int i = 0; i<monster.size(); i++) {
+            monster.set(i, new Monsters(monster.get(i).monsStartX, monster.get(i).monsStartY, 0));
+          }
+        }
       }
     }
-    //restarting
-    else if(m.equals(buttons[1])){
-      music.pause();
-      setup();
-      for(int i = 0; i<monster.size(); i++){
-        monster.set(i, new Monsters(monster.get(i).monsStartX, monster.get(i).monsStartY, 0));
+  }
+
+  for (Button m : buttonWin) {
+    if (m.overSqrt()) {
+      //restart
+      if (m.equals(buttonWin[0])) {
+        music.pause();
+        setup();
+        for (int i = 0; i<monster.size(); i++) {
+          monster.set(i, new Monsters(monster.get(i).monsStartX, monster.get(i).monsStartY, 0));
+        }
       }
-     }
-   }
+      //menu
+      else if (m.equals(buttons[1])) {
+        music.pause();
+        setup();
+        for (int i = 0; i<monster.size(); i++) {
+          monster.set(i, new Monsters(monster.get(i).monsStartX, monster.get(i).monsStartY, 0));
+        }
+      }
+      //next level
+      else if (m.equals(buttons[1])) {
+        music.pause();
+        setup();
+        for (int i = 0; i<monster.size(); i++) {
+          monster.set(i, new Monsters(monster.get(i).monsStartX, monster.get(i).monsStartY, 0));
+        }
+      }
+    }
   }
 }
 
-void mouseDragged(){
+void mouseDragged() {
   //use y = mx+b to find intersection of points
-  if(mouseX-pmouseX != 0){
+  if (mouseX-pmouseX != 0) {
     float slope = (mouseY-pmouseY)/(mouseX-pmouseX);
     float b = mouseY-(slope*mouseX);
-    for(int i = 0; i < candy.fixPoint.size(); i++){
+    for (int i = 0; i < candy.fixPoint.size(); i++) {
       /*float first = ((candy.x-candy.fixPoint.get(i)[0])*(pmouseY-candy.fixPoint.get(i)[1]) - (candy.y-candy.fixPoint.get(i)[1])*(pmouseX-candy.fixPoint.get(i)[0])) / ((candy.y-candy.fixPoint.get(i)[1])*(mouseX-pmouseX) - (candy.x-candy.fixPoint.get(i)[0])*(mouseY-pmouseY));
-      float sec = ((mouseX-pmouseX)*(pmouseY-candy.fixPoint.get(i)[1]) - (mouseY-pmouseY)*(pmouseX-candy.fixPoint.get(i)[0])) / ((candy.y-candy.fixPoint.get(i)[1])*(mouseX-pmouseX) - (candy.x-candy.fixPoint.get(i)[0])*(mouseY-pmouseY));
-      if(first >= 0 && first <= 1 && sec >= 0 && sec <= 1){
-        candy.cut(i);
-      }*/
+       float sec = ((mouseX-pmouseX)*(pmouseY-candy.fixPoint.get(i)[1]) - (mouseY-pmouseY)*(pmouseX-candy.fixPoint.get(i)[0])) / ((candy.y-candy.fixPoint.get(i)[1])*(mouseX-pmouseX) - (candy.x-candy.fixPoint.get(i)[0])*(mouseY-pmouseY));
+       if(first >= 0 && first <= 1 && sec >= 0 && sec <= 1){
+       candy.cut(i);
+       }*/
       float ropeSlope = (candy.y-candy.fixPoint.get(i)[1])/(candy.x-candy.fixPoint.get(i)[0]);
       float bRope = candy.y-(ropeSlope*candy.x);
       float xCor = (b-bRope)/(ropeSlope-slope);
-      if(pmouseX-xCor >= 0 && mouseX-xCor <= 0 || pmouseX-xCor <= 0 && mouseX-xCor >= 0){
-        if(candy.x <= candy.fixPoint.get(i)[0] && xCor >= candy.x && xCor <= candy.fixPoint.get(i)[0]){
+      if (pmouseX-xCor >= 0 && mouseX-xCor <= 0 || pmouseX-xCor <= 0 && mouseX-xCor >= 0) {
+        if (candy.x <= candy.fixPoint.get(i)[0] && xCor >= candy.x && xCor <= candy.fixPoint.get(i)[0]) {
           candy.cut(i);
-        } else if(candy.x >= candy.fixPoint.get(i)[0] && xCor <= candy.x && xCor >= candy.fixPoint.get(i)[0]){
+        } else if (candy.x >= candy.fixPoint.get(i)[0] && xCor <= candy.x && xCor >= candy.fixPoint.get(i)[0]) {
           candy.cut(i);
         }
       }
@@ -147,47 +183,50 @@ void mouseDragged(){
   }
 }
 
-void draw(){
+void draw() {
   background(255);
   //text("mode: "+mode, 50, 320);
 
   //buttons
-  for(Button m : buttons){
+  for (Button m : buttons) {
     m.display();
   }
 
   //pause and restart icons
-  triangle(105,53,105,72,120,62);
+  imageMode(CENTER);
+  triangle(105, 53, 105, 72, 120, 62);
   image(restartB, 60, 60, restartB.width/22, restartB.height/22);
 
   //step stuff
-  for(Steps s : game1){ //modify this if change game
+  for (Steps s : game1) { //modify this if change game
     s.drawStep();
   }
 
   //cut candy part
-  if(mousePressed){
+  if (mousePressed) {
     cursor(CROSS);
-    stroke(150,150,150);
+    stroke(150, 150, 150);
     strokeWeight(6);
     line(mouseX, mouseY, pmouseX, pmouseY);
   }
 
   //doodle stuff
-  if(keyPressed && mode != 3){
-    if(key == 'e'){
-      if(onStep()){
+  if (keyPressed && mode != 3) {
+    if (key == 'e') {
+      if (onStep()) {
         doodle.jump();
       }
-    }if(key == 's'){
+    }
+    if (key == 's') {
       mode = 0;
       doodle.moveLeft();
-    }if(key == 'f'){
+    }
+    if (key == 'f') {
       mode = 1;
       doodle.moveRight();
     }
   }
-  
+
   //spikes
   spike.display();
 
@@ -197,12 +236,12 @@ void draw(){
   //text("dy of doodle is " + doodle.dy, 50, 100);
   doodle.display(); //draw out doodle
 
-  if(candyBroken == false){
-    if(doodle.victory(candy) || mode ==3){
-      if(counter < 5){
+  if (candyBroken == false) {
+    if (doodle.victory(candy) || mode ==3) {
+      if (counter < 5) {
         mode = 3;
         monster.clear();
-        if(onStep()){
+        if (onStep()) {
           counter++;
           doodle.jump();
           doodle.gravity();
@@ -213,7 +252,7 @@ void draw(){
           stars.add(new Sprinkle(doodle.x, doodle.y+70, 8));
           stars.add(new Sprinkle(doodle.x, doodle.y+70, -8));
         }
-        for(Sprinkle s : stars){
+        for (Sprinkle s : stars) {
           s.gravity();
           s.move();
           s.display();
@@ -221,13 +260,17 @@ void draw(){
       } else {
         //draw win tab
         won.display();
+        for (Button m : buttonWin) {
+          m.display();
+          imageMode(CORNER);
+          image(restartB, restartWin.sqrtX, restartWin.sqrtY, restartB.width/15, restartB.height/15);
+        }
       }
     }
-
-  }else if (doodle.dies()||candy.dies()){
+  } else if (doodle.dies()||candy.dies()) {
     music.pause();
     setup();
-    for(int i = 0; i<monster.size(); i++){
+    for (int i = 0; i<monster.size(); i++) {
       monster.set(i, new Monsters(monster.get(i).monsStartX, monster.get(i).monsStartY, 0));
     }
     skipStep = false;
@@ -236,13 +279,13 @@ void draw(){
   //text("monsnter arraylist size is: "+ monster.size(), 50, 500);
 
 
-  if(onStep() && !skipStep){ //doodle stops once it lands on the step
+  if (onStep() && !skipStep) { //doodle stops once it lands on the step
     doodle.dy = 0;
   }
 
 
   //monster stuff
-  if(monster.size() >0){ //prevent out of bound error
+  if (monster.size() >0) { //prevent out of bound error
     monster.get(0).monsHorMove();
     monster.get(0).monsMove();
     monster.get(0).display(monsterIm1);
@@ -250,7 +293,7 @@ void draw(){
 
     monster.get(1).display(monsterIm2);
     monster.get(1).attack(doodle);
-    stroke(225,0,0);
+    stroke(225, 0, 0);
     monster.get(1).shoot(monster.get(1).x, monster.get(1).y+33, 4);
     monster.get(1).monsAttract(doodle);
     monster.get(1).monsMove();
@@ -266,9 +309,9 @@ void draw(){
   //text("biggy's y= " + biggy.y, 50, 250);
 
   //candy stuff
-  if(mousePressed){
+  if (mousePressed) {
     cursor(CROSS);
-    stroke(150,150,150);
+    stroke(150, 150, 150);
     strokeWeight(6);
     line(mouseX, mouseY, pmouseX, pmouseY);
   }
@@ -277,7 +320,7 @@ void draw(){
   //text("candy dy: " + candy.dy, 50,210);
   //text("starScore: " + candy.getScore(), 50,220); //starScore
   candy.move();
-  if(candy.breakCandy){
+  if (candy.breakCandy) {
     candyBroken = true;
   }
 
@@ -290,14 +333,14 @@ void draw(){
   rect(width-28, 0, 28, height); // Right
   rect(0, height-28, width, 28); // Bottom
   rect(0, 0, 28, height); // Left
-
 }
 
-boolean onStep(){
-  for(Steps s : game1){ //modify this if change game
-    if(doodle.x <s.leng + s.x && s.x < doodle.x && (doodle.y+51<= s.y+16 && doodle.y+51 >= s.y) && !skipStep){
+boolean onStep() {
+  for (Steps s : game1) { //modify this if change game
+    if (doodle.x <s.leng + s.x && s.x < doodle.x && (doodle.y+51<= s.y+16 && doodle.y+51 >= s.y) && !skipStep) {
       doodle.y = s.y-51;
       return true;
     }
-  }return false;
+  }
+  return false;
 }
