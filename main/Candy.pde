@@ -32,7 +32,7 @@ public class Candy{
     float incX = abs(fx-cx)/10;
     float incY = abs(fy-cy)/10;
     
-    for(int t = 0; t<fixPoint.size(); t++){
+    for(int t = 0; t<fixPoint.size(); t++){ //loop through each fix point
       Node[] storage = new Node[10];
       for(int i = 0; i < 10; i++){
         storage[i] = new Node(fx+incX*i, fy+incY*i);
@@ -41,7 +41,17 @@ public class Candy{
     }
   }
   
-  
+  void display(){
+    for(Node[] n : nodeArr){ //loop through each fix point
+      int w = 0;
+      Node current = n[w];
+      while(w<n.length){ //loop through each node
+        current.move();
+        current=current.next;
+        w++;
+      }
+    }
+  }
   
   
   //for regular string
