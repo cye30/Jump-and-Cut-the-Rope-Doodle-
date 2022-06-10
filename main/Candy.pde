@@ -33,8 +33,8 @@ public class Candy{
     float incY = abs(fy-cy)/10;
     
     for(int t = 0; t<fixPoint.size(); t++){ //loop through each fix point
-      Node[] storage = new Node[10];
-      for(int i = 0; i < 10; i++){
+      Node[] storage = new Node[11];
+      for(int i = 0; i <= 10; i++){
         storage[i] = new Node(fx+incX*i, fy+incY*i);
       }
       nodeArr.add(storage);
@@ -50,9 +50,18 @@ public class Candy{
     for(Node[] n : nodeArr){ //loop through each fix point
       int w = 0;
       while(w<n.length){ //loop through each node
-        Node current= n[w];
-        current.display();
-        current.move();
+        if(w==0){
+          n[w+1].attract(n[w]);
+        }if(w==n.length-1){
+          n[w-1].attract(n[w]);
+        }else{
+          n[w+1].attract(n[w]);
+          n[w-1].attract(n[w]);
+        }
+        n[w].move();
+        if(w+1 <n.length-1){
+          n[w].display(n[w+1].x, n[w+1].y);
+        }
         w++;
       }
     }

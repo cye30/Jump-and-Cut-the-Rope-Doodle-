@@ -1,6 +1,5 @@
 public class Node{
   float x, y, dx, dy;
-  Node prev, next;
   
   public Node(float x_, float y_){
     x=x_;
@@ -9,13 +8,8 @@ public class Node{
     dy=0;
   }
   
-  void display(){
-    if(prev!=null){
-      line(x, y, prev.x, prev.y);
-    }
-    if(next!=null){
-      line(x, y, prev.x, prev.y);
-    }
+  void display(float x_, float y_){
+     line(x, y, x_, y_);
   }
   
   
@@ -32,13 +26,8 @@ public class Node{
   
   
   void move(){
-    prev.attract(this);
-    next.attract(this);
-    
     x+=dx;
     y+=dy;
-    
     dy+=.3;
   }
-
 }
