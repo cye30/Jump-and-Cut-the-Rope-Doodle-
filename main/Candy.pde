@@ -12,10 +12,10 @@ public class Candy{
   //Bubble[] bubbles;
   boolean drawCandy = true;
   
-  ArrayList<float[]> PointsX = new ArrayList<float[]>();
-  ArrayList<float[]> PointsY = new ArrayList<float[]>();
+  ArrayList<Node[]> nodeArr;
   
   
+  //create candy
   public Candy(float xx, float yy, float rad, ArrayList<float[]> fixP){
     x = xx;
     y = yy;
@@ -25,6 +25,24 @@ public class Candy{
     dy = 0;
     starScore = 0;
   }
+  
+  
+  //help constructs the arraylist necessary for organization and easier access
+  void createArr(float fx, float fy, float cx, float cy){
+    float incX = abs(fx-cx)/10;
+    float incY = abs(fy-cy)/10;
+    
+    for(int t = 0; t<fixPoint.size(); t++){
+      Node[] storage = new Node[10];
+      for(int i = 0; i < 10; i++){
+        storage[i] = new Node(fx+incX*i, fy+incY*i);
+      }
+      nodeArr.add(storage);
+    }
+  }
+  
+  
+  
   
   //for regular string
   //void display(){
