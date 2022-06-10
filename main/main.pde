@@ -4,6 +4,8 @@ final float gravity = 1;
 int mode;
 //int score;
 
+PImage menu;
+
 //construct buttons
 PImage restartB;
 Button restart = new Button(37, 40);
@@ -61,6 +63,7 @@ int counter;
 
 void setup() {
   //import doodle image
+  menu = loadImage("MenuPage.png");
   doodleAngelLeft = loadImage("doodleTheAngelLeft.png");
   doodleAngelRight = loadImage("doodleTheAngelRight.png");
   doodleWins = loadImage("success.png");
