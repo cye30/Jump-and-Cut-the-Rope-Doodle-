@@ -257,7 +257,7 @@ void draw(){
   text("candy dx: " + candy.dx, 50,200);
   text("candy dy: " + candy.dy, 50,210);
   text("starScore: " + candy.getScore(), 50,220); //starScore
-  candy.move();
+  //candy.move();
 
 
   //boarders

@@ -12,7 +12,7 @@ public class Candy{
   //Bubble[] bubbles;
   boolean drawCandy = true;
   
-  ArrayList<Node[]> nodeArr;
+  ArrayList<Node[]> nodeArr = new ArrayList<Node[]>();
   
   
   //create candy
@@ -42,15 +42,30 @@ public class Candy{
   }
   
   void display(){
+    if(drawCandy){
+      imageMode(CENTER);
+      image(candyImg, x, y, candyImg.width/10, candyImg.height/10);
+    }
+    
     for(Node[] n : nodeArr){ //loop through each fix point
       int w = 0;
-      Node current = n[w];
       while(w<n.length){ //loop through each node
+        Node current= n[w];
+        current.display();
         current.move();
-        current=current.next;
         w++;
       }
     }
+    
+    for(int i = 0; i < fixPoint.size(); i++){
+      stroke(102,51,0);
+      strokeWeight(4);
+      ellipse(fixPoint.get(i)[0],fixPoint.get(i)[1],10,10);
+    }
+    
+    addStar(300,400);
+      starAchieved();
+      //display spikes && stars
   }
   
   
