@@ -44,18 +44,22 @@ public class Candy{
       image(candyImg, x, y, candyImg.width/10, candyImg.height/10);
     }
     
+    int countyCount = 0;
     for(Node[] n : nodeArr){ //loop through each fix point
+      countyCount++;
+      text("n is equal to "+ countyCount , 400, 450);
       int w = 0;
       while(w<n.length){ //loop through each node
-        //if(w==0){
-        //  n[w+1].attract(n[w]);
-        //}else if(w==n.length-1){
-        //  n[w-1].attract(n[w]);
-        //}else{
-        //  n[w+1].attract(n[w]);
-        //  n[w-1].attract(n[w]);
-        //}
-        //n[w].move();
+        text("w is equal to "+ w , 400, 400);
+        if(w==0){
+          n[w+1].attract(n[w]);
+        }else if(w==n.length-1){
+          n[w-1].attract(n[w]);
+        }else{
+          n[w+1].attract(n[w]);
+          n[w-1].attract(n[w]);
+        }
+        n[w].move();
         if(w+1 <= n.length-1){
           n[w].display(n[w+1].x, n[w+1].y);
         }
