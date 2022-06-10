@@ -9,7 +9,14 @@ public class Node{
     dy=0;
   }
   
-  void display(){}
+  void display(){
+    if(prev!=null){
+      line(x, y, prev.x, prev.y);
+    }
+    if(next!=null){
+      line(x, y, prev.x, prev.y);
+    }
+  }
   
   
   void attract(){}
