@@ -1,4 +1,4 @@
-import processing.sound.*;
+ import processing.sound.*;
 SoundFile music;
 final float gravity = 1;
 int mode;
@@ -252,6 +252,9 @@ void draw(){
     stroke(150,150,150);
     strokeWeight(6);
     line(mouseX, mouseY, pmouseX, pmouseY);
+  }
+  for(int v = 0; v < points.size(); v++){
+    candy.createArr(points.get(v)[0], points.get(v)[1], candy.x, candy.y);
   }
   candy.display(); //test candy!!!
   text("candy dx: " + candy.dx, 50,200);

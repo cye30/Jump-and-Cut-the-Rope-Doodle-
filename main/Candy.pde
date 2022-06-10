@@ -29,16 +29,13 @@ public class Candy{
   
   //help constructs the arraylist necessary for organization and easier access
   void createArr(float fx, float fy, float cx, float cy){
-    float incX = abs(fx-cx)/10;
-    float incY = abs(fy-cy)/10;
-    
-    for(int t = 0; t<fixPoint.size(); t++){ //loop through each fix point
-      Node[] storage = new Node[11];
-      for(int i = 0; i <= 10; i++){
-        storage[i] = new Node(fx+incX*i, fy+incY*i);
-      }
-      nodeArr.add(storage);
+    float incX = (cx-fx)/10;
+    float incY = (cy-fy)/10;
+    Node[] storage = new Node[11];
+    for(int i = 0; i <= 10; i++){
+      storage[i] = new Node(fx+incX*i, fy+incY*i);
     }
+    nodeArr.add(storage);
   }
   
   void display(){
@@ -50,16 +47,16 @@ public class Candy{
     for(Node[] n : nodeArr){ //loop through each fix point
       int w = 0;
       while(w<n.length){ //loop through each node
-        if(w==0){
-          n[w+1].attract(n[w]);
-        }if(w==n.length-1){
-          n[w-1].attract(n[w]);
-        }else{
-          n[w+1].attract(n[w]);
-          n[w-1].attract(n[w]);
-        }
-        n[w].move();
-        if(w+1 <n.length-1){
+        //if(w==0){
+        //  n[w+1].attract(n[w]);
+        //}else if(w==n.length-1){
+        //  n[w-1].attract(n[w]);
+        //}else{
+        //  n[w+1].attract(n[w]);
+        //  n[w-1].attract(n[w]);
+        //}
+        //n[w].move();
+        if(w+1 <= n.length-1){
           n[w].display(n[w+1].x, n[w+1].y);
         }
         w++;
