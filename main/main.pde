@@ -21,9 +21,11 @@ Button pause = new Button(90, 40);
 Button[] buttons = new Button[]{pause, restart};
 
 Button restartWin = new Button(160, 540, 70);
-Button menu = new Button(300-(restartWin.sqrtSize/2), 540, 70);
+Button menu = new Button(300-(restartWin.sqrtSizeX/2), 540, 70);
 Button nextLev = new Button(370, 540, 70);
 Button[] buttonWin = new Button[]{restartWin, menu, nextLev};
+
+Button play = new Button(80, 410, 140, 50);
 
 //construct steps for this game; sample 1
 Steps a = new Steps(424, 686);
@@ -195,8 +197,19 @@ void mouseDragged() {
 }
 
 void draw() {
+  //cut candy part
+  if (mousePressed) {
+    cursor(CROSS);
+    stroke(150, 150, 150);
+    strokeWeight(6);
+    line(mouseX, mouseY, pmouseX, pmouseY);
+  }
   if(pageMode == menuPg){
     image(Menu, 0, 0, Menu.width/1.95, Menu.height/1.95);
+    play.display();
+    textSize(50);
+    fill(0,150,0);
+    text("PLAY", 90,453);
   }
   
   if(pageMode != menuPg){
@@ -216,14 +229,6 @@ void draw() {
     //step stuff
     for (Steps s : game1) { //modify this if change game
       s.drawStep();
-    }
-
-    //cut candy part
-    if (mousePressed) {
-      cursor(CROSS);
-      stroke(150, 150, 150);
-      strokeWeight(6);
-      line(mouseX, mouseY, pmouseX, pmouseY);
     }
 
     //doodle stuff
