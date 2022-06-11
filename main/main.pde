@@ -5,11 +5,14 @@ final float gravity = 1;
 int menuPg = -1;
 int winPg = 0;
 int level1 = 1;
-int pageMode;
+int level2 = 2;
+int pageMode = menuPg;
 
 int left = 0;
 int right = 1;
 int moveMode;
+
+Levels lev1;
 
 //int score;
 
@@ -29,11 +32,14 @@ Button[] buttonWin = new Button[]{restartWin, menu, nextLev};
 
 Button play = new Button(80, 410, 140, 50);
 
-//construct steps for this game; sample 1
-Steps a = new Steps(424, 686);
+//construct steps for this game
+
 Steps b = new Steps(240, 623);
+Steps[] game1 = new Steps[]{b};
+
+Steps a = new Steps(424, 686);
 Steps c = new Steps(56, 560);
-Steps[] game1 = new Steps[]{a, b, c};
+Steps[] game2 = new Steps[]{a, b, c};
 
 //construct the doodle; sample 1
 float startX = 300; //for organizational purposes
@@ -97,18 +103,18 @@ void setup() {
 
   //restart button image
   restartB = loadImage("restartButton.png");
-
-  pageMode = menuPg;
+  
+  lev1 = new Levels();
+  
   //background
   size(600, 800);
   background(225);
 
   //candy
-  candy = new Candy(300, 300, 30, points, arrSpikes);
-  if (points.size() < 2) {
     points.add(0, new float[]{200, 250});
     points.add(0, new float[]{300, 200});
-  }
+  
+  candy = new Candy(300, 300, 30, points, arrSpikes);
 
   //music
   music = new SoundFile(this, "game_music.wav");
@@ -172,7 +178,7 @@ void mousePressed() {
   }
   
   if(play.overSqrt()){
-    pageMode = 1;
+    pageMode = level1;
   }
 }
 
@@ -210,6 +216,7 @@ void draw() {
     line(mouseX, mouseY, pmouseX, pmouseY);
   }
   if(pageMode == menuPg){
+    imageMode(CORNER);
     image(Menu, 0, 0, Menu.width/1.95, Menu.height/1.95);
     play.display();
     textSize(50);
@@ -220,6 +227,15 @@ void draw() {
   if(pageMode != menuPg){
     background(255);
     //text("mode: "+mode, 50, 320);
+    
+    //boarders
+    stroke(0, 150, 0);
+    fill(0, 150, 0);
+  
+    rect(0, 0, width, 28); // Top
+    rect(width-28, 0, 28, height); // Right
+    rect(0, height-28, width, 28); // Bottom
+    rect(0, 0, 28, height); // Left
   
     //buttons
     for (Button m : buttons) {
@@ -230,14 +246,9 @@ void draw() {
     imageMode(CENTER);
     triangle(105, 53, 105, 72, 120, 62);
     image(restartB, 60, 60, restartB.width/22, restartB.height/22);
-  
-    //step stuff
-    for (Steps s : game1) { //modify this if change game
-      s.drawStep();
-    }
 
     //doodle stuff
-    if (keyPressed && pageMode != winPg) {
+    if (keyPressed) {
       if (key == 'e') {
         if (onStep()) {
           doodle.jump();
@@ -252,16 +263,33 @@ void draw() {
         doodle.moveRight();
       }
     }
-
+  }
+  
+  if(pageMode == level1 || pageMode == winPg){
+    //step stuff
+    for (Steps s : game2) {
+      s.drawStep();
+    }
+    
     //spikes
-    spike.display();
-
+    for(Spikes s : arrSpikes) {
+      s.display();
+    }
+    
     //doodle stuff
     doodle.gravity();
     doodle.move();
     //text("dy of doodle is " + doodle.dy, 50, 100);
     doodle.display(); //draw out doodle
-
+    
+    candy.display();
+    //text("candy dx: " + candy.dx, 50,200);
+    //text("candy dy: " + candy.dy, 50,210);
+    //text("starScore: " + candy.getScore(), 50,220); //starScore
+    candy.move();
+    if (candy.breakCandy) {
+      candyBroken = true;
+    }
     if (candyBroken == false) {
       if (doodle.victory(candy) || pageMode == winPg) {
         if (counter < 5) {
@@ -286,6 +314,7 @@ void draw() {
         } else {
           //draw win tab
           won.display();
+          image(doodleAngelLeft, 300, 450, 4 * doodleAngelLeft.width/12, 4 * doodleAngelLeft.height/12);
           for (Button m : buttonWin) {
             m.display();
             imageMode(CORNER);
@@ -304,16 +333,16 @@ void draw() {
       }
       skipStep = false;
     }
+  
+    
     candy.candyAchieved(doodle);
     //text("monsnter arraylist size is: "+ monster.size(), 50, 500);
-
 
     if (onStep() && !skipStep) { //doodle stops once it lands on the step
       doodle.dy = 0;
     }
-
-
-  //monster stuff
+     
+    //monster stuff
     if (monster.size() >0) { //prevent out of bound error
       monster.get(0).monsHorMove();
       monster.get(0).monsMove();
@@ -336,39 +365,15 @@ void draw() {
     //text("biggy's height= " + monsterIm2.height/5, 50, 230);
     //text("biggy's x= " + biggy.x, 50, 260);
     //text("biggy's y= " + biggy.y, 50, 250);
-  
-    //candy stuff
-    if (mousePressed) {
-      cursor(CROSS);
-      stroke(150, 150, 150);
-      strokeWeight(6);
-      line(mouseX, mouseY, pmouseX, pmouseY);
-    }
-    candy.display(); //test candy!!!
-    //text("candy dx: " + candy.dx, 50,200);
-    //text("candy dy: " + candy.dy, 50,210);
-    //text("starScore: " + candy.getScore(), 50,220); //starScore
-    candy.move();
-    if (candy.breakCandy) {
-      candyBroken = true;
-    }
-  
-  
-    //boarders
-    stroke(0, 150, 0);
-    fill(0, 150, 0);
-  
-    rect(0, 0, width, 28); // Top
-    rect(width-28, 0, 28, height); // Right
-    rect(0, height-28, width, 28); // Bottom
-    rect(0, 0, 28, height); // Left
+    
   }
+
 }
   
 
 boolean onStep() {
-  for (Steps s : game1) { //modify this if change game
-    if (doodle.x <s.leng + s.x && s.x < doodle.x && (doodle.y+51<= s.y+16 && doodle.y+51 >= s.y) && !skipStep) {
+  for (Steps s : game2) { //modify this if change game
+    if (doodle.x-doodleAngelLeft.width/30 <s.leng + s.x && s.x < doodle.x+doodleAngelLeft.width/30 && (doodle.y+51<= s.y+16 && doodle.y+51 >= s.y) && !skipStep) {
       doodle.y = s.y-51;
       return true;
     }
