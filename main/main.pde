@@ -35,6 +35,7 @@ ArrayList<Monsters> monster = new ArrayList<Monsters>();
 
 //construct candy stuff;
 Candy candy;
+boolean created;
 PImage candyImg;
 PImage starImg;
 ArrayList<float[]> points = new ArrayList<float[]>();
@@ -76,6 +77,7 @@ void setup(){
     points.add(0, new float[]{200,250});
     points.add(0, new float[]{400,200});
   }
+  created = false;
 
   //music
   music = new SoundFile(this, "game_music.wav");
@@ -254,10 +256,10 @@ void draw(){
     strokeWeight(6);
     line(mouseX, mouseY, pmouseX, pmouseY);
   }
-  for(int v = 0; v < points.size(); v++){
-    candy.createArr(points.get(v)[0], points.get(v)[1], candy.x, candy.y);
-  }
-  candy.display(); //test candy!!!
+  //for(int v = 0; v < points.size(); v++){
+  //  candy.createArr(points.get(v)[0], points.get(v)[1], candy.x, candy.y);
+  //}
+  candy.display(10); //test candy!!!
   text("candy dx: " + candy.dx, 50,200);
   text("candy dy: " + candy.dy, 50,210);
   text("starScore: " + candy.getScore(), 50,220); //starScore

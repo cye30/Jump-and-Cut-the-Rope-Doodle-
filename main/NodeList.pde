@@ -1,9 +1,9 @@
 public class NodeList{
-  OrbNode first, last;
+  Node first, last;
   
-  NodeList(FixedOrbNode fNode, float cx, float cy){
+  NodeList(Node fNode, float cx, float cy){
     first = fNode;
-    last =  new Node(cd, cy);
+    last =  new Node(cx, cy);
     
     first.next = last;
     last.prev = first;
@@ -11,13 +11,13 @@ public class NodeList{
   
   void add(Node n){
     n.prev = last.prev;
-    orb.next = last;
-    last.prev.next = orb;
-    last.prev = orb;
+    n.next = last;
+    last.prev.next = n;
+    last.prev = n;
   }
   
   void processAll(){
-    OrbNode current = frst;
+    Node current = first;
     while(current != null){
       current.move();
       current = current.next;
@@ -25,7 +25,7 @@ public class NodeList{
   }
   
   void display(){
-    OrbNode current = first;
+    Node current = first.next;
     while(current != null){
       current.display();
       current = current.next;

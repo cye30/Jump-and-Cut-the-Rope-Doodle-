@@ -12,7 +12,9 @@ public class Candy{
   //Bubble[] bubbles;
   boolean drawCandy = true;
   
-  ArrayList<Node[]> nodeArr = new ArrayList<Node[]>();
+  NodeList[] list;
+  
+  //ArrayList<Node[]> nodeArr = new ArrayList<Node[]>();
   
   
   //create candy
@@ -24,8 +26,33 @@ public class Candy{
     dx = 0;
     dy = 0;
     starScore = 0;
+     list = new NodeList[fixP.size()];
+    for(int i=0; i<fixP.size(); i++){
+      Node fPt = new Node(fixP.get(i)[0], fixP.get(i)[1]);
+      list[i] = new NodeList(fPt, x, y);
+    }
   }
   
+  void createList(int inc){
+    for(int i = 0; i < list.length; i++){
+      float incX = (list[i].last.x-list[i].first.x)/inc;
+      float incY = (list[i].last.y-list[i].first.y)/inc;
+      for(int w=0; w < inc; w++){
+        Node newNode = new Node(w*incX + list[i].first.x, w*incY + list[i].first.y);
+        list[i].add(newNode);
+      }
+      list[i].display();
+    }
+    created = true;
+  }
+  
+  void display(int inc){
+    if(!created){
+      createList(inc);
+    }
+    
+  }
+
   
   //help constructs the arraylist necessary for organization and easier access
   //void createArr(float fx, float fy, float cx, float cy){
@@ -67,16 +94,16 @@ public class Candy{
     //  }
     //}
     
-    for(int i = 0; i < fixPoint.size(); i++){
-      stroke(102,51,0);
-      strokeWeight(4);
-      ellipse(fixPoint.get(i)[0],fixPoint.get(i)[1],10,10);
-    }
+  //  for(int i = 0; i < fixPoint.size(); i++){
+  //    stroke(102,51,0);
+  //    strokeWeight(4);
+  //    ellipse(fixPoint.get(i)[0],fixPoint.get(i)[1],10,10);
+  //  }
     
-    addStar(300,400);
-      starAchieved();
-      //display spikes && stars
-  }
+  //  addStar(300,400);
+  //    starAchieved();
+  //    //display spikes && stars
+  //}
   
   
   //for regular string
