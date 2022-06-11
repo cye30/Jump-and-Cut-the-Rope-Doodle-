@@ -17,7 +17,7 @@ public class NodeList{
   }
   
   void processAll(){
-    Node current = first;
+    Node current = first.next;
     while(current != null){
       current.move();
       current = current.next;
@@ -25,7 +25,7 @@ public class NodeList{
   }
   
   void display(){
-    Node current = first.next;
+    Node current = first;
     while(current != null){
       current.display();
       current = current.next;

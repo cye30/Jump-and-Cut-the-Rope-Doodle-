@@ -72,11 +72,11 @@ void setup(){
   background(225);
 
   //candy
-  candy = new Candy(300,300,30,points);
   if(points.size() < 2){
     points.add(0, new float[]{200,250});
     points.add(0, new float[]{400,200});
   }
+  candy = new Candy(300,300,30,points);
   created = false;
 
   //music
@@ -141,6 +141,7 @@ void draw(){
   clear();
   background(255);
   text("mode: "+mode, 50, 320);
+  candy.display(3); //test candy!!!
 
   //draw win tab
   //won.display();
@@ -259,7 +260,7 @@ void draw(){
   //for(int v = 0; v < points.size(); v++){
   //  candy.createArr(points.get(v)[0], points.get(v)[1], candy.x, candy.y);
   //}
-  candy.display(10); //test candy!!!
+  
   text("candy dx: " + candy.dx, 50,200);
   text("candy dy: " + candy.dy, 50,210);
   text("starScore: " + candy.getScore(), 50,220); //starScore

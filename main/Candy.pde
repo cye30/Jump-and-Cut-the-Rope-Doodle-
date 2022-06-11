@@ -26,29 +26,44 @@ public class Candy{
     dx = 0;
     dy = 0;
     starScore = 0;
-     list = new NodeList[fixP.size()];
-    for(int i=0; i<fixP.size(); i++){
+    list = new NodeList[fixPoint.size()];
+    for(int i=0; i<list.length; i++){
       Node fPt = new Node(fixP.get(i)[0], fixP.get(i)[1]);
       list[i] = new NodeList(fPt, x, y);
     }
+   
   }
   
   void createList(int inc){
+     text("size of list is" + list.length, 350, 350);
     for(int i = 0; i < list.length; i++){
       float incX = (list[i].last.x-list[i].first.x)/inc;
       float incY = (list[i].last.y-list[i].first.y)/inc;
-      for(int w=0; w < inc; w++){
+      for(int w=1; w < inc; w++){
         Node newNode = new Node(w*incX + list[i].first.x, w*incY + list[i].first.y);
         list[i].add(newNode);
       }
-      list[i].display();
+      //list[i].display();
     }
     created = true;
   }
   
   void display(int inc){
-    if(!created){
+    if(drawCandy){
+      imageMode(CENTER);
+      //image(candyImg, list[0].last.x, list[0].last.y, candyImg.width/10, candyImg.height/10);
+    }
+    
+    //if(!created){
       createList(inc);
+    //}
+    
+    for(int i = 0; i < list.length; i++){
+      list[i].processAll();
+      list[i].display();
+      stroke(102,51,0);
+      strokeWeight(4);
+      ellipse(fixPoint.get(i)[0],fixPoint.get(i)[1],10,10);
     }
     
   }

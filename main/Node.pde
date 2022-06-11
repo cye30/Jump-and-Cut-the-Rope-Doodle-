@@ -34,7 +34,9 @@ public class Node{
   
   void move(){
     prev.attract(this);
-    next.attract(this);
+    if(next != null){
+      next.attract(this);
+    }
     
     x+=dx;
     y+=dy;
