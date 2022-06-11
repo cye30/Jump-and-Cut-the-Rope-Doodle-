@@ -28,44 +28,44 @@ public class Candy{
   
   
   //help constructs the arraylist necessary for organization and easier access
-  void createArr(float fx, float fy, float cx, float cy){
-    float incX = (cx-fx)/10;
-    float incY = (cy-fy)/10;
-    Node[] storage = new Node[11];
-    for(int i = 0; i <= 10; i++){
-      storage[i] = new Node(fx+incX*i, fy+incY*i);
-    }
-    nodeArr.add(storage);
-  }
+  //void createArr(float fx, float fy, float cx, float cy){
+  //  float incX = (cx-fx)/10;
+  //  float incY = (cy-fy)/10;
+  //  Node[] storage = new Node[11];
+  //  for(int i = 0; i <= 10; i++){
+  //    storage[i] = new Node(fx+incX*i, fy+incY*i);
+  //  }
+  //  nodeArr.add(storage);
+  //}
   
-  void display(){
-    if(drawCandy){
-      imageMode(CENTER);
-      image(candyImg, x, y, candyImg.width/10, candyImg.height/10);
-    }
+  //void display(){
+  //  if(drawCandy){
+  //    imageMode(CENTER);
+  //    image(candyImg, x, y, candyImg.width/10, candyImg.height/10);
+  //  }
     
-    int countyCount = 0;
-    for(Node[] n : nodeArr){ //loop through each fix point
-      countyCount++;
-      text("n is equal to "+ countyCount , 400, 450);
-      int w = 0;
-      while(w<n.length){ //loop through each node
-        text("w is equal to "+ w , 400, 400);
-        if(w==0){
-          n[w+1].attract(n[w]);
-        }else if(w==n.length-1){
-          n[w-1].attract(n[w]);
-        }else{
-          n[w+1].attract(n[w]);
-          n[w-1].attract(n[w]);
-        }
-        n[w].move();
-        if(w+1 <= n.length-1){
-          n[w].display(n[w+1].x, n[w+1].y);
-        }
-        w++;
-      }
-    }
+    //int countyCount = 0;
+    //for(Node[] n : nodeArr){ //loop through each fix point
+    //  countyCount++;
+    //  text("n is equal to "+ countyCount , 400, 450);
+    //  int w = 0;
+    //  while(w<n.length){ //loop through each node
+    //    text("w is equal to "+ w , 400, 400);
+    //    if(w==0){
+    //      //nothing is to be done
+    //    }else if(w==n.length-1){
+    //      n[w-1].attract(n[w]);
+    //    }else{
+    //      n[w+1].attract(n[w]);
+    //      n[w-1].attract(n[w]);
+    //    }
+    //    n[w].move();
+    //    if(w+1 <= n.length-1){
+    //      n[w].display(n[w+1].x, n[w+1].y);
+    //    }
+    //    w++;
+    //  }
+    //}
     
     for(int i = 0; i < fixPoint.size(); i++){
       stroke(102,51,0);

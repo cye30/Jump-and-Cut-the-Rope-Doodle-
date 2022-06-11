@@ -79,7 +79,7 @@ void setup(){
 
   //music
   music = new SoundFile(this, "game_music.wav");
-  music.play();
+  //music.play();         
 
   won = new Win();
 }
@@ -136,6 +136,7 @@ void mouseDragged(){
 }
 
 void draw(){
+  clear();
   background(255);
   text("mode: "+mode, 50, 320);
 
