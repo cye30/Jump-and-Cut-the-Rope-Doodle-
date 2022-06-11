@@ -22,13 +22,12 @@ public class Doodle{
   void display(){
     //drawing doodle
     imageMode(CENTER);
-    if(moveMode == left){
-      image(doodleAngelLeft, x, y, 4 * doodleAngelLeft.width/15, 4 * doodleAngelLeft.height/15);
-    }if(moveMode == right){
-      image(doodleAngelRight, x, y, 4 * doodleAngelRight.width/15, 4 * doodleAngelRight.height/15);
-    }if(pageMode == winPg){
-      
+    if(pageMode == winPg){
       image(doodleWins, x, y, 4 * doodleWins.width/15, 4 * doodleWins.height/15);
+    }else if(moveMode == left){
+      image(doodleAngelLeft, x, y, 4 * doodleAngelLeft.width/15, 4 * doodleAngelLeft.height/15);
+    }else if(moveMode == right){
+      image(doodleAngelRight, x, y, 4 * doodleAngelRight.width/15, 4 * doodleAngelRight.height/15);
     }
     //noFill();
     //circle(x, y, 125);

@@ -4,10 +4,11 @@ final float gravity = 1;
 
 int menuPg = -1;
 int winPg = 0;
+int level1 = 1;
 int pageMode;
 
 int left = 0;
-int right = 0;
+int right = 1;
 int moveMode;
 
 //int score;
@@ -20,6 +21,7 @@ Button restart = new Button(37, 40);
 Button pause = new Button(90, 40);
 Button[] buttons = new Button[]{pause, restart};
 
+PImage menuButton;
 Button restartWin = new Button(160, 540, 70);
 Button menu = new Button(300-(restartWin.sqrtSizeX/2), 540, 70);
 Button nextLev = new Button(370, 540, 70);
@@ -74,6 +76,7 @@ int counter;
 void setup() {
   //import doodle image
   Menu = loadImage("MenuPage.png");
+  menuButton = loadImage("menuB.png");
   doodleAngelLeft = loadImage("doodleTheAngelLeft.png");
   doodleAngelRight = loadImage("doodleTheAngelRight.png");
   doodleWins = loadImage("success.png");
@@ -125,7 +128,7 @@ void mousePressed() {
             music.pause();
             noLoop();
           } else {
-            music.play();
+            //music.play();
             loop();
           }
         }
@@ -133,6 +136,7 @@ void mousePressed() {
         else if (m.equals(buttons[1])) {
           music.pause();
           setup();
+          pageMode = level1;
           for (int i = 0; i<monster.size(); i++) {
             monster.set(i, new Monsters(monster.get(i).monsStartX, monster.get(i).monsStartY, 0));
           }
@@ -155,6 +159,7 @@ void mousePressed() {
       //menu
       else if (m.equals(buttonWin[1])) {
         music.pause();
+        setup();
         pageMode = menuPg;
       }
       //next level
@@ -285,6 +290,9 @@ void draw() {
             m.display();
             imageMode(CORNER);
             image(restartB, restartWin.sqrtX, restartWin.sqrtY, restartB.width/15, restartB.height/15);
+            image(menuButton, menu.sqrtX + 9, menu.sqrtY + 13, menuButton.width/20, menuButton.height/20);
+            strokeWeight(8);
+            triangle(nextLev.sqrtX + 23, nextLev.sqrtY + 20, nextLev.sqrtX + 23, nextLev.sqrtY + 50, nextLev.sqrtX + 48, nextLev.sqrtY + 35);
           }
         }
       }
