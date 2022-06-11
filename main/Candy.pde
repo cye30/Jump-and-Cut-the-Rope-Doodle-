@@ -13,7 +13,6 @@ public class Candy{
   
   NodeList[] list;
   int increment;
-  Node[] prevs;
   
   
   //create candy
@@ -29,7 +28,8 @@ public class Candy{
       float incX = (xx-fixP.get(i)[0])/inc;
       float incY = (yy-fixP.get(i)[1])/inc;
       Node fPt = new Node(fixP.get(i)[0], fixP.get(i)[1]);
-      Node lastNode = new Node(fixP.get(i)[0] + incX*(inc-1), fixP.get(i)[1] + incY*(inc-1)); 
+      Node lastNode = new Node(fixP.get(i)[0] + incX*(inc-1), fixP.get(i)[1] + incY*(inc-1));
+      lastNode.next=candy;
       list[i] = new NodeList(fPt, lastNode);
      }
    } 
@@ -54,20 +54,17 @@ public class Candy{
     if (!created){
       createArr();
     }
-   for(int i = 0; i < list.length; i++){
+   for(int i = 0; i < fixPoint.size(); i++){
       list[i].processAll();
-      
-      line(candy.x, candy.y, list[i].last.x, list[i].last.y);
       list[i].display();
-      candy.attract(list[i].last);
       list[i].last.attract(candy);
-      candy.x += candy.dx;
-      candy.y += candy.dy;
-      candy.dy+=.1;
       stroke(102,51,0);
       strokeWeight(4);
       ellipse(fixPoint.get(i)[0],fixPoint.get(i)[1],10,10);
    }
+   candy.x += candy.dx;
+   candy.y += candy.dy;
+   candy.dy+=.3;
   }
 
   

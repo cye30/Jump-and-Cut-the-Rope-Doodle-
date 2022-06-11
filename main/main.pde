@@ -117,21 +117,20 @@ void mouseDragged(){
   if(mouseX-pmouseX != 0){
     float slope = (mouseY-pmouseY)/(mouseX-pmouseX);
     float b = mouseY-(slope*mouseX);
-    for(int i = 0; i < candy.fixPoint.size(); i++){
-      /*float first = ((candy.x-candy.fixPoint.get(i)[0])*(pmouseY-candy.fixPoint.get(i)[1]) - (candy.y-candy.fixPoint.get(i)[1])*(pmouseX-candy.fixPoint.get(i)[0])) / ((candy.y-candy.fixPoint.get(i)[1])*(mouseX-pmouseX) - (candy.x-candy.fixPoint.get(i)[0])*(mouseY-pmouseY));
-      float sec = ((mouseX-pmouseX)*(pmouseY-candy.fixPoint.get(i)[1]) - (mouseY-pmouseY)*(pmouseX-candy.fixPoint.get(i)[0])) / ((candy.y-candy.fixPoint.get(i)[1])*(mouseX-pmouseX) - (candy.x-candy.fixPoint.get(i)[0])*(mouseY-pmouseY));
-      if(first >= 0 && first <= 1 && sec >= 0 && sec <= 1){
-        candy.cut(i);
-      }*/
-      float ropeSlope = (candy.candy.y-candy.fixPoint.get(i)[1])/(candy.candy.x-candy.fixPoint.get(i)[0]);
-      float bRope = candy.candy.y-(ropeSlope*candy.candy.x);
-      float xCor = (b-bRope)/(ropeSlope-slope);
-      if(pmouseX-xCor >= 0 && mouseX-xCor <= 0 || pmouseX-xCor <= 0 && mouseX-xCor >= 0){
-        if(candy.candy.x <= candy.fixPoint.get(i)[0] && xCor >= candy.candy.x && xCor <= candy.fixPoint.get(i)[0]){
-          candy.cut(i);
-        } else if(candy.candy.x >= candy.fixPoint.get(i)[0] && xCor <= candy.candy.x && xCor >= candy.fixPoint.get(i)[0]){
-          candy.cut(i);
+    for(int i = 0; i < candy.list.length; i++){
+      Node current = candy.list[i].first;
+      while(current.next != null){
+        float ropeSlope = (current.y-current.next.y)/(current.x-current.next.x);
+        float bRope = candy.candy.y-(ropeSlope*candy.candy.x);
+        float xCor = (b-bRope)/(ropeSlope-slope);
+        if(pmouseX-xCor >= 0 && mouseX-xCor <= 0 || pmouseX-xCor <= 0 && mouseX-xCor >= 0){
+          if(current.x <= current.next.x && xCor >= current.x && xCor <= current.next.x){
+            candy.cut(i);
+          } else if(current.x >= current.next.x && xCor <= current.x && xCor >= current.next.x){
+            candy.cut(i);
+          }
         }
+        current = current.next;
       }
     }
   }
@@ -236,19 +235,10 @@ void draw(){
     monster.get(1).display(monsterIm2);
     monster.get(1).attack(doodle);
     stroke(225,0,0);
-    monster.get(1).shoot(monster.get(1).x, monster.get(1).y+33, 4);
+    //monster.get(1).shoot(monster.get(1).x, monster.get(1).y+33, 4);
     monster.get(1).monsAttract(doodle);
     monster.get(1).monsMove();
   }
-
-  text("toothy's width= " + monsterIm1.width/5, 50, 280);
-  text("toothy's height= " + monsterIm1.height/5, 50, 270);
-  text("toothy's x= " + toothy.x, 50, 300);
-  text("toohty's y= " + toothy.y, 50, 290);
-  text("biggy's width= " + monsterIm2.width/5, 50, 240);
-  text("biggy's height= " + monsterIm2.height/5, 50, 230);
-  text("biggy's x= " + biggy.x, 50, 260);
-  text("biggy's y= " + biggy.y, 50, 250);
 
   //candy stuff
   if(mousePressed){
