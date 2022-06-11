@@ -80,7 +80,7 @@ void setup(){
   created = false;
 
   //music
-  music = new SoundFile(this, "game_music.wav");
+  //music = new SoundFile(this, "game_music.wav");
   //music.play();         
 
   won = new Win();
@@ -93,16 +93,16 @@ void mousePressed(){
     //pausing
     if(m.equals(buttons[0])){
       if(looping){
-        music.pause();
+        //music.pause();
         noLoop();
       }else{
-        music.play();
+        //music.play();
         loop();
       }
     }
     //restarting
     else if(m.equals(buttons[1])){
-      music.pause();
+      //music.pause();
       setup();
       for(int i = 0; i<monster.size(); i++){
         monster.set(i, new Monsters(monster.get(i).monsStartX, monster.get(i).monsStartY, 0));
@@ -123,13 +123,13 @@ void mouseDragged(){
       if(first >= 0 && first <= 1 && sec >= 0 && sec <= 1){
         candy.cut(i);
       }*/
-      float ropeSlope = (candy.candy.y-candy.fixPoint.get(i)[1])/(candy.candy.x-candy.fixPoint.get(i)[0]);
-      float bRope = candy.candy.y-(ropeSlope*candy.candy.x);
+      float ropeSlope = (candy.y-candy.fixPoint.get(i)[1])/(candy.x-candy.fixPoint.get(i)[0]);
+      float bRope = candy.y-(ropeSlope*candy.x);
       float xCor = (b-bRope)/(ropeSlope-slope);
       if(pmouseX-xCor >= 0 && mouseX-xCor <= 0 || pmouseX-xCor <= 0 && mouseX-xCor >= 0){
-        if(candy.candy.x <= candy.fixPoint.get(i)[0] && xCor >= candy.candy.x && xCor <= candy.fixPoint.get(i)[0]){
+        if(candy.x <= candy.fixPoint.get(i)[0] && xCor >= candy.x && xCor <= candy.fixPoint.get(i)[0]){
           candy.cut(i);
-        } else if(candy.candy.x >= candy.fixPoint.get(i)[0] && xCor <= candy.candy.x && xCor >= candy.fixPoint.get(i)[0]){
+        } else if(candy.x >= candy.fixPoint.get(i)[0] && xCor <= candy.x && xCor >= candy.fixPoint.get(i)[0]){
           candy.cut(i);
         }
       }
@@ -210,7 +210,7 @@ void draw(){
 
 
   }else if (doodle.dies()||candy.dies()){
-    music.pause();
+    //music.pause();
     setup();
     for(int i = 0; i<monster.size(); i++){
       monster.set(i, new Monsters(monster.get(i).monsStartX, monster.get(i).monsStartY, 0));

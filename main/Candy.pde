@@ -1,6 +1,6 @@
 public class Candy{
+  float x, y, dx, dy;
   float radius;
-  Node candy;
   float[][] star;
   ArrayList<float[]> fixPoint;
   int starScore;
@@ -9,19 +9,19 @@ public class Candy{
   boolean drawStar=true;
   float starx;
   float stary;
-  //Spike[] spikes; later methods
-  //Bubble[] bubbles;
   boolean drawCandy = true;
   
   NodeList[] list;
   int increment;
-  
-  //ArrayList<Node[]> nodeArr = new ArrayList<Node[]>();
+  Node[] prevs;
   
   
   //create candy
   public Candy(float xx, float yy, float rad, ArrayList<float[]> fixP, int inc){
-    candy = new Node(xx, yy);
+    dx=0;
+    dy=0;
+    x=xx;
+    y=yy;
     radius = rad;
     fixPoint = fixP;
     starScore = 0;
@@ -40,8 +40,8 @@ public class Candy{
   
   void createArr(){
     for(int i=0; i<list.length; i++){
-      float incX = (candy.x-fixPoint.get(i)[0])/increment;
-      float incY = (candy.y-fixPoint.get(i)[1])/increment;
+      float incX = (x-fixPoint.get(i)[0])/increment;
+      float incY = (y-fixPoint.get(i)[1])/increment;
       for(int w = 1; w < increment-1; w ++){
         list[i].add(new Node(incX*w+fixPoint.get(i)[0],incY*w+fixPoint.get(i)[1]));
       }
@@ -59,6 +59,8 @@ public class Candy{
     }
    for(int i = 0; i < list.length; i++){
       list[i].processAll();
+      
+      line(x, y, list[i].last.x, list[i].last.y);
       list[i].display();
       stroke(102,51,0);
       strokeWeight(4);
@@ -66,58 +68,6 @@ public class Candy{
    }
   }
 
-  
-  //help constructs the arraylist necessary for organization and easier access
-  //void createArr(float fx, float fy, float cx, float cy){
-  //  float incX = (cx-fx)/10;
-  //  float incY = (cy-fy)/10;
-  //  Node[] storage = new Node[11];
-  //  for(int i = 0; i <= 10; i++){
-  //    storage[i] = new Node(fx+incX*i, fy+incY*i);
-  //  }
-  //  nodeArr.add(storage);
-  //}
-  
-  //void display(){
-  //  if(drawCandy){
-  //    imageMode(CENTER);
-  //    image(candyImg, x, y, candyImg.width/10, candyImg.height/10);
-  //  }
-    
-    //int countyCount = 0;
-    //for(Node[] n : nodeArr){ //loop through each fix point
-    //  countyCount++;
-    //  text("n is equal to "+ countyCount , 400, 450);
-    //  int w = 0;
-    //  while(w<n.length){ //loop through each node
-    //    text("w is equal to "+ w , 400, 400);
-    //    if(w==0){
-    //      //nothing is to be done
-    //    }else if(w==n.length-1){
-    //      n[w-1].attract(n[w]);
-    //    }else{
-    //      n[w+1].attract(n[w]);
-    //      n[w-1].attract(n[w]);
-    //    }
-    //    n[w].move();
-    //    if(w+1 <= n.length-1){
-    //      n[w].display(n[w+1].x, n[w+1].y);
-    //    }
-    //    w++;
-    //  }
-    //}
-    
-  //  for(int i = 0; i < fixPoint.size(); i++){
-  //    stroke(102,51,0);
-  //    strokeWeight(4);
-  //    ellipse(fixPoint.get(i)[0],fixPoint.get(i)[1],10,10);
-  //  }
-    
-  //  addStar(300,400);
-  //    starAchieved();
-  //    //display spikes && stars
-  //}
-  
   
   //for regular string
   //void display(){
@@ -140,37 +90,16 @@ public class Candy{
     
   //}
   
-  //NOT WORKING
-  //void drawLine(float fx, float fy){ //access through the arraylist
-  //  float incX = abs(fx-x)/10;
-  //  float incY = abs(fy-y)/10;
-  //  float[] holderX = new float[10];
-  //  float[] holderY = new float[10];
-  //  holderX[0] = fx;
-  //  holderY[0] = fy;
-  //  for(int i = 1; i<10; i++){
-  //    float secX = fx+(incX*(i));
-  //    float secY = fy+(incY*(i));
-  //    holderX[i] = secX;
-  //    holderY[i] = secY;
-  //    line(holderX[i], holderY[i], holderX[i-1], holderY[i-1]);
-  //  }
-  //  PointsX.add(holderX);
-  //  PointsY.add(holderY);
-  //}
-  
-  
-  //attract for regular string
-  //void attract(float px, float py){//modify this
-  //  float dist = dist(x, y, px, py) ;
-  //  float force = (dist-100) * 0.05;
-  //  float displacex = (px-x) ;
-  //  float displacey = (py-y) ;
-  //  dx += displacex * force / dist;
-  //  dy += displacey * force / dist;
-  //  dx *= 0.99;
-  //  dy *= 0.99;
-  //}
+  void attract(float px, float py){
+    float dist = dist(candy.x, candy.y, px, py) ;
+    float force = (dist-100) * 0.05;
+    float displacex = (px-candy.x) ;
+    float displacey = (py-candy.y) ;
+    dx += displacex * force / dist;
+    dy += displacey * force / dist;
+    dx *= 0.99;
+    dy *= 0.99;
+  }
   
   //move for regular string
   //void move(){
@@ -239,10 +168,5 @@ public class Candy{
   void addSpike(Spike s){
     : add a specified spike into the spike array
   }
-  void addBubble(Bubble b){
-    : add a specified bubble into the bubble array. 
-  }
-  void inBubble(){
-    :remove the gravitational force and  modify the dy of the candy based on bubbleFloat()
-  }*/
+  */
 }
