@@ -1,9 +1,9 @@
 public class NodeList{
   Node first, last;
   
-  NodeList(Node fNode, float cx, float cy){
+  NodeList(Node fNode, Node candy){
     first = fNode;
-    last =  new Node(cx, cy);
+    last =  candy;
     
     first.next = last;
     last.prev = first;

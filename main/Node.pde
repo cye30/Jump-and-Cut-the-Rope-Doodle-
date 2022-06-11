@@ -22,7 +22,7 @@ public class Node{
   
   void attract(Node other){
     float dist = dist(x, y, other.x, other.y) ;
-    float force = (dist-50) * 0.015;
+    float force = (dist-3) * 0.005;
     float displacex = (x - other.x) ;
     float displacey = (y - other.y) ;
     other.dx += displacex * force / dist;

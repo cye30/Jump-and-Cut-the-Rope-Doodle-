@@ -1,5 +1,6 @@
 public class Candy{
-  float dx,dy,x,y,radius;
+  float radius;
+  Node candy;
   float[][] star;
   ArrayList<float[]> fixPoint;
   int starScore;
@@ -13,59 +14,56 @@ public class Candy{
   boolean drawCandy = true;
   
   NodeList[] list;
+  int increment;
   
   //ArrayList<Node[]> nodeArr = new ArrayList<Node[]>();
   
   
   //create candy
-  public Candy(float xx, float yy, float rad, ArrayList<float[]> fixP){
-    x = xx;
-    y = yy;
+  public Candy(float xx, float yy, float rad, ArrayList<float[]> fixP, int inc){
+    candy = new Node(xx, yy);
     radius = rad;
     fixPoint = fixP;
-    dx = 0;
-    dy = 0;
     starScore = 0;
     list = new NodeList[fixPoint.size()];
+    increment = inc;
+    
     for(int i=0; i<list.length; i++){
+      float incX = (xx-fixP.get(i)[0])/inc;
+      float incY = (yy-fixP.get(i)[1])/inc;
       Node fPt = new Node(fixP.get(i)[0], fixP.get(i)[1]);
-      list[i] = new NodeList(fPt, x, y);
-    }
-   
-  }
+      Node lastNode = new Node(fixP.get(i)[0] + incX*(inc-1), fixP.get(i)[1] + incY*(inc-1)); 
+      list[i] = new NodeList(fPt, lastNode);
+     }
+   } 
   
-  void createList(int inc){
-     text("size of list is" + list.length, 350, 350);
-    for(int i = 0; i < list.length; i++){
-      float incX = (list[i].last.x-list[i].first.x)/inc;
-      float incY = (list[i].last.y-list[i].first.y)/inc;
-      for(int w=1; w < inc; w++){
-        Node newNode = new Node(w*incX + list[i].first.x, w*incY + list[i].first.y);
-        list[i].add(newNode);
+  
+  void createArr(){
+    for(int i=0; i<list.length; i++){
+      float incX = (candy.x-fixPoint.get(i)[0])/increment;
+      float incY = (candy.y-fixPoint.get(i)[1])/increment;
+      for(int w = 1; w < increment-1; w ++){
+        list[i].add(new Node(incX*w+fixPoint.get(i)[0],incY*w+fixPoint.get(i)[1]));
       }
-      //list[i].display();
-    }
-    created = true;
+    }created = true;
+    
   }
   
-  void display(int inc){
+  void display(){
     if(drawCandy){
       imageMode(CENTER);
-      //image(candyImg, list[0].last.x, list[0].last.y, candyImg.width/10, candyImg.height/10);
+      image(candyImg, candy.x, candy.y, candyImg.width/10, candyImg.height/10);
     }
-    
-    //if(!created){
-      createList(inc);
-    //}
-    
-    for(int i = 0; i < list.length; i++){
+    if (!created){
+      createArr();
+    }
+   for(int i = 0; i < list.length; i++){
       list[i].processAll();
       list[i].display();
       stroke(102,51,0);
       strokeWeight(4);
       ellipse(fixPoint.get(i)[0],fixPoint.get(i)[1],10,10);
-    }
-    
+   }
   }
 
   
@@ -201,7 +199,7 @@ public class Candy{
   
   //logistics
   boolean dies(){
-    return (y >= 800) && drawCandy;
+    return (candy.y >= 800) && drawCandy;
   }
   void candyAchieved(Doodle d){
     if(d.victory(this)){
@@ -211,7 +209,7 @@ public class Candy{
   
 //star stuff
   void starAchieved(){
-    if(abs(x - starx) < 48 && abs(y - stary) < 46){
+    if(abs(candy.x - starx) < 48 && abs(candy.y - stary) < 46){
       starScore++;
       drawStar=false;
     }

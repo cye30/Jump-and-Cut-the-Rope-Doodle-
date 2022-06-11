@@ -96,7 +96,7 @@ public class Doodle{
   }
   
   boolean victory(Candy c){
-    return (dist(x, y, c.x, c.y)<=75);
+    return (dist(x, y, c.candy.x, c.candy.y)<=75);
   }
   
   void injure(){
