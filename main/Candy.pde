@@ -1,5 +1,5 @@
 public class Candy{
-  float x, y, dx, dy;
+  Node candy;
   float radius;
   float[][] star;
   ArrayList<float[]> fixPoint;
@@ -18,10 +18,7 @@ public class Candy{
   
   //create candy
   public Candy(float xx, float yy, float rad, ArrayList<float[]> fixP, int inc){
-    dx=0;
-    dy=0;
-    x=xx;
-    y=yy;
+    candy = new Node(xx, yy);
     radius = rad;
     fixPoint = fixP;
     starScore = 0;
@@ -40,8 +37,8 @@ public class Candy{
   
   void createArr(){
     for(int i=0; i<list.length; i++){
-      float incX = (x-fixPoint.get(i)[0])/increment;
-      float incY = (y-fixPoint.get(i)[1])/increment;
+      float incX = (candy.x-fixPoint.get(i)[0])/increment;
+      float incY = (candy.y-fixPoint.get(i)[1])/increment;
       for(int w = 1; w < increment-1; w ++){
         list[i].add(new Node(incX*w+fixPoint.get(i)[0],incY*w+fixPoint.get(i)[1]));
       }
@@ -60,8 +57,13 @@ public class Candy{
    for(int i = 0; i < list.length; i++){
       list[i].processAll();
       
-      line(x, y, list[i].last.x, list[i].last.y);
+      line(candy.x, candy.y, list[i].last.x, list[i].last.y);
       list[i].display();
+      candy.attract(list[i].last);
+      list[i].last.attract(candy);
+      candy.x += candy.dx;
+      candy.y += candy.dy;
+      candy.dy+=.1;
       stroke(102,51,0);
       strokeWeight(4);
       ellipse(fixPoint.get(i)[0],fixPoint.get(i)[1],10,10);
@@ -90,16 +92,16 @@ public class Candy{
     
   //}
   
-  void attract(float px, float py){
-    float dist = dist(candy.x, candy.y, px, py) ;
-    float force = (dist-100) * 0.05;
-    float displacex = (px-candy.x) ;
-    float displacey = (py-candy.y) ;
-    dx += displacex * force / dist;
-    dy += displacey * force / dist;
-    dx *= 0.99;
-    dy *= 0.99;
-  }
+  //void attract(float px, float py){
+  //  float dist = dist(candy.x, candy.y, px, py) ;
+  //  float force = (dist-100) * 0.05;
+  //  float displacex = (px-candy.x) ;
+  //  float displacey = (py-candy.y) ;
+  //  dx += displacex * force / dist;
+  //  dy += displacey * force / dist;
+  //  dx *= 0.99;
+  //  dy *= 0.99;
+  //}
   
   //move for regular string
   //void move(){
