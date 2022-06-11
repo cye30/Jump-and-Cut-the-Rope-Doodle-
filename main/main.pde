@@ -147,27 +147,27 @@ void mousePressed() {
       if (m.equals(buttonWin[0])) {
         music.pause();
         setup();
+        pageMode = 1;
         for (int i = 0; i<monster.size(); i++) {
           monster.set(i, new Monsters(monster.get(i).monsStartX, monster.get(i).monsStartY, 0));
         }
       }
       //menu
-      else if (m.equals(buttons[1])) {
+      else if (m.equals(buttonWin[1])) {
         music.pause();
-        setup();
-        for (int i = 0; i<monster.size(); i++) {
-          monster.set(i, new Monsters(monster.get(i).monsStartX, monster.get(i).monsStartY, 0));
-        }
+        pageMode = menuPg;
       }
       //next level
-      else if (m.equals(buttons[1])) {
+      else if (m.equals(buttonWin[2])) {
         music.pause();
         setup();
-        for (int i = 0; i<monster.size(); i++) {
-          monster.set(i, new Monsters(monster.get(i).monsStartX, monster.get(i).monsStartY, 0));
-        }
+        pageMode++;
       }
     }
+  }
+  
+  if(play.overSqrt()){
+    pageMode = 1;
   }
 }
 
