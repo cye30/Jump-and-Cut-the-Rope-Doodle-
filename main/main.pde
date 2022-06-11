@@ -1,10 +1,18 @@
 import processing.sound.*;
 SoundFile music;
 final float gravity = 1;
-int mode;
+
+int menuPg = -1;
+int winPg = 0;
+int pageMode;
+
+int left = 0;
+int right = 0;
+int moveMode;
+
 //int score;
 
-PImage menu;
+PImage Menu;
 
 //construct buttons
 PImage restartB;
@@ -63,7 +71,7 @@ int counter;
 
 void setup() {
   //import doodle image
-  menu = loadImage("MenuPage.png");
+  Menu = loadImage("MenuPage.png");
   doodleAngelLeft = loadImage("doodleTheAngelLeft.png");
   doodleAngelRight = loadImage("doodleTheAngelRight.png");
   doodleWins = loadImage("success.png");
@@ -85,7 +93,7 @@ void setup() {
   //restart button image
   restartB = loadImage("restartButton.png");
 
-  mode = 0;
+  pageMode = menuPg;
   //background
   size(600, 800);
   background(225);
@@ -106,7 +114,7 @@ void setup() {
 
 //for the buttons!
 void mousePressed() {
-  if(mode != 3){
+  if(pageMode != winPg){
     for (Button m : buttons) {
       if (m.overSqrt()) {
         //pausing
@@ -187,156 +195,163 @@ void mouseDragged() {
 }
 
 void draw() {
-  background(255);
-  //text("mode: "+mode, 50, 320);
-
-  //buttons
-  for (Button m : buttons) {
-    m.display();
+  if(pageMode == menuPg){
+    image(Menu, 0, 0, Menu.width/1.95, Menu.height/1.95);
   }
-
-  //pause and restart icons
-  imageMode(CENTER);
-  triangle(105, 53, 105, 72, 120, 62);
-  image(restartB, 60, 60, restartB.width/22, restartB.height/22);
-
-  //step stuff
-  for (Steps s : game1) { //modify this if change game
-    s.drawStep();
-  }
-
-  //cut candy part
-  if (mousePressed) {
-    cursor(CROSS);
-    stroke(150, 150, 150);
-    strokeWeight(6);
-    line(mouseX, mouseY, pmouseX, pmouseY);
-  }
-
-  //doodle stuff
-  if (keyPressed && mode != 3) {
-    if (key == 'e') {
-      if (onStep()) {
-        doodle.jump();
-      }
+  
+  if(pageMode != menuPg){
+    background(255);
+    //text("mode: "+mode, 50, 320);
+  
+    //buttons
+    for (Button m : buttons) {
+      m.display();
     }
-    if (key == 's') {
-      mode = 0;
-      doodle.moveLeft();
+  
+    //pause and restart icons
+    imageMode(CENTER);
+    triangle(105, 53, 105, 72, 120, 62);
+    image(restartB, 60, 60, restartB.width/22, restartB.height/22);
+  
+    //step stuff
+    for (Steps s : game1) { //modify this if change game
+      s.drawStep();
     }
-    if (key == 'f') {
-      mode = 1;
-      doodle.moveRight();
+
+    //cut candy part
+    if (mousePressed) {
+      cursor(CROSS);
+      stroke(150, 150, 150);
+      strokeWeight(6);
+      line(mouseX, mouseY, pmouseX, pmouseY);
     }
-  }
 
-  //spikes
-  spike.display();
-
-  //doodle stuff
-  doodle.gravity();
-  doodle.move();
-  //text("dy of doodle is " + doodle.dy, 50, 100);
-  doodle.display(); //draw out doodle
-
-  if (candyBroken == false) {
-    if (doodle.victory(candy) || mode ==3) {
-      if (counter < 5) {
-        mode = 3;
-        monster.clear();
+    //doodle stuff
+    if (keyPressed && pageMode != winPg) {
+      if (key == 'e') {
         if (onStep()) {
-          counter++;
           doodle.jump();
-          doodle.gravity();
-          doodle.move();
-          //sprinkles!!
-          stars.add(new Sprinkle(doodle.x, doodle.y+120, -5));
-          stars.add(new Sprinkle(doodle.x, doodle.y+120, 5));
-          stars.add(new Sprinkle(doodle.x, doodle.y+70, 8));
-          stars.add(new Sprinkle(doodle.x, doodle.y+70, -8));
-        }
-        for (Sprinkle s : stars) {
-          s.gravity();
-          s.move();
-          s.display();
-        }
-      } else {
-        //draw win tab
-        won.display();
-        for (Button m : buttonWin) {
-          m.display();
-          imageMode(CORNER);
-          image(restartB, restartWin.sqrtX, restartWin.sqrtY, restartB.width/15, restartB.height/15);
         }
       }
+      if (key == 's') {
+        moveMode = left;
+        doodle.moveLeft();
+      }
+      if (key == 'f') {
+        moveMode = right;
+        doodle.moveRight();
+      }
     }
-  } else if (doodle.dies()||candy.dies()) {
-    music.pause();
-    setup();
-    for (int i = 0; i<monster.size(); i++) {
-      monster.set(i, new Monsters(monster.get(i).monsStartX, monster.get(i).monsStartY, 0));
+
+    //spikes
+    spike.display();
+
+    //doodle stuff
+    doodle.gravity();
+    doodle.move();
+    //text("dy of doodle is " + doodle.dy, 50, 100);
+    doodle.display(); //draw out doodle
+
+    if (candyBroken == false) {
+      if (doodle.victory(candy) || pageMode == winPg) {
+        if (counter < 5) {
+          pageMode = winPg;
+          monster.clear();
+          if (onStep()) {
+            counter++;
+            doodle.jump();
+            doodle.gravity();
+            doodle.move();
+            //sprinkles!!
+            stars.add(new Sprinkle(doodle.x, doodle.y+120, -5));
+            stars.add(new Sprinkle(doodle.x, doodle.y+120, 5));
+            stars.add(new Sprinkle(doodle.x, doodle.y+70, 8));
+            stars.add(new Sprinkle(doodle.x, doodle.y+70, -8));
+          }
+          for (Sprinkle s : stars) {
+            s.gravity();
+            s.move();
+            s.display();
+          }
+        } else {
+          //draw win tab
+          won.display();
+          for (Button m : buttonWin) {
+            m.display();
+            imageMode(CORNER);
+            image(restartB, restartWin.sqrtX, restartWin.sqrtY, restartB.width/15, restartB.height/15);
+          }
+        }
+      }
+    } else if (doodle.dies()||candy.dies()) {
+      music.pause();
+      setup();
+      for (int i = 0; i<monster.size(); i++) {
+        monster.set(i, new Monsters(monster.get(i).monsStartX, monster.get(i).monsStartY, 0));
+      }
+      skipStep = false;
     }
-    skipStep = false;
-  }
-  candy.candyAchieved(doodle);
-  //text("monsnter arraylist size is: "+ monster.size(), 50, 500);
+    candy.candyAchieved(doodle);
+    //text("monsnter arraylist size is: "+ monster.size(), 50, 500);
 
 
-  if (onStep() && !skipStep) { //doodle stops once it lands on the step
-    doodle.dy = 0;
-  }
+    if (onStep() && !skipStep) { //doodle stops once it lands on the step
+      doodle.dy = 0;
+    }
 
 
   //monster stuff
-  if (monster.size() >0) { //prevent out of bound error
-    monster.get(0).monsHorMove();
-    monster.get(0).monsMove();
-    monster.get(0).display(monsterIm1);
-    monster.get(0).attack(doodle);
+    if (monster.size() >0) { //prevent out of bound error
+      monster.get(0).monsHorMove();
+      monster.get(0).monsMove();
+      monster.get(0).display(monsterIm1);
+      monster.get(0).attack(doodle);
+  
+      monster.get(1).display(monsterIm2);
+      monster.get(1).attack(doodle);
+      stroke(225, 0, 0);
+      monster.get(1).shoot(monster.get(1).x, monster.get(1).y+33, 4);
+      monster.get(1).monsAttract(doodle);
+      monster.get(1).monsMove();
+    }
 
-    monster.get(1).display(monsterIm2);
-    monster.get(1).attack(doodle);
-    stroke(225, 0, 0);
-    monster.get(1).shoot(monster.get(1).x, monster.get(1).y+33, 4);
-    monster.get(1).monsAttract(doodle);
-    monster.get(1).monsMove();
+    //text("toothy's width= " + monsterIm1.width/5, 50, 280);
+    //text("toothy's height= " + monsterIm1.height/5, 50, 270);
+    //text("toothy's x= " + toothy.x, 50, 300);
+    //text("toohty's y= " + toothy.y, 50, 290);
+    //text("biggy's width= " + monsterIm2.width/5, 50, 240);
+    //text("biggy's height= " + monsterIm2.height/5, 50, 230);
+    //text("biggy's x= " + biggy.x, 50, 260);
+    //text("biggy's y= " + biggy.y, 50, 250);
+  
+    //candy stuff
+    if (mousePressed) {
+      cursor(CROSS);
+      stroke(150, 150, 150);
+      strokeWeight(6);
+      line(mouseX, mouseY, pmouseX, pmouseY);
+    }
+    candy.display(); //test candy!!!
+    //text("candy dx: " + candy.dx, 50,200);
+    //text("candy dy: " + candy.dy, 50,210);
+    //text("starScore: " + candy.getScore(), 50,220); //starScore
+    candy.move();
+    if (candy.breakCandy) {
+      candyBroken = true;
+    }
+  
+  
+    //boarders
+    stroke(0, 150, 0);
+    fill(0, 150, 0);
+  
+    rect(0, 0, width, 28); // Top
+    rect(width-28, 0, 28, height); // Right
+    rect(0, height-28, width, 28); // Bottom
+    rect(0, 0, 28, height); // Left
   }
-
-  //text("toothy's width= " + monsterIm1.width/5, 50, 280);
-  //text("toothy's height= " + monsterIm1.height/5, 50, 270);
-  //text("toothy's x= " + toothy.x, 50, 300);
-  //text("toohty's y= " + toothy.y, 50, 290);
-  //text("biggy's width= " + monsterIm2.width/5, 50, 240);
-  //text("biggy's height= " + monsterIm2.height/5, 50, 230);
-  //text("biggy's x= " + biggy.x, 50, 260);
-  //text("biggy's y= " + biggy.y, 50, 250);
-
-  //candy stuff
-  if (mousePressed) {
-    cursor(CROSS);
-    stroke(150, 150, 150);
-    strokeWeight(6);
-    line(mouseX, mouseY, pmouseX, pmouseY);
-  }
-  candy.display(); //test candy!!!
-  //text("candy dx: " + candy.dx, 50,200);
-  //text("candy dy: " + candy.dy, 50,210);
-  //text("starScore: " + candy.getScore(), 50,220); //starScore
-  candy.move();
-  if (candy.breakCandy) {
-    candyBroken = true;
-  }
-
-
-  //boarders
-  stroke(0, 150, 0);
-  fill(0, 150, 0);
-
-  rect(0, 0, width, 28); // Top
-  rect(width-28, 0, 28, height); // Right
-  rect(0, height-28, width, 28); // Bottom
-  rect(0, 0, 28, height); // Left
 }
+  
 
 boolean onStep() {
   for (Steps s : game1) { //modify this if change game
