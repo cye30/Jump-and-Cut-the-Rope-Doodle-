@@ -63,5 +63,5 @@ Created a new mode system to make a menu page and now the menu button works. | C
 All button functions for the win tab function correctly. Then reorganized main.pde to group into levels. Had to debug with Angel after moving around the code. | Trying to debug rope-related methods. It seems to be displaying rope multiple times. Modify different methods to figure out what’s wrong.
 6/12/2022 | 6/11/2022
 Made three distinct levels and added star features. Created buttons for each level. Fixed the bug that allowed the doodle to move after victory. Met with Angel to debug any remaining problems in the code. Worked on the README file. | Continue to try to figure out how to create the rope-like effect for the string. Referenced OrbChain Lab.It’s finally working! Met with Christina to fix the bugs that are created after implementing the level system. Debugged rope by changing the List array to ArrayList. Resolved merge conflicts together
- | 6/12/2022
- | Resolved some errors that resulted from merging. Fixed the prototype and the UML. Met with Christina to resolve issues associated with the level system.
+N/A | 6/12/2022
+N/A | Resolved some errors that resulted from merging. Fixed the prototype and the UML. Met with Christina to resolve issues associated with the level system.
