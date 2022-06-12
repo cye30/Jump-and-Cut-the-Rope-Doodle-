@@ -141,7 +141,7 @@ void mousePressed() {
             music.pause();
             noLoop();
           } else {
-            //music.play();
+            music.play();
             loop();
           }
         }
@@ -190,10 +190,10 @@ void mousePressed() {
   }
 
   if(play.overSqrt()){
+    music.pause();
     setup();
     pageMode = levels;
     level = level1;
-    candyBroken = false;
   }
 }
 
@@ -232,7 +232,6 @@ void mouseDragged() {
 void draw(){
   if(pageMode != menuPg){
     background(255);
-    //text("mode: "+mode, 50, 320);
 
     //boarders
     stroke(0, 150, 0);
@@ -282,6 +281,7 @@ void draw(){
     doodle.display();
 
     candy.display();
+    candy.move();
     if (candy.breakCandy) {
       candyBroken = true;
     }
@@ -312,6 +312,7 @@ void draw(){
     doodle.display(); //draw out doodle
 
     candy.display();
+    candy.move();
     if (candy.breakCandy) {
       candyBroken = true;
     }
