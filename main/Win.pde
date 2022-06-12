@@ -1,5 +1,4 @@
 public class Win{
-  boolean candyObtained;
 
   public Win(){
     
