@@ -48,8 +48,10 @@ public class Candy{
         //display spikes && stars
     }
         
-    for(int i = 0; i < spike.length; i++){
+    if(level == 2){
+      for(int i = 0; i < spike.length; i++){
       shatter(spike[i]);
+      }
     }
     
   }

@@ -68,7 +68,7 @@ PImage candyR;
 PImage starImg;
 PImage starUImg;
 ArrayList<float[]> points = new ArrayList<float[]>();
-boolean candyBroken = false;
+boolean candyBroken;
 
 //construct spikes
 Spikes spike = new Spikes(100, 400, 5);
@@ -123,6 +123,7 @@ void setup() {
   //music.play();
 
   won = new Win();
+  candyBroken = false;
 }
 
 //for the buttons!
@@ -259,16 +260,8 @@ void draw() {
     }
   }
   
-  //cut candy part
-  if (mousePressed) {
-    cursor(CROSS);
-    stroke(150, 150, 150);
-    strokeWeight(6);
-    line(mouseX, mouseY, pmouseX, pmouseY);
-  }
-  
   //level 1
-  if(level == level1 || pageMode == winPg){
+  if(level == level1){
     for (Steps s : game1) {
       s.drawStep();
     }
@@ -317,15 +310,15 @@ void draw() {
           }
         }
       }
-    } else if (doodle.dies()||candy.dies()) {
-      music.pause();
-      setup();
-      for (int i = 0; i<monster.size(); i++) {
-        monster.set(i, new Monsters(monster.get(i).monsStartX, monster.get(i).monsStartY, 0));
+     }else if (doodle.dies()||candy.dies()) {
+        music.pause();
+        setup();
+        for (int i = 0; i<monster.size(); i++) {
+          monster.set(i, new Monsters(monster.get(i).monsStartX, monster.get(i).monsStartY, 0));
+        }
+        skipStep = false;
+        candyBroken = false;
       }
-      skipStep = false;
-      candyBroken = false;
-    }
     
     candy.candyAchieved(doodle);
 
@@ -334,7 +327,8 @@ void draw() {
     }
   }
   
-  if(level == level2 || pageMode == winPg){
+  //level 2
+  if(level == level2){
     //step stuff
     for (Steps s : game2) {
       s.drawStep();
@@ -348,13 +342,9 @@ void draw() {
     //doodle stuff
     doodle.gravity();
     doodle.move();
-    //text("dy of doodle is " + doodle.dy, 50, 100);
     doodle.display(); //draw out doodle
     
     candy.display();
-    //text("candy dx: " + candy.dx, 50,200);
-    //text("candy dy: " + candy.dy, 50,210);
-    //text("starScore: " + candy.getScore(), 50,220); //starScore
     candy.move();
     if (candy.breakCandy) {
       candyBroken = true;
@@ -405,7 +395,6 @@ void draw() {
     }
     
     candy.candyAchieved(doodle);
-    //text("monsnter arraylist size is: "+ monster.size(), 50, 500);
 
     if (onStep() && !skipStep) { //doodle stops once it lands on the step
       doodle.dy = 0;
@@ -425,15 +414,6 @@ void draw() {
       monster.get(1).monsAttract(doodle);
       monster.get(1).monsMove();
     }
-
-    //text("toothy's width= " + monsterIm1.width/5, 50, 280);
-    //text("toothy's height= " + monsterIm1.height/5, 50, 270);
-    //text("toothy's x= " + toothy.x, 50, 300);
-    //text("toohty's y= " + toothy.y, 50, 290);
-    //text("biggy's width= " + monsterIm2.width/5, 50, 240);
-    //text("biggy's height= " + monsterIm2.height/5, 50, 230);
-    //text("biggy's x= " + biggy.x, 50, 260);
-    //text("biggy's y= " + biggy.y, 50, 250);
     
   }
 
@@ -446,9 +426,17 @@ void draw() {
     text("PLAY", 90,453);
     
     if(level >= 2){
-      textSize(10);
-      text("More Levels to Come!", 500,600);
+      textSize(20);
+      text("More Levels to Come!", 350,700);
     }
+  }
+  
+  //cut candy part
+  if (mousePressed) {
+    cursor(CROSS);
+    stroke(150, 150, 150);
+    strokeWeight(6);
+    line(mouseX, mouseY, pmouseX, pmouseY);
   }
 }
   
