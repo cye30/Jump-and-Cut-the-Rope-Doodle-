@@ -141,7 +141,7 @@ void mousePressed() {
             music.pause();
             noLoop();
           } else {
-            //music.play();
+            music.play();
             loop();
           }
         }
@@ -190,6 +190,7 @@ void mousePressed() {
   }
 
   if(play.overSqrt()){
+    music.pause();
     setup();
     pageMode = levels;
     level = level1;
