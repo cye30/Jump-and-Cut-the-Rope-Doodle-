@@ -19,7 +19,7 @@ public class Monsters{
 
   void display(PImage im){
     imageMode(CENTER);
-    image(im, x, y, im.width/5, im.height/5
+    image(im, x, y, im.width/5, im.height/5);
   }
   
   void attack(Doodle d){
