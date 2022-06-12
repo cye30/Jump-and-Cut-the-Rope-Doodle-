@@ -1,7 +1,8 @@
 public class Button{
   
   color sqrtColor, sqrtHighlight;
-  int sqrtSize = 45;
+  float sqrtSizeX = 45;
+  float sqrtSizeY = 45;
   float sqrtX, sqrtY;
   
   public Button(float x, float y){
@@ -9,6 +10,22 @@ public class Button{
     sqrtY = y;
     sqrtColor = color(255);
     sqrtHighlight = color(243);
+  }
+  public Button(float x, float y, float size){
+    sqrtX = x;
+    sqrtY = y;
+    sqrtColor = color(255);
+    sqrtHighlight = color(243);
+    sqrtSizeX = size;
+    sqrtSizeY = size;
+  }
+  public Button(float x, float y, float sizeX, float sizeY){
+    sqrtX = x;
+    sqrtY = y;
+    sqrtColor = color(255);
+    sqrtHighlight = color(243);
+    sqrtSizeX = sizeX;
+    sqrtSizeY = sizeY;
   }
   
   void display(){
@@ -20,11 +37,11 @@ public class Button{
     }else{
       fill(sqrtColor);
     }
-    rect(sqrtX, sqrtY, sqrtSize, sqrtSize, 10);
+    rect(sqrtX, sqrtY, sqrtSizeX, sqrtSizeY, 10);
     
   }
   
   boolean overSqrt(){
-    return(mouseX>=sqrtX && mouseX<=sqrtX+sqrtSize && mouseY >= sqrtY && mouseY <= sqrtY+sqrtSize);
+    return(mouseX>=sqrtX && mouseX<=sqrtX+sqrtSizeX && mouseY >= sqrtY && mouseY <= sqrtY+sqrtSizeY);
   }
  }

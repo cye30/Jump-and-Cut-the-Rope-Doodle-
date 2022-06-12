@@ -2,20 +2,23 @@ public class Candy{
   Node candy;
   float radius;
   float[][] star;
-  
+
   int starScore;
   color c;
   boolean status;
   boolean drawStar=true;
   float starx;
   float stary;
+  Spikes[] spike;
   boolean drawCandy = true;
-  
+  boolean breakCandy = false;
+  float grav;
+
   ArrayList<float[]> fixPoint;
   ArrayList<NodeList> list;
   int increment;
-  
-  
+
+
   //create candy
   public Candy(float xx, float yy, float rad, ArrayList<float[]> fixP, int inc){
     candy = new Node(xx, yy);
@@ -24,7 +27,7 @@ public class Candy{
     starScore = 0;
     list = new ArrayList<NodeList>();
     increment = inc;
-    
+
     for(int i=0; i<fixPoint.size(); i++){
       float incX = (xx-fixP.get(i)[0])/inc;
       float incY = (yy-fixP.get(i)[1])/inc;
@@ -33,9 +36,9 @@ public class Candy{
       lastNode.next=candy;
       list.add(new NodeList(fPt, lastNode));
      }
-   } 
-  
-  
+   }
+
+
   void createArr(){
     for(int i=0; i<list.size(); i++){
       float incX = (candy.x-fixPoint.get(i)[0])/increment;
@@ -44,14 +47,18 @@ public class Candy{
         list.get(i).add(new Node(incX*w+fixPoint.get(i)[0],incY*w+fixPoint.get(i)[1]));
       }
     }created = true;
-    
+
   }
-  
+
   void display(){
-    if(drawCandy){
-      imageMode(CENTER);
-      image(candyImg, candy.x, candy.y, candyImg.width/10, candyImg.height/10);
-    }
+    if(breakCandy){
+      image(candyL, x-20, y, candyL.width/10, candyL.height/10);
+      image(candyR, x+20, y, candyR.width/10, candyR.height/10);
+    } else{
+      if(drawCandy){
+        imageMode(CENTER);
+        image(candyImg, x, y, candyImg.width/10, candyImg.height/10);
+      }
     if (!created){
       createArr();
     }
@@ -66,16 +73,29 @@ public class Candy{
    candy.x += candy.dx;
    candy.y += candy.dy;
    candy.dy+=.3;
+
+   addStar(300,400);
+   starAchieved();
+  //display spikes && stars
+
+     spike = spi;
+
+     if(level == 2){
+       for(int i = 0; i < spike.length; i++){
+       shatter(spike[i]);
+       }
+     }
   }
 
-  
+
+
   //for regular string
   //void display(){
   //  if(drawCandy){
   //    imageMode(CENTER);
   //    image(candyImg, x, y, candyImg.width/10, candyImg.height/10);
   //  }
-    
+
   //  for(int i = 0; i < fixPoint.size(); i++){
   //    stroke(102,51,0);
   //    strokeWeight(4);
@@ -83,13 +103,13 @@ public class Candy{
   //    line(x, y, fixPoint.get(i)[0], fixPoint.get(i)[1]);
   //    ellipse(fixPoint.get(i)[0],fixPoint.get(i)[1],10,10);
   //  }
-    
+
   //  addStar(300,400);
   //    starAchieved();
   //    //display spikes && stars
-    
+
   //}
-  
+
   //void attract(float px, float py){
   //  float dist = dist(candy.x, candy.y, px, py) ;
   //  float force = (dist-100) * 0.05;
@@ -100,12 +120,12 @@ public class Candy{
   //  dx *= 0.99;
   //  dy *= 0.99;
   //}
-  
+
   //move for regular string
   //void move(){
   //  for(int i = 0; i < fixPoint.size(); i++){
   //    for(int t = 0; t < PointsX.get(i).length-1; t++){                                           //NEED MORE WORK
-  //     this.attract(PointsX.get(i)[t], PointsY.get(i)[t], PointsX.get(i)[t+1], PointsY.get(i)[t+1]); 
+  //     this.attract(PointsX.get(i)[t], PointsY.get(i)[t], PointsX.get(i)[t+1], PointsY.get(i)[t+1]);
   //     //PointsX.get(i)[t]+=dx;
   //     //PointsY.get(i)[t]+=dy;
   //     //dy+=0.3;
@@ -115,7 +135,7 @@ public class Candy{
   //  y+=dy;
   //  dy+=.3;
   //}
-  
+
   //NEEDS MODIFICATIONS
   void cut(int count){
     for(int i = fixPoint.size()-1; i >= 0; i--){
@@ -126,7 +146,7 @@ public class Candy{
     }
     //disconnect the candy from the string
   }
-  
+
   //logistics
   boolean dies(){
     return (candy.y >= 800) && drawCandy;
@@ -136,7 +156,7 @@ public class Candy{
       drawCandy = false;
     }//candy is removed when it falls within the radius of the doodle
   }
-  
+
 //star stuff
   void starAchieved(){
     if(abs(candy.x - starx) < 48 && abs(candy.y - stary) < 46){
@@ -145,7 +165,7 @@ public class Candy{
     }
     //star is removed from screen and starScore + 1 when the candy touches the star
   }
-  
+
   void addStar(float xs, float ys){
     if(drawStar == true){
       starx = xs;
@@ -157,17 +177,20 @@ public class Candy{
       stary = 0;
     }
   }
-  
+
   int getScore(){
     return starScore;
     //return the current starScore.
   }
-  
-  /*void shatter(){
-    : candy will shatter if it touches the spikes
+
+  void shatter(Spikes broken){
+    //candy will shatter if it touches the spikes
+    if(broken.x > x && (broken.x - x) < 5 || broken.x < x && (x - (broken.x + broken.sideLength*broken.numSpikes)) < 3){
+      if(abs(y - broken.y) < broken.sideLength){
+        grav = 1;
+        breakCandy = true;
+      }
+    }
+
   }
-  void addSpike(Spike s){
-    : add a specified spike into the spike array
-  }
-  */
 }

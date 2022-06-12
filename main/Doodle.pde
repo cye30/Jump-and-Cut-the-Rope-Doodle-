@@ -22,20 +22,19 @@ public class Doodle{
   void display(){
     //drawing doodle
     imageMode(CENTER);
-    if(mode == 0){
-      image(doodleAngelLeft, x, y, 4 * doodleAngelLeft.width/15, 4 * doodleAngelLeft.height/15);
-    }if(mode == 1){
-      image(doodleAngelRight, x, y, 4 * doodleAngelRight.width/15, 4 * doodleAngelRight.height/15);
-    }if(mode == 3){
-      
+    if(pageMode == winPg){
       image(doodleWins, x, y, 4 * doodleWins.width/15, 4 * doodleWins.height/15);
+    }else if(moveMode == left){
+      image(doodleAngelLeft, x, y, 4 * doodleAngelLeft.width/15, 4 * doodleAngelLeft.height/15);
+    }else if(moveMode == right){
+      image(doodleAngelRight, x, y, 4 * doodleAngelRight.width/15, 4 * doodleAngelRight.height/15);
     }
     //noFill();
     //circle(x, y, 125);
     
-    text("doodle's width= " + 4*doodleAngelLeft.width/15, 50, 110);
-    text("doodle's height= " + 4*doodleAngelLeft.height/15, 50, 120);
-    text("doodle's heart= " + heart, 50, 170);
+    //text("doodle's width= " + 4*doodleAngelLeft.width/15, 50, 110);
+    //text("doodle's height= " + 4*doodleAngelLeft.height/15, 50, 120);
+    //text("doodle's heart= " + heart, 50, 170);
     
     //drawing steps
     //for(Steps s : steps){
