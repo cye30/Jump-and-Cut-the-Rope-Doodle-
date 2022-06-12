@@ -144,9 +144,9 @@ void setup() {
     points.add(0, new float[]{550,280});
     points.add(0, new float[]{500,160});
     candy = new Candy(500,300,30,points,5, arrSpikes);
-    candy.addStar(220,340);
-    candy.addStar(250,370);
-    candy.addStar(300,390);
+    candy.addStar(400,300);
+    candy.addStar(500,405);
+    candy.addStar(550,300);
     game3 = new Steps[]{a, b, c};
   }
   
