@@ -24,31 +24,19 @@ Run Instructions: This is a processing based program, you may have to download t
 Christina Ye | JiaXin (Angel) Xie
 --- | ---
 5/14/2022 | 5/14/2022
-We brainstormed for our projects by examining our favorite games and processing  | We brainstormed for our projects by examining our favorite games and processing projects.
-projects. We decided to create a game that combines Doodle and Cut the Rope | We decided to create a game that combines Doodle and Cut the Rope
- |
+We brainstormed for our projects by examining our favorite games and processing  projects. We decided to create a game that combines Doodle and Cut the Rope | We brainstormed for our projects by examining our favorite games and processing projects. We decided to create a game that combines Doodle and Cut the Rope
 5/21/2022 | 5/21/2022
 We discussed our plan for the project in detail and completed our outline for the prototype. | We discussed our plan for the project in detail and completed our outline for the prototype
- |
 5/24/2022 | 5/23/2022
-I created the steps class to display green steps and worked on displaying the candy | Worked on main and doodle. Ensured that everything is displayed properly  and that doodle is
-and rope in candy class. Then merged to the main branch. | functioning as intended
- |
+I created the steps class to display green steps and worked on displaying the candy and rope in candy class. Then merged to the main branch. | Worked on main and doodle. Ensured that everything is displayed properly  and that doodle is functioning as intended
 5/25/2022 | 5/24/2022
-I tried making the candy attached to rope and a fixed point follow orb physics and | Debugged the doodle class
-worked displaying the star in addStar. |
- |
+I tried making the candy attached to rope and a fixed point follow orb physics and worked displaying the star in addStar. | Debugged the doodle class
 5/26/2022 | 5/25/2022
-Continued working on debugging the physics of the candy. Modified original design by deleting | Deal with merging issues because my partner and I had different names for our
-unnecessary methods and fixed attract method issues. | sketch tab
- |
+Continued working on debugging the physics of the candy. Modified original design by deleting unnecessary methods and fixed attract method issues. | Deal with merging issues because my partner and I had different names for our sketch tab
 5/27/2022 | 5/26/2022
 Tried figuring out why the attract method did not work at all. | Ensures that the game restarts when doodle falls off the screen
- |
 5/29/2022 | 5/27/2022
-Imported images for the candy and stars. Stars can now be displayed and achieved. Then, I worked | Worked on the monster class and ensure that the monster can attack doodle
-on the cut method to delete fixedPoints and “cut” the rope when mousePresses on it.  |
- |
+Imported images for the candy and stars. Stars can now be displayed and achieved. Then, I worked on the cut method to delete fixedPoints and “cut” the rope when mousePresses on it. | Worked on the monster class and ensure that the monster can attack doodle
 5/30/2022 | 5/28/2022
 Merged main branch onto my branch. Fixed attract method so candy has physics when attached to the rope. | Debugged the current code and ensure that restart and pause buttons are working
  |
