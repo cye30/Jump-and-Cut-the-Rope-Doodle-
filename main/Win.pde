@@ -1,6 +1,5 @@
 public class Win{
   boolean candyObtained;
-  PFont mono;
 
   public Win(){
     
