@@ -52,21 +52,15 @@ Used the button class to create buttons for the winning tab. | Helped Christina 
 6/6/2022 | 6/4/2022
 Worked on the spikes breaking the candy feature. Candy bounces weirdly on them upon contact. | Worked on the bullet feature for monsters. Added background music for the game. Discovered and resolved bugs in the celebration animation. Merged with the main branch and resolved merge conflicts.
 6/7/2022 | 6/6/2022
-
 Created animation of candy shattering when it hits the spikes. | Presented a Demo in class. Brainstormed how to create the rope simulation with Christina.
 6/8/2022 | 6/7/2022
 Modified the candy so the doodle won’t eat it if broken.  | Created a new drawline method based on yesterday’s brainstorming. that would break the strings into equal segments.
 6/9/2022 | 6/8/2022
 Made a timer to display the win tab five seconds after winning animation and made the corner buttons stop working when the win tab appears. Met with Angel to debug the problems in our code. | Modifying the original attract methods in candy to work on rope. Studying different parts of the code to figure out what’s wrong with the rope codes.
-
-
 6/10/2022 | 6/9/2022
-
 Created a new mode system to make a menu page and now the menu button works. | Continued to try fixing the rope simulation. Created a Node class. Tried creating an array to store the nodes. Implemented all the methods, but still need to figure out why the ropes are not displaying. Met with Christina and debugged issues associated with the victory celebration and tab. Added three buttons and created a timer variable.
 6/11/2022 | 6/10/2022
 All button functions for the win tab function correctly. Then reorganized main.pde to group into levels. Had to debug with Angel after moving around the code. | Trying to debug rope-related methods. It seems to be displaying rope multiple times. Modify different methods to figure out what’s wrong.
-
-
 6/12/2022 | 6/11/2022
 Made three distinct levels and added star features. Created buttons for each level. Fixed the bug that allowed the doodle to move after victory. Met with Angel to debug any remaining problems in the code. Worked on the README file. | Continue to try to figure out how to create the rope-like effect for the string. Referenced OrbChain Lab.It’s finally working! Met with Christina to fix the bugs that are created after implementing the level system. Debugged rope by changing the List array to ArrayList. Resolved merge conflicts together
  | 6/12/2022
