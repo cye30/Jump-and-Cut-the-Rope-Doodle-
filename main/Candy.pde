@@ -28,6 +28,7 @@ public class Candy{
     list = new ArrayList<NodeList>();
     increment = inc;
     spike = spi;
+    grav = 0.3;
 
     for(int i=0; i<fixPoint.size(); i++){
       float incX = (xx-fixP.get(i)[0])/inc;
@@ -71,9 +72,6 @@ public class Candy{
       strokeWeight(4);
       ellipse(fixPoint.get(i)[0],fixPoint.get(i)[1],10,10);
    }
-   candy.x += candy.dx;
-   candy.y += candy.dy;
-   candy.dy+=.3;
 
    addStar(300,400);
    starAchieved();
@@ -122,19 +120,11 @@ public class Candy{
   //}
 
   //move for regular string
-  //void move(){
-  //  for(int i = 0; i < fixPoint.size(); i++){
-  //    for(int t = 0; t < PointsX.get(i).length-1; t++){                                           //NEED MORE WORK
-  //     this.attract(PointsX.get(i)[t], PointsY.get(i)[t], PointsX.get(i)[t+1], PointsY.get(i)[t+1]);
-  //     //PointsX.get(i)[t]+=dx;
-  //     //PointsY.get(i)[t]+=dy;
-  //     //dy+=0.3;
-  //    }
-  //  }
-  //  x+=dx;
-  //  y+=dy;
-  //  dy+=.3;
-  //}
+  void move(){
+    candy.x+=candy.dx;
+    candy.y+=candy.dy;
+    candy.dy+=grav;
+  }
 
   //NEEDS MODIFICATIONS
   void cut(int count){
