@@ -116,19 +116,19 @@ void setup() {
   //candy
   points.clear();
   if(level == 1){
-    points.add(0, new float[]{300,50});
+    points.add(0, new float[]{300,100});
   }
   if(level == 2 && points.size() < 2){
     points.add(0, new float[]{200,250});
     points.add(0, new float[]{400,200});
   }
   
-  candy = new Candy(300,300,30,points,5, arrSpikes);
+  candy = new Candy(300,250,30,points,5, arrSpikes);
   created = false;
   
-  candy.addStar(300,300);
+  candy.addStar(300,340);
   candy.addStar(300,400);
-  candy.addStar(300,500);
+  candy.addStar(300,460);
 
   //music
   music = new SoundFile(this, "game_music.wav");
@@ -186,22 +186,22 @@ void mousePressed() {
       //next level
       else if (m.equals(buttonWin[2])) {
         music.pause();
-        setup();
         if(level+1 == 3){
           pageMode = menuPg;
         } else {
           pageMode = levels;
           level++;
-        }
+        } 
+        setup();
       }
     }
   }
 
   if(play.overSqrt()){
     music.pause();
+    level = level1;
     setup();
     pageMode = levels;
-    level = level1;
   }
 }
 
