@@ -2,7 +2,7 @@ public class Candy{
   Node candy;
   float radius;
   float[][] star;
-  ArrayList<float[]> fixPoint;
+  
   int starScore;
   color c;
   boolean status;
@@ -11,7 +11,8 @@ public class Candy{
   float stary;
   boolean drawCandy = true;
   
-  NodeList[] list;
+  ArrayList<float[]> fixPoint;
+  ArrayList<NodeList> list;
   int increment;
   
   
@@ -21,26 +22,26 @@ public class Candy{
     radius = rad;
     fixPoint = fixP;
     starScore = 0;
-    list = new NodeList[fixPoint.size()];
+    list = new ArrayList<NodeList>();
     increment = inc;
     
-    for(int i=0; i<list.length; i++){
+    for(int i=0; i<fixPoint.size(); i++){
       float incX = (xx-fixP.get(i)[0])/inc;
       float incY = (yy-fixP.get(i)[1])/inc;
       Node fPt = new Node(fixP.get(i)[0], fixP.get(i)[1]);
       Node lastNode = new Node(fixP.get(i)[0] + incX*(inc-1), fixP.get(i)[1] + incY*(inc-1));
       lastNode.next=candy;
-      list[i] = new NodeList(fPt, lastNode);
+      list.add(new NodeList(fPt, lastNode));
      }
    } 
   
   
   void createArr(){
-    for(int i=0; i<list.length; i++){
+    for(int i=0; i<list.size(); i++){
       float incX = (candy.x-fixPoint.get(i)[0])/increment;
       float incY = (candy.y-fixPoint.get(i)[1])/increment;
       for(int w = 1; w < increment-1; w ++){
-        list[i].add(new Node(incX*w+fixPoint.get(i)[0],incY*w+fixPoint.get(i)[1]));
+        list.get(i).add(new Node(incX*w+fixPoint.get(i)[0],incY*w+fixPoint.get(i)[1]));
       }
     }created = true;
     
@@ -55,9 +56,9 @@ public class Candy{
       createArr();
     }
    for(int i = 0; i < fixPoint.size(); i++){
-      list[i].processAll();
-      list[i].display();
-      list[i].last.attract(candy);
+      list.get(i).processAll();
+      list.get(i).display();
+      list.get(i).last.attract(candy);
       stroke(102,51,0);
       strokeWeight(4);
       ellipse(fixPoint.get(i)[0],fixPoint.get(i)[1],10,10);
@@ -120,6 +121,7 @@ public class Candy{
     for(int i = fixPoint.size()-1; i >= 0; i--){
       if(count == i){
         fixPoint.remove(i);
+        list.remove(i);
       }
     }
     //disconnect the candy from the string

@@ -72,11 +72,12 @@ void setup(){
   background(225);
 
   //candy
+  points.clear();
   if(points.size() < 2){
     points.add(0, new float[]{200,250});
     points.add(0, new float[]{400,200});
   }
-  candy = new Candy(300,300,30,points, 5);
+  candy = new Candy(300,300,30,points,10);
   created = false;
 
   //music
@@ -114,25 +115,37 @@ void mousePressed(){
 
 void mouseDragged(){
   //use y = mx+b to find intersection of points
-  if(mouseX-pmouseX != 0){
-    float slope = (mouseY-pmouseY)/(mouseX-pmouseX);
-    float b = mouseY-(slope*mouseX);
-    for(int i = 0; i < candy.list.length; i++){
-      Node current = candy.list[i].first;
+  //if(mouseX-pmouseX != 0){
+  //  float slope = (mouseY-pmouseY)/(mouseX-pmouseX);
+  //  float b = mouseY-(slope*mouseX);
+    for(int i = 0; i < candy.list.size(); i++){
+      
+      Node current = candy.list.get(i).first;
       while(current.next != null){
-        float ropeSlope = (current.y-current.next.y)/(current.x-current.next.x);
-        float bRope = candy.candy.y-(ropeSlope*candy.candy.x);
-        float xCor = (b-bRope)/(ropeSlope-slope);
-        if(pmouseX-xCor >= 0 && mouseX-xCor <= 0 || pmouseX-xCor <= 0 && mouseX-xCor >= 0){
-          if(current.x <= current.next.x && xCor >= current.x && xCor <= current.next.x){
-            candy.cut(i);
-          } else if(current.x >= current.next.x && xCor <= current.x && xCor >= current.next.x){
-            candy.cut(i);
-          }
+        float first = ((current.next.x-current.x)*(pmouseY-current.next.y) - (current.y-current.next.y)*(pmouseX-current.x)) / ((current.y-current.next.y)*(mouseX-pmouseX) - (current.next.x-current.x)*(mouseY-pmouseY));
+        float sec = ((mouseX-pmouseX)*(pmouseY-current.next.y) - (mouseY-pmouseY)*(pmouseX-current.x)) / ((current.y-current.next.y)*(mouseX-pmouseX) - (current.next.x-current.x)*(mouseY-pmouseY));
+         if(first >= 0 && first <= 1 && sec >= 0 && sec <= 1){
+         candy.cut(i);
         }
         current = current.next;
       }
-    }
+      
+      
+      //Node current = candy.list[i].first;
+      //while(current.next != null){
+      //  float ropeSlope = (current.y-current.next.y)/(current.x-current.next.x);
+      //  float bRope = candy.candy.y-(ropeSlope*candy.candy.x);
+      //  float xCor = (b-bRope)/(ropeSlope-slope);
+      //  if(pmouseX-xCor >= 0 && mouseX-xCor <= 0 || pmouseX-xCor <= 0 && mouseX-xCor >= 0){
+      //    if(current.x <= current.next.x && xCor >= current.x && xCor <= current.next.x){
+      //      candy.cut(i);
+      //    } else if(current.x >= current.next.x && xCor <= current.x && xCor >= current.next.x){
+      //      candy.cut(i);
+      //    }
+      //  }
+      //  current = current.next;
+      //}
+    //}
   }
 }
 
@@ -141,6 +154,8 @@ void draw(){
   background(255);
   text("mode: "+mode, 50, 320);
   candy.display(); //test candy!!!
+
+  text(points.size(), 400, 400);
 
   //draw win tab
   //won.display();
