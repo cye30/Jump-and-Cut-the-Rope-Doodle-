@@ -1,7 +1,5 @@
 public class Doodle{
   float x, y, dx, dy;
-  //boolean status; //dead or alive
-  //ArrayList<Steps> steps;//waiting for Step class construction
   int heart; //waiting for stage 4 implementation
   
   
@@ -29,17 +27,6 @@ public class Doodle{
     }else if(moveMode == right){
       image(doodleAngelRight, x, y, 4 * doodleAngelRight.width/15, 4 * doodleAngelRight.height/15);
     }
-    //noFill();
-    //circle(x, y, 125);
-    
-    //text("doodle's width= " + 4*doodleAngelLeft.width/15, 50, 110);
-    //text("doodle's height= " + 4*doodleAngelLeft.height/15, 50, 120);
-    //text("doodle's heart= " + heart, 50, 170);
-    
-    //drawing steps
-    //for(Steps s : steps){
-    //  s.drawStep();
-    //}
   }
   
   void jump(){
@@ -51,18 +38,6 @@ public class Doodle{
       dy += gravity;
     }
   }
-  
-  //boolean onStep(){
-  //  if(x<500 && x>200 && y > 800){ //for testing jump methods solely
-  //     return true;
-  //  }return false;
-    
-  //  //for(Steps s : steps){ 
-  //  //  if(x<s.leng + s.x && s.x < x && y > s.y){
-  //  //    return true;
-  //  //  }
-  //  //}return false;
-  //}
   
   void move(){
    y += dy;

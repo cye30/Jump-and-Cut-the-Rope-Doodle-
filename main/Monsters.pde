@@ -1,6 +1,5 @@
 public class Monsters{
   float x, y, dx, dy;
-  //boolean status;
   int attackSpeed;
   float monsStartX; //for organizational purposes
   float monsStartY = 560; //for organizational purposes
@@ -20,10 +19,7 @@ public class Monsters{
 
   void display(PImage im){
     imageMode(CENTER);
-    image(im, x, y, im.width/5, im.height/5);
-    //noFill(); //for testing purposes
-    //circle(x, y, 100);
-    
+    image(im, x, y, im.width/5, im.height/5
   }
   
   void attack(Doodle d){

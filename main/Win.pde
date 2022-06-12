@@ -2,7 +2,6 @@ public class Win{
   boolean candyObtained;
   PFont mono;
 
-  
   public Win(){
     
   }
@@ -36,12 +35,4 @@ public class Win{
     triangle(105,53,105,72,120,62);
     image(restartB, restart.sqrtX, restart.sqrtY, restartB.width/20, restartB.height/20);
   }
-  /*
-  void nextLevel(){
-    
-  }
-  
-  void menu(){
-    
-  }*/
 }

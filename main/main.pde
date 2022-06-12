@@ -1,4 +1,4 @@
- import processing.sound.*;
+import processing.sound.*;
 SoundFile music;
 final float gravity = 1;
 
