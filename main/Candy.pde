@@ -64,27 +64,29 @@ public class Candy{
         imageMode(CENTER);
         image(candyImg, candy.x, candy.y, candyImg.width/10, candyImg.height/10);
       }
-    if (!created){
-      createArr();
-    }
-   for(int i = 0; i < fixPoint.size(); i++){
-      list.get(i).processAll();
-      list.get(i).display();
-      list.get(i).last.attract(candy);
-      stroke(102,51,0);
-      strokeWeight(4);
-      ellipse(fixPoint.get(i)[0],fixPoint.get(i)[1],10,10);
-   }
+      if (!created){
+        createArr();
+      }
+     for(int i = 0; i < fixPoint.size(); i++){
+        list.get(i).processAll();
+        list.get(i).display();
+        list.get(i).last.attract(candy);
+        stroke(102,51,0);
+        strokeWeight(4);
+        ellipse(fixPoint.get(i)[0],fixPoint.get(i)[1],10,10);
+     }
    
-   if(level == 1){
-     starAchieved();
-     displayStar();
-   }
-  //display spikes && stars
+     if(pageMode == levels){
+       starAchieved();
+       displayStar();
+     }
+    //display spikes && stars
 
      if(level == 2){
-       for(int i = 0; i < spike.length; i++){
-       shatter(spike[i]);
+       if(spike != null){
+         for(int i = 0; i < spike.length; i++){
+         shatter(spike[i]);
+         }
        }
      }
     }
@@ -144,7 +146,7 @@ public class Candy{
 
   //logistics
   boolean dies(){
-    return (candy.y >= 800) && drawCandy;
+    return (candy.y >= 800) && (drawCandy || breakCandy);
   }
   void candyAchieved(Doodle d){
     if(d.victory(this)){
