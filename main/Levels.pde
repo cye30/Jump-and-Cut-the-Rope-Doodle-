@@ -11,6 +11,7 @@ public class Levels{
           monster.clear();
           if (onStep()) {
             counter++;
+            candy.starVals.clear();
             doodle.jump();
             doodle.gravity();
             doodle.move();

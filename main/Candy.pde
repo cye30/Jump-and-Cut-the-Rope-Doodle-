@@ -9,6 +9,7 @@ public class Candy{
   boolean drawStar=true;
   float starx;
   float stary;
+  ArrayList<float[]> starVals;
   Spikes[] spike;
   boolean drawCandy = true;
   boolean breakCandy = false;
@@ -29,6 +30,8 @@ public class Candy{
     increment = inc;
     spike = spi;
     grav = 0.3;
+    
+    starVals = new ArrayList<float[]>();
 
     for(int i=0; i<fixPoint.size(); i++){
       float incX = (xx-fixP.get(i)[0])/inc;
@@ -72,9 +75,11 @@ public class Candy{
       strokeWeight(4);
       ellipse(fixPoint.get(i)[0],fixPoint.get(i)[1],10,10);
    }
-
-   addStar(300,400);
-   starAchieved();
+   
+   if(level == 1){
+     starAchieved();
+     displayStar();
+   }
   //display spikes && stars
 
      if(level == 2){
@@ -149,22 +154,23 @@ public class Candy{
 
 //star stuff
   void starAchieved(){
-    if(abs(candy.x - starx) < 48 && abs(candy.y - stary) < 46){
-      starScore++;
-      drawStar=false;
+    for(int i = starVals.size()-1; i >= 0; i--){
+      if(abs(candy.x - starVals.get(i)[0]) < 48 && abs(candy.y - starVals.get(i)[1]) < 46){
+        starScore++;
+        starVals.remove(i);
+      }
     }
     //star is removed from screen and starScore + 1 when the candy touches the star
   }
 
   void addStar(float xs, float ys){
-    if(drawStar == true){
-      starx = xs;
-      stary = ys;
-      imageMode(CENTER);
-      image(starImg, xs, ys, starImg.width/50, starImg.height/50);
-    } else {
-      starx = 0;
-      stary = 0;
+    starVals.add(new float[]{xs,ys});
+  }
+  
+  void displayStar(){
+    imageMode(CENTER);
+    for(int i = starVals.size()-1; i >= 0; i--){
+      image(starImg, starVals.get(i)[0], starVals.get(i)[1], starImg.width/50, starImg.height/50);
     }
   }
 

@@ -115,16 +115,24 @@ void setup() {
 
   //candy
   points.clear();
-  if(points.size() < 2){
+  if(level == 1){
+    points.add(0, new float[]{300,50});
+  }
+  if(level == 2 && points.size() < 2){
     points.add(0, new float[]{200,250});
     points.add(0, new float[]{400,200});
   }
+  
   candy = new Candy(300,300,30,points,5, arrSpikes);
   created = false;
+  
+  candy.addStar(300,300);
+  candy.addStar(300,400);
+  candy.addStar(300,500);
 
   //music
   music = new SoundFile(this, "game_music.wav");
-  music.play();
+  //music.play();
 
   won = new Win();
   candyBroken = false;
