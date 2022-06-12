@@ -1,4 +1,4 @@
- import processing.sound.*;
+import processing.sound.*;
 SoundFile music;
 final float gravity = 1;
 
@@ -154,7 +154,7 @@ void setup() {
 
   //music
   music = new SoundFile(this, "game_music.wav");
-  //music.play();
+  music.play();
 
   won = new Win();
   candyBroken = false;
