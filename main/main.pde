@@ -25,6 +25,11 @@ Button pause = new Button(90, 40);
 Button[] buttons = new Button[]{pause, restart};
 
 PImage menuButton;
+Button level1 = new Button(80, 630);
+Button level2 = new Button(140, 630);
+Button level3 = new Button(200, 630);
+Button[] levBut = new Button[]{level1, level2, level3};
+
 Button restartWin = new Button(160, 540, 70);
 Button menu = new Button(300-(restartWin.sqrtSizeX/2), 540, 70);
 Button nextLev = new Button(370, 540, 70);
@@ -220,6 +225,30 @@ void mousePressed() {
     setup();
     pageMode = levels;
   }
+  for(Button m : levBut) {
+    if (m.overSqrt()) {
+      //level1
+      if (m.equals(levBut[0])) {
+        music.pause();
+        level = 1;
+        setup();
+        pageMode = levels;
+      }
+      //level2
+      else if (m.equals(levBut[1])) {
+        music.pause();
+        level = 2;
+        setup();
+        pageMode = levels;
+      }//level3
+      else if (m.equals(levBut[2])) {
+        music.pause();
+        level = 3;
+        setup();
+        pageMode = levels;
+      }
+    }
+  }
 }
 
 void mouseDragged() {
@@ -357,7 +386,7 @@ void draw(){
   }
   if(level == 3){
     //step stuff
-    for (Steps s : game2) {
+    for (Steps s : game3) {
       s.drawStep();
     }
 
@@ -403,6 +432,15 @@ void draw(){
     textSize(50);
     fill(0,150,0);
     text("PLAY", 90,453);
+    
+    level1.display();
+    level2.display();
+    level3.display();
+    fill(0,150,0);
+    text("1",level1.sqrtX+7,level1.sqrtY+41);
+    text("2",level2.sqrtX+7,level2.sqrtY+41);
+    text("3",level3.sqrtX+7,level3.sqrtY+41);
+    text("Levels",90,610);
 
     if(level >= 3){
       textSize(20);
@@ -418,8 +456,6 @@ void draw(){
     line(mouseX, mouseY, pmouseX, pmouseY);
   }
 }
-
-
 
 
 boolean onStep() {
