@@ -20,13 +20,14 @@ public class Candy{
 
 
   //create candy
-  public Candy(float xx, float yy, float rad, ArrayList<float[]> fixP, int inc){
+  public Candy(float xx, float yy, float rad, ArrayList<float[]> fixP, int inc, Spikes[] spi){
     candy = new Node(xx, yy);
     radius = rad;
     fixPoint = fixP;
     starScore = 0;
     list = new ArrayList<NodeList>();
     increment = inc;
+    spike = spi;
 
     for(int i=0; i<fixPoint.size(); i++){
       float incX = (xx-fixP.get(i)[0])/inc;
@@ -52,12 +53,12 @@ public class Candy{
 
   void display(){
     if(breakCandy){
-      image(candyL, x-20, y, candyL.width/10, candyL.height/10);
-      image(candyR, x+20, y, candyR.width/10, candyR.height/10);
+      image(candyL, candy.x-20, candy.y, candyL.width/10, candyL.height/10);
+      image(candyR, candy.x+20, candy.y, candyR.width/10, candyR.height/10);
     } else{
       if(drawCandy){
         imageMode(CENTER);
-        image(candyImg, x, y, candyImg.width/10, candyImg.height/10);
+        image(candyImg, candy.x, candy.y, candyImg.width/10, candyImg.height/10);
       }
     if (!created){
       createArr();
@@ -78,13 +79,12 @@ public class Candy{
    starAchieved();
   //display spikes && stars
 
-     spike = spi;
-
      if(level == 2){
        for(int i = 0; i < spike.length; i++){
        shatter(spike[i]);
        }
      }
+    }
   }
 
 
@@ -185,8 +185,8 @@ public class Candy{
 
   void shatter(Spikes broken){
     //candy will shatter if it touches the spikes
-    if(broken.x > x && (broken.x - x) < 5 || broken.x < x && (x - (broken.x + broken.sideLength*broken.numSpikes)) < 3){
-      if(abs(y - broken.y) < broken.sideLength){
+    if(broken.x > candy.x && (broken.x - candy.x) < 5 || broken.x < candy.x && (candy.x - (broken.x + broken.sideLength*broken.numSpikes)) < 3){
+      if(abs(candy.y - broken.y) < broken.sideLength){
         grav = 1;
         breakCandy = true;
       }

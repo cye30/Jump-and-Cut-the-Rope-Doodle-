@@ -119,7 +119,7 @@ void setup() {
     points.add(0, new float[]{200,250});
     points.add(0, new float[]{400,200});
   }
-  candy = new Candy(300,300,30,points,5);
+  candy = new Candy(300,300,30,points,5, arrSpikes);
   created = false;
 
   //music
@@ -227,8 +227,9 @@ void mouseDragged() {
       //}
     //}
   }
+}
 
-void draw() {
+void draw(){
   if(pageMode != menuPg){
     background(255);
     //text("mode: "+mode, 50, 320);
@@ -281,7 +282,6 @@ void draw() {
     doodle.display();
 
     candy.display();
-    candy.move();
     if (candy.breakCandy) {
       candyBroken = true;
     }
@@ -312,7 +312,6 @@ void draw() {
     doodle.display(); //draw out doodle
 
     candy.display();
-    candy.move();
     if (candy.breakCandy) {
       candyBroken = true;
     }
@@ -357,21 +356,12 @@ void draw() {
   }
 
   //cut candy part
-  if (mousePressed) {
+  if (mousePressed){
     cursor(CROSS);
     stroke(150, 150, 150);
     strokeWeight(6);
     line(mouseX, mouseY, pmouseX, pmouseY);
   }
-  //boarders
-  stroke(0, 150, 0);
-  fill(0, 150, 0);
-
-  rect(0, 0, width, 28); // Top
-  rect(width-28, 0, 28, height); // Right
-  rect(0, height-28, width, 28); // Bottom
-  rect(0, 0, 28, height); // Left
-  spike.display();}
 }
 
 
