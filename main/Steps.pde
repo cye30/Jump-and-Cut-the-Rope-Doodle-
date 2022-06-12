@@ -9,6 +9,12 @@ public class Steps{
     leng = 120;
     wid = 18;
   }
+  public Steps(float m,float n, float nums){
+    x = m;
+    y = n;
+    leng = nums;
+    wid = 18;
+  }
   
   void drawStep(){
     fill(0,150,0);

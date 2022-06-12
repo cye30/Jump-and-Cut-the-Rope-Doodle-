@@ -6,8 +6,6 @@ int menuPg = 0;
 int winPg = 1;
 int levels = 2;
 int pageMode = menuPg;
-int level1 = 1;
-int level2 = 2;
 int level;
 
 int left = 0;
@@ -27,6 +25,11 @@ Button pause = new Button(90, 40);
 Button[] buttons = new Button[]{pause, restart};
 
 PImage menuButton;
+Button level1 = new Button(80, 630);
+Button level2 = new Button(140, 630);
+Button level3 = new Button(200, 630);
+Button[] levBut = new Button[]{level1, level2, level3};
+
 Button restartWin = new Button(160, 540, 70);
 Button menu = new Button(300-(restartWin.sqrtSizeX/2), 540, 70);
 Button nextLev = new Button(370, 540, 70);
@@ -39,9 +42,11 @@ Button play = new Button(80, 410, 140, 50);
 Steps b = new Steps(240, 623);
 Steps[] game1 = new Steps[]{b};
 
-Steps a = new Steps(424, 686);
+Steps a = new Steps(424, 500);
 Steps c = new Steps(56, 560);
-Steps[] game2 = new Steps[]{a, b, c};
+Steps d = new Steps(0,799,600);
+Steps[] game2;
+Steps[] game3;
 
 //construct the doodle; sample 1
 float startX = 300; //for organizational purposes
@@ -72,8 +77,8 @@ ArrayList<float[]> points = new ArrayList<float[]>();
 boolean candyBroken;
 
 //construct spikes
-Spikes spike = new Spikes(100, 400, 5);
-Spikes[] arrSpikes = new Spikes[]{spike};
+Spikes spike;
+Spikes[] arrSpikes;
 Win won;
 
 //special effect at the end
@@ -115,16 +120,41 @@ void setup() {
 
   //candy
   points.clear();
-  if(points.size() < 2){
-    points.add(0, new float[]{200,250});
-    points.add(0, new float[]{400,200});
+  
+  if(level == 1){
+    points.add(0, new float[]{300,100});
+    candy = new Candy(300,250,30,points,5, arrSpikes);
+    candy.addStar(300,340);
+    candy.addStar(300,400);
+    candy.addStar(300,460);
   }
-  candy = new Candy(300,300,30,points,5, arrSpikes);
+  if(level == 2 && points.size() < 2){
+    points.add(0, new float[]{60,240});
+    points.add(0, new float[]{240,160});
+    spike = new Spikes(100, 450, 6);
+    arrSpikes = new Spikes[]{spike};
+    candy = new Candy(150,300,30,points,5, arrSpikes);
+    candy.addStar(220,340);
+    candy.addStar(250,370);
+    candy.addStar(300,390);
+    game2 = new Steps[]{a, b};
+  }
+  if(level == 3 && points.size() < 2){
+    points.add(0, new float[]{400,200});
+    points.add(0, new float[]{550,280});
+    points.add(0, new float[]{500,160});
+    candy = new Candy(500,300,30,points,5, arrSpikes);
+    candy.addStar(400,300);
+    candy.addStar(500,405);
+    candy.addStar(550,300);
+    game3 = new Steps[]{a, b, c};
+  }
+  
   created = false;
 
   //music
   music = new SoundFile(this, "game_music.wav");
-  music.play();
+  //music.play();
 
   won = new Win();
   candyBroken = false;
@@ -178,26 +208,51 @@ void mousePressed() {
       //next level
       else if (m.equals(buttonWin[2])) {
         music.pause();
-        setup();
-        if(level+1 == 3){
+        if(level+1 == 4){
           pageMode = menuPg;
         } else {
           pageMode = levels;
           level++;
-        }
+        } 
+        setup();
       }
     }
   }
 
   if(play.overSqrt()){
     music.pause();
+    level = 1;
     setup();
     pageMode = levels;
-    level = level1;
+  }
+  for(Button m : levBut) {
+    if (m.overSqrt()) {
+      //level1
+      if (m.equals(levBut[0])) {
+        music.pause();
+        level = 1;
+        setup();
+        pageMode = levels;
+      }
+      //level2
+      else if (m.equals(levBut[1])) {
+        music.pause();
+        level = 2;
+        setup();
+        pageMode = levels;
+      }//level3
+      else if (m.equals(levBut[2])) {
+        music.pause();
+        level = 3;
+        setup();
+        pageMode = levels;
+      }
+    }
   }
 }
 
 void mouseDragged() {
+  if(candy!=null){
     for(int i = 0; i < candy.list.size(); i++){
 
       Node current = candy.list.get(i).first;
@@ -227,6 +282,7 @@ void mouseDragged() {
       //}
     //}
   }
+  }
 }
 
 void draw(){
@@ -253,7 +309,7 @@ void draw(){
     image(restartB, 60, 60, restartB.width/22, restartB.height/22);
 
     //doodle stuff
-    if (keyPressed) {
+    if (keyPressed && pageMode != winPg) {
       if (key == 'e') {
         if (onStep()) {
           doodle.jump();
@@ -271,7 +327,7 @@ void draw(){
   }
 
   //level 1
-  if(level == level1){
+  if(level == 1){
     for (Steps s : game1) {
       s.drawStep();
     }
@@ -295,15 +351,43 @@ void draw(){
   }
 
   //level 2
-  if(level == level2){
+  if(level == 2){
     //step stuff
     for (Steps s : game2) {
       s.drawStep();
     }
 
     //spikes
-    for(Spikes s : arrSpikes) {
-      s.display();
+    
+      for(Spikes s : arrSpikes) {
+        s.display();
+      }
+    
+
+    //doodle stuff
+    doodle.gravity();
+    doodle.move();
+    doodle.display(); //draw out doodle
+
+    candy.display();
+    candy.move();
+    if (candy.breakCandy) {
+      candyBroken = true;
+    }
+
+    lev1.celebrate();
+
+    candy.candyAchieved(doodle);
+
+    if (onStep() && !skipStep) { //doodle stops once it lands on the step
+      doodle.dy = 0;
+    }
+
+  }
+  if(level == 3){
+    //step stuff
+    for (Steps s : game3) {
+      s.drawStep();
     }
 
     //doodle stuff
@@ -339,7 +423,6 @@ void draw(){
       monster.get(1).monsAttract(doodle);
       monster.get(1).monsMove();
     }
-
   }
 
   if(pageMode == menuPg){
@@ -349,8 +432,17 @@ void draw(){
     textSize(50);
     fill(0,150,0);
     text("PLAY", 90,453);
+    
+    level1.display();
+    level2.display();
+    level3.display();
+    fill(0,150,0);
+    text("1",level1.sqrtX+7,level1.sqrtY+41);
+    text("2",level2.sqrtX+7,level2.sqrtY+41);
+    text("3",level3.sqrtX+7,level3.sqrtY+41);
+    text("Levels",90,610);
 
-    if(level >= 2){
+    if(level >= 3){
       textSize(20);
       text("More Levels to Come!", 350,700);
     }
@@ -366,8 +458,6 @@ void draw(){
 }
 
 
-
-
 boolean onStep() {
   Steps[] gam = new Steps[]{};
   if(level == 1){
@@ -375,6 +465,9 @@ boolean onStep() {
   }
   else if(level == 2){
     gam = game2;
+  }
+  else if(level == 3){
+    gam = game3;
   }
   for (Steps s : gam) { //modify this if change game
     if (doodle.x-doodleAngelLeft.width/30 <s.leng + s.x && s.x < doodle.x+doodleAngelLeft.width/30 && (doodle.y+51<= s.y+16 && doodle.y+51 >= s.y) && !skipStep) {

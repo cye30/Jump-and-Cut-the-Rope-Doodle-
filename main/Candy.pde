@@ -9,6 +9,7 @@ public class Candy{
   boolean drawStar=true;
   float starx;
   float stary;
+  ArrayList<float[]> starVals;
   Spikes[] spike;
   boolean drawCandy = true;
   boolean breakCandy = false;
@@ -29,6 +30,8 @@ public class Candy{
     increment = inc;
     spike = spi;
     grav = 0.3;
+    
+    starVals = new ArrayList<float[]>();
 
     for(int i=0; i<fixPoint.size(); i++){
       float incX = (xx-fixP.get(i)[0])/inc;
@@ -61,25 +64,29 @@ public class Candy{
         imageMode(CENTER);
         image(candyImg, candy.x, candy.y, candyImg.width/10, candyImg.height/10);
       }
-    if (!created){
-      createArr();
-    }
-   for(int i = 0; i < fixPoint.size(); i++){
-      list.get(i).processAll();
-      list.get(i).display();
-      list.get(i).last.attract(candy);
-      stroke(102,51,0);
-      strokeWeight(4);
-      ellipse(fixPoint.get(i)[0],fixPoint.get(i)[1],10,10);
-   }
-
-   addStar(300,400);
-   starAchieved();
-  //display spikes && stars
+      if (!created){
+        createArr();
+      }
+     for(int i = 0; i < fixPoint.size(); i++){
+        list.get(i).processAll();
+        list.get(i).display();
+        list.get(i).last.attract(candy);
+        stroke(102,51,0);
+        strokeWeight(4);
+        ellipse(fixPoint.get(i)[0],fixPoint.get(i)[1],10,10);
+     }
+   
+     if(pageMode == levels){
+       starAchieved();
+       displayStar();
+     }
+    //display spikes && stars
 
      if(level == 2){
-       for(int i = 0; i < spike.length; i++){
-       shatter(spike[i]);
+       if(spike != null){
+         for(int i = 0; i < spike.length; i++){
+         shatter(spike[i]);
+         }
        }
      }
     }
@@ -139,7 +146,7 @@ public class Candy{
 
   //logistics
   boolean dies(){
-    return (candy.y >= 800) && drawCandy;
+    return (candy.y >= 800) && (drawCandy || breakCandy);
   }
   void candyAchieved(Doodle d){
     if(d.victory(this)){
@@ -149,22 +156,23 @@ public class Candy{
 
 //star stuff
   void starAchieved(){
-    if(abs(candy.x - starx) < 48 && abs(candy.y - stary) < 46){
-      starScore++;
-      drawStar=false;
+    for(int i = starVals.size()-1; i >= 0; i--){
+      if(abs(candy.x - starVals.get(i)[0]) < 48 && abs(candy.y - starVals.get(i)[1]) < 46){
+        starScore++;
+        starVals.remove(i);
+      }
     }
     //star is removed from screen and starScore + 1 when the candy touches the star
   }
 
   void addStar(float xs, float ys){
-    if(drawStar == true){
-      starx = xs;
-      stary = ys;
-      imageMode(CENTER);
-      image(starImg, xs, ys, starImg.width/50, starImg.height/50);
-    } else {
-      starx = 0;
-      stary = 0;
+    starVals.add(new float[]{xs,ys});
+  }
+  
+  void displayStar(){
+    imageMode(CENTER);
+    for(int i = starVals.size()-1; i >= 0; i--){
+      image(starImg, starVals.get(i)[0], starVals.get(i)[1], starImg.width/50, starImg.height/50);
     }
   }
 
