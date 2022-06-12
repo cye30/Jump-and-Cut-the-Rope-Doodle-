@@ -2,11 +2,13 @@ import processing.sound.*;
 SoundFile music;
 final float gravity = 1;
 
-int menuPg = -1;
-int winPg = 0;
+int menuPg = 0;
+int winPg = 1;
+int levels = 2;
+int pageMode = menuPg;
 int level1 = 1;
 int level2 = 2;
-int pageMode = menuPg;
+int level;
 
 int left = 0;
 int right = 1;
@@ -111,8 +113,8 @@ void setup() {
   background(225);
 
   //candy
-    points.add(0, new float[]{200, 250});
-    points.add(0, new float[]{300, 200});
+  points.add(0, new float[]{200, 250});
+  points.add(0, new float[]{300, 200});
   
   candy = new Candy(300, 300, 30, points, arrSpikes);
 
@@ -142,7 +144,7 @@ void mousePressed() {
         else if (m.equals(buttons[1])) {
           music.pause();
           setup();
-          pageMode = level1;
+          pageMode = levels;
           for (int i = 0; i<monster.size(); i++) {
             monster.set(i, new Monsters(monster.get(i).monsStartX, monster.get(i).monsStartY, 0));
           }
@@ -157,7 +159,7 @@ void mousePressed() {
       if (m.equals(buttonWin[0])) {
         music.pause();
         setup();
-        pageMode = 1;
+        pageMode = levels;
         for (int i = 0; i<monster.size(); i++) {
           monster.set(i, new Monsters(monster.get(i).monsStartX, monster.get(i).monsStartY, 0));
         }
@@ -172,13 +174,21 @@ void mousePressed() {
       else if (m.equals(buttonWin[2])) {
         music.pause();
         setup();
-        pageMode++;
+        if(level+1 == 3){
+          pageMode = menuPg;
+        } else {
+          pageMode = levels;
+          level++;
+        }
       }
     }
   }
   
   if(play.overSqrt()){
-    pageMode = level1;
+    setup();
+    pageMode = levels;
+    level = level1;
+    candyBroken = false;
   }
 }
 
@@ -208,22 +218,6 @@ void mouseDragged() {
 }
 
 void draw() {
-  //cut candy part
-  if (mousePressed) {
-    cursor(CROSS);
-    stroke(150, 150, 150);
-    strokeWeight(6);
-    line(mouseX, mouseY, pmouseX, pmouseY);
-  }
-  if(pageMode == menuPg){
-    imageMode(CORNER);
-    image(Menu, 0, 0, Menu.width/1.95, Menu.height/1.95);
-    play.display();
-    textSize(50);
-    fill(0,150,0);
-    text("PLAY", 90,453);
-  }
-  
   if(pageMode != menuPg){
     background(255);
     //text("mode: "+mode, 50, 320);
@@ -265,7 +259,82 @@ void draw() {
     }
   }
   
-  if(pageMode == level1 || pageMode == winPg){
+  //cut candy part
+  if (mousePressed) {
+    cursor(CROSS);
+    stroke(150, 150, 150);
+    strokeWeight(6);
+    line(mouseX, mouseY, pmouseX, pmouseY);
+  }
+  
+  //level 1
+  if(level == level1 || pageMode == winPg){
+    for (Steps s : game1) {
+      s.drawStep();
+    }
+    
+    doodle.gravity();
+    doodle.move();
+    doodle.display();
+    
+    candy.display();
+    candy.move();
+    if (candy.breakCandy) {
+      candyBroken = true;
+    }
+    if (candyBroken == false) {
+      if (doodle.victory(candy) || pageMode == winPg) {
+        if (counter < 5) {
+          pageMode = winPg;
+          monster.clear();
+          if (onStep()) {
+            counter++;
+            doodle.jump();
+            doodle.gravity();
+            doodle.move();
+            //sprinkles!!
+            stars.add(new Sprinkle(doodle.x, doodle.y+120, -5));
+            stars.add(new Sprinkle(doodle.x, doodle.y+120, 5));
+            stars.add(new Sprinkle(doodle.x, doodle.y+70, 8));
+            stars.add(new Sprinkle(doodle.x, doodle.y+70, -8));
+          }
+          for (Sprinkle s : stars) {
+            s.gravity();
+            s.move();
+            s.display();
+          }
+        } else {
+          //draw win tab
+          won.display();
+          image(doodleAngelLeft, 300, 450, 4 * doodleAngelLeft.width/12, 4 * doodleAngelLeft.height/12);
+          for (Button m : buttonWin) {
+            m.display();
+            imageMode(CORNER);
+            image(restartB, restartWin.sqrtX, restartWin.sqrtY, restartB.width/15, restartB.height/15);
+            image(menuButton, menu.sqrtX + 9, menu.sqrtY + 13, menuButton.width/20, menuButton.height/20);
+            strokeWeight(8);
+            triangle(nextLev.sqrtX + 23, nextLev.sqrtY + 20, nextLev.sqrtX + 23, nextLev.sqrtY + 50, nextLev.sqrtX + 48, nextLev.sqrtY + 35);
+          }
+        }
+      }
+    } else if (doodle.dies()||candy.dies()) {
+      music.pause();
+      setup();
+      for (int i = 0; i<monster.size(); i++) {
+        monster.set(i, new Monsters(monster.get(i).monsStartX, monster.get(i).monsStartY, 0));
+      }
+      skipStep = false;
+      candyBroken = false;
+    }
+    
+    candy.candyAchieved(doodle);
+
+    if (onStep() && !skipStep) {
+      doodle.dy = 0;
+    }
+  }
+  
+  if(level == level2 || pageMode == winPg){
     //step stuff
     for (Steps s : game2) {
       s.drawStep();
@@ -332,8 +401,8 @@ void draw() {
         monster.set(i, new Monsters(monster.get(i).monsStartX, monster.get(i).monsStartY, 0));
       }
       skipStep = false;
+      candyBroken = false;
     }
-  
     
     candy.candyAchieved(doodle);
     //text("monsnter arraylist size is: "+ monster.size(), 50, 500);
@@ -368,11 +437,31 @@ void draw() {
     
   }
 
+  if(pageMode == menuPg){
+    imageMode(CORNER);
+    image(Menu, 0, 0, Menu.width/1.95, Menu.height/1.95);
+    play.display();
+    textSize(50);
+    fill(0,150,0);
+    text("PLAY", 90,453);
+    
+    if(level >= 2){
+      textSize(10);
+      text("More Levels to Come!", 500,600);
+    }
+  }
 }
   
 
 boolean onStep() {
-  for (Steps s : game2) { //modify this if change game
+  Steps[] gam = new Steps[]{};
+  if(level == 1){
+    gam = game1;
+  }
+  else if(level == 2){
+    gam = game2;
+  }
+  for (Steps s : gam) { //modify this if change game
     if (doodle.x-doodleAngelLeft.width/30 <s.leng + s.x && s.x < doodle.x+doodleAngelLeft.width/30 && (doodle.y+51<= s.y+16 && doodle.y+51 >= s.y) && !skipStep) {
       doodle.y = s.y-51;
       return true;
