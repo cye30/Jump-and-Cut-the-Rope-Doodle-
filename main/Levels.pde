@@ -1,11 +1,13 @@
 public class Levels{
-  
   public Levels(){
   }
   
   void celebrate(){
     if (!candyBroken) {
       if (doodle.victory(candy) || pageMode == winPg) {
+        game1 = new Steps[]{b, d};
+        game2 = new Steps[]{a, b, d};
+        game3 = new Steps[]{a, b, c, d};
         if (counter < 5) {
           pageMode = winPg;
           monster.clear();

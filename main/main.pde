@@ -39,8 +39,9 @@ Steps[] game1 = new Steps[]{b};
 
 Steps a = new Steps(424, 500);
 Steps c = new Steps(56, 560);
-Steps[] game2 = new Steps[]{a, b};
-Steps[] game3 = new Steps[]{a, b, c};
+Steps d = new Steps(0,799,600);
+Steps[] game2;
+Steps[] game3;
 
 //construct the doodle; sample 1
 float startX = 300; //for organizational purposes
@@ -131,11 +132,17 @@ void setup() {
     candy.addStar(220,340);
     candy.addStar(250,370);
     candy.addStar(300,390);
+    game2 = new Steps[]{a, b};
   }
   if(level == 3 && points.size() < 2){
-    points.add(0, new float[]{60,200});
-    points.add(0, new float[]{200,160});
-    candy = new Candy(150,200,30,points,5, arrSpikes);
+    points.add(0, new float[]{400,200});
+    points.add(0, new float[]{550,280});
+    points.add(0, new float[]{500,160});
+    candy = new Candy(500,300,30,points,5, arrSpikes);
+    candy.addStar(220,340);
+    candy.addStar(250,370);
+    candy.addStar(300,390);
+    game3 = new Steps[]{a, b, c};
   }
   
   created = false;
@@ -273,7 +280,7 @@ void draw(){
     image(restartB, 60, 60, restartB.width/22, restartB.height/22);
 
     //doodle stuff
-    if (keyPressed) {
+    if (keyPressed && pageMode != winPg) {
       if (key == 'e') {
         if (onStep()) {
           doodle.jump();
