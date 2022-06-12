@@ -11,7 +11,7 @@ public class Node{
   
   void display(){
      stroke(0);
-     circle(x, y, 3);
+     //circle(x, y, 3);
      if(prev != null){
        line(x, y, prev.x, prev.y);
      }
@@ -23,7 +23,7 @@ public class Node{
   
   void attract(Node other){
     float dist = dist(x, y, other.x, other.y);
-    float force = (dist) * 0.02;
+    float force = (dist-3) * 0.02;
     float displacex = (x - other.x) ;
     float displacey = (y - other.y) ;
     other.dx += displacex * force / (dist);

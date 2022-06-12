@@ -77,7 +77,7 @@ void setup(){
     points.add(0, new float[]{200,250});
     points.add(0, new float[]{400,200});
   }
-  candy = new Candy(300,300,30,points,10);
+  candy = new Candy(300,300,30,points,5);
   created = false;
 
   //music
@@ -152,10 +152,7 @@ void mouseDragged(){
 void draw(){
   clear();
   background(255);
-  text("mode: "+mode, 50, 320);
   candy.display(); //test candy!!!
-
-  text(points.size(), 400, 400);
 
   //draw win tab
   //won.display();
@@ -200,7 +197,6 @@ void draw(){
   //doodle stuff
   doodle.gravity();
   doodle.move();
-  text("dy of doodle is " + doodle.dy, 50, 100);
   doodle.display(); //draw out doodle
 
   if(doodle.victory(candy) || mode ==3){
@@ -232,7 +228,6 @@ void draw(){
     skipStep = false;
   }
   candy.candyAchieved(doodle);
-  text("monsnter arraylist size is: "+ monster.size(), 50, 500);
 
 
   if(onStep() && !skipStep){ //doodle stops once it lands on the step
@@ -266,7 +261,6 @@ void draw(){
   //  candy.createArr(points.get(v)[0], points.get(v)[1], candy.x, candy.y);
   //}
   
-  text("starScore: " + candy.getScore(), 50,220); //starScore
   //candy.move();
 
 
