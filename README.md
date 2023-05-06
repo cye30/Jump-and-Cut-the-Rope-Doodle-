@@ -1,4 +1,4 @@
-# Jump-and-Cut-the-Rope-Doodle-
+# Jump and Cut the Rope, Doodle!
 Christina Ye, Jia xin "Angel" Xie     Period 3
 
 ### Prototype:
