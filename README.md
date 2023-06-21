@@ -1,5 +1,5 @@
 # Jump and Cut the Rope, Doodle!
-Christina Ye, Jia xin "Angel" Xie     Period 3
+Christina Ye, Jia xin "Angel" Xie  APCS   Period 3, Final Project
 
 ### Prototype:
 
