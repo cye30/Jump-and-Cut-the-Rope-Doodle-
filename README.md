@@ -1,7 +1,5 @@
-# Jump and Cut the Rope, Doodle!
-Christina Ye, Jia xin "Angel" Xie 
-Stuyvesant High School
-AP Computer Science A, Period 3, Final Project
+# Jump and Cut the Rope, Doodle! 🍭
+Christina Ye, Jia xin "Angel" Xie  |  Stuyvesant High School | AP Computer Science A, Final Project
 
 ### Prototype:
 
