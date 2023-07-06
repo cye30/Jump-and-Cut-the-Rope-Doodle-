@@ -9,6 +9,9 @@ Christina Ye, Jia xin "Angel" Xie  |  Stuyvesant High School | AP Computer Scien
 ### Project Description:
 Our project is a combination of the games Doodle Jump and Cut the Rope. The player will control the doodle character using jump, left, and right keys. The player must also cut the rope and use different elements of the game to feed the character with candy in order to win. The game will have multiple levels each with different features including monsters and spikes that the player has to avoid. If the character or the candy drops to the ground, the player loses and the game restarts.
 
+![image](https://github.com/cye30/Jump-and-Cut-the-Rope-Doodle-/assets/78315342/426ab51c-7be5-484c-a0af-1aa4e61104bd)
+
+
 ##### Game Directions:
 
 * To move the character - Jump is the 'e' key, left is the 's' key, and right is the 'f' key
